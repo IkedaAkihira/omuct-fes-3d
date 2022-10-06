@@ -2,18 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Character : MonoBehaviour
+public class Player : MonoBehaviour
 {
-    private CharacterController controller;
-    Vector3 playerVelocity;
-    private bool groundedPlayer;
+    public int id;
+    protected int hp;
+    public Item item;
+    public GameMaster gm;
+    public Dictionary<int,Effect>effects=new Dictionary<int, Effect>();
+    protected void Attack(){
+        AttackEvent e=new AttackEvent(this);
+        gm.OnAttack(e);
+    }
+    public void Damage(DamageSource damageSource){
+        DamageEvent e=new DamageEvent(this,damageSource);
+        gm.OnDamaged(e);
+        if(e.isAvailable)
+            this.hp-=damageSource.amount;
+    }
+
+    
     public float playerSpeed = 2.0f;
     public float gravityValue = -9.81f;
+    public float jumpForce = 1.0f;
+
+
+
+    private CharacterController controller;
+    private Vector3 playerVelocity;
+    private bool groundedPlayer;
     private float cameraRotation = 0f;
     private float cameraRotationY = 0f;
 
     public GameObject camera;
-    public float jumpForce = 1.0f;
     public float cameraDistance = 10.0f;
     private void Start()
     {
