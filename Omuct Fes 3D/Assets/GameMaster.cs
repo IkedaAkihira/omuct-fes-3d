@@ -20,19 +20,19 @@ public class GameMaster : MonoBehaviour,EventListener
         
     }
 
-    public void EventListener.OnAttack(AttackEvent e){
+    void EventListener.OnAttack(AttackEvent e){
         for(int i=0;i<listeners.Count;i++){
             listeners[i].OnAttack(e);
         }
     }
 
-    public void EventListener.OnDamaged(DamageEvent e){
+    void EventListener.OnDamaged(DamageEvent e){
         for(int i=0;i<listeners.Count;i++){
             listeners[i].OnDamaged(e);
         }
     }
 
-    public void EventListener.OnUseItem(UseItemEvent e){
+    void EventListener.OnUseItem(UseItemEvent e){
         for(int i=0;i<listeners.Count;i++){
             listeners[i].OnUseItem(e);
         }
