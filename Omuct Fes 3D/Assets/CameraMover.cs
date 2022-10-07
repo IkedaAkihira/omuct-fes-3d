@@ -6,10 +6,10 @@ public class CameraMover : MonoBehaviour
 {
     public void MoveCamera(Vector3 targetPos,Vector3 cameraVec,float distance){
         RaycastHit hit;
-        if(Physics.Raycast(targetPos,cameraVec,out hit,distance)){
-            this.transform.position=targetPos+cameraVec*hit.distance*0.9f;
+        if(Physics.Raycast(targetPos,-cameraVec,out hit,distance)){
+            this.transform.position=targetPos-cameraVec*hit.distance*0.9f;
         }else{
-            this.transform.position=targetPos+cameraVec*distance;
+            this.transform.position=targetPos-cameraVec*distance;
         }
 
         this.transform.LookAt(targetPos);

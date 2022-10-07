@@ -87,7 +87,7 @@ abstract public class Player : MonoBehaviour
             0,
             Mathf.Sin(cameraRotation)
             );
-        cameraVec3=new Vector3(0,Mathf.Sin(cameraRotationY),0)+cameraVec2*Mathf.Cos(cameraRotationY);
+        cameraVec3=-(new Vector3(0,Mathf.Sin(cameraRotationY),0)+cameraVec2*Mathf.Cos(cameraRotationY));
         cameraMover.MoveCamera(this.transform.position,cameraVec3,cameraDistance);
         
         //gravity

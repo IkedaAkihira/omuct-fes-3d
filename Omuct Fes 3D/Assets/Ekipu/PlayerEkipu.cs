@@ -11,8 +11,8 @@ public class PlayerEkipu : Player{
         if(time<lastAttackTime+1000)
             return;
         lastAttackTime=time;
-        GameObject cloneObject=Instantiate(attackObject,transform.position-cameraVec3*2,Quaternion.identity);
+        GameObject cloneObject=Instantiate(attackObject,transform.position+cameraVec3*2,Quaternion.identity);
         Rigidbody rb=cloneObject.GetComponent<Rigidbody>();
-        rb.AddForce(this.cameraVec3*-1000);
+        rb.AddForce(this.cameraVec3*1000);
     }
 }
