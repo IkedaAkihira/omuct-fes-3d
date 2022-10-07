@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class GameMaster : MonoBehaviour,EventListener
 {
+    static public GameMaster instance=null;
+    private void Awake() {
+        if(instance==null)
+            instance=this;
+        else
+            Destroy(this.gameObject);
+    }
     Player playerL;
     Player playerR;
 
