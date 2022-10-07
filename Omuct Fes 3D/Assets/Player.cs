@@ -88,7 +88,7 @@ abstract public class Player : MonoBehaviour
             Mathf.Sin(cameraRotation)
             );
         cameraVec3=-(new Vector3(0,Mathf.Sin(cameraRotationY),0)+cameraVec2*Mathf.Cos(cameraRotationY));
-        cameraMover.MoveCamera(this.transform.position,cameraVec3,cameraDistance);
+        cameraMover.MoveCamera(this.transform.position+new Vector3(0f,1f,0f),cameraVec3,cameraDistance);
         
         //gravity
         groundedPlayer = controller.isGrounded;

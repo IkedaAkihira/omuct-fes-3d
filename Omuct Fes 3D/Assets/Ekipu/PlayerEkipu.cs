@@ -11,8 +11,15 @@ public class PlayerEkipu : Player{
         if(time<lastAttackTime+1000)
             return;
         lastAttackTime=time;
-        GameObject cloneObject=Instantiate(attackObject,transform.position+cameraVec3*2,Quaternion.identity);
+        RaycastHit hit;
+        Vector3 attackVec;
+        if(Physics.Raycast(transform.position+new Vector3(0f,1f,0f),cameraVec3,out hit,Mathf.Infinity)){
+            attackVec=(hit.point-(transform.position+new Vector3(0f,1f,0f))).normalized;
+        }else{
+            attackVec=cameraVec3.normalized;
+        }
+        GameObject cloneObject=Instantiate(attackObject,transform.position+attackVec*2,Quaternion.identity);
         Rigidbody rb=cloneObject.GetComponent<Rigidbody>();
-        rb.AddForce(this.cameraVec3*1000);
+        rb.AddForce(attackVec*1000);
     }
 }
