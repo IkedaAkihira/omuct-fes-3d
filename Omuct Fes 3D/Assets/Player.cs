@@ -20,8 +20,8 @@ abstract public class Player : MonoBehaviour
     private CharacterController controller;
     private Vector3 playerVelocity;
     private bool groundedPlayer;
-    private float cameraRotation = 0f;
-    private float cameraRotationY = 0f;
+    public float cameraRotation = 0f;
+    public float cameraRotationY = 0f;
     private Vector3 move;
     public Vector3 cameraVec2;
     public Vector3 cameraVec3;
@@ -32,6 +32,7 @@ abstract public class Player : MonoBehaviour
     public float cameraDistance = 10.0f;
     private void Start()
     {
+        item=new ItemShootingBit();
         controller = this.GetComponent<CharacterController>();
         cameraMover=tpsCamera.GetComponent<CameraMover>();
         move=new Vector3(0,0,0);
