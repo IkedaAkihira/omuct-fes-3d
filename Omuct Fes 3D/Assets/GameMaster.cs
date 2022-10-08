@@ -50,4 +50,8 @@ public class GameMaster : MonoBehaviour,EventListener
             listeners[i].OnUseItem(e);
         }
     }
+
+    public GameObject PublicInstantiate(GameObject obj,Vector3 pos,Quaternion rot){
+        return Instantiate(obj,pos,rot);
+    }
 }
