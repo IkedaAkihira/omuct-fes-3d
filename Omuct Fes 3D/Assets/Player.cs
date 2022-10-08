@@ -90,7 +90,7 @@ abstract public class Player : MonoBehaviour
             );
         cameraVec3=-(new Vector3(0,Mathf.Sin(cameraRotationY),0))+cameraVec2*Mathf.Cos(cameraRotationY);
         cameraPos=this.transform.position
-        +-(new Vector3(0,Mathf.Sin(cameraRotationY-Mathf.PI/2),0))+cameraVec2*Mathf.Cos(cameraRotationY-Mathf.PI/2);
+        -(new Vector3(0,Mathf.Sin(cameraRotationY-Mathf.PI/2),0))+cameraVec2*Mathf.Cos(cameraRotationY-Mathf.PI/2);
         cameraMover.MoveCamera(cameraPos,cameraVec3,cameraDistance);
         
         //gravity
