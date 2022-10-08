@@ -23,8 +23,9 @@ abstract public class Player : MonoBehaviour
     private float cameraRotation = 0f;
     private float cameraRotationY = 0f;
     private Vector3 move;
-    private Vector3 cameraVec2;
+    public Vector3 cameraVec2;
     public Vector3 cameraVec3;
+    public Vector3 cameraPos;
 
     public GameObject tpsCamera;
     CameraMover cameraMover;
@@ -45,7 +46,7 @@ abstract public class Player : MonoBehaviour
         cameraRotationY=Mathf.Min(Mathf.Max(-1.0f,(-Input.mousePosition.y)*0.01f),1.0f);
 
         //move
-        move = -cameraVec2*Input.GetAxis("Vertical")
+        move = cameraVec2*Input.GetAxis("Vertical")
         +new Vector3(
             -Mathf.Sin(cameraRotation),
             0,
@@ -83,12 +84,14 @@ abstract public class Player : MonoBehaviour
     private void FixedUpdate() {
         //update camera
         cameraVec2=new Vector3(
-            Mathf.Cos(cameraRotation),
+            -Mathf.Cos(cameraRotation),
             0,
-            Mathf.Sin(cameraRotation)
+            -Mathf.Sin(cameraRotation)
             );
-        cameraVec3=-(new Vector3(0,Mathf.Sin(cameraRotationY),0)+cameraVec2*Mathf.Cos(cameraRotationY));
-        cameraMover.MoveCamera(this.transform.position+new Vector3(0f,1f,0f),cameraVec3,cameraDistance);
+        cameraVec3=-(new Vector3(0,Mathf.Sin(cameraRotationY),0))+cameraVec2*Mathf.Cos(cameraRotationY);
+        cameraPos=this.transform.position
+        +-(new Vector3(0,Mathf.Sin(cameraRotationY-Mathf.PI/2),0))+cameraVec2*Mathf.Cos(cameraRotationY-Mathf.PI/2);
+        cameraMover.MoveCamera(cameraPos,cameraVec3,cameraDistance);
         
         //gravity
         groundedPlayer = controller.isGrounded;

@@ -16,7 +16,7 @@ public class PlayerEkipu : Player{
         RaycastHit hit;
         Vector3 attackVec;
         if(
-            Physics.Raycast(transform.position+new Vector3(0f,1f,0f),cameraVec3,out hit,Mathf.Infinity)
+            Physics.Raycast(cameraPos,cameraVec3,out hit,Mathf.Infinity)
             &&hit.collider.GetComponent<PlayerEkipu>()!=this
         ){
             attackVec=(hit.point-transform.position).normalized;
