@@ -24,6 +24,6 @@ public class ExplosionEkipu : MonoBehaviour {
             return;
         /*if(player==parent)
             return;*/
-        player.AddEffect(new EffectPoison(200));
+        player.AddEffect(new EffectPoison(500));
     }
 }
