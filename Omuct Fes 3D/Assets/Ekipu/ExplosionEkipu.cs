@@ -15,7 +15,7 @@ public class ExplosionEkipu : MonoBehaviour {
         Destroy(this.gameObject);
         return;
     }
-        transform.localScale=new Vector3(1f,1f,1f)*Mathf.Sin((currentTime-startTime)*0.01f*Mathf.PI/2)*10;
+        transform.localScale=new Vector3(1f,1f,1f)*Mathf.Sin((currentTime-startTime)*0.01f*Mathf.PI/2)*1;
     }
     private void OnTriggerEnter(Collider other) {
         Debug.Log(parent);
