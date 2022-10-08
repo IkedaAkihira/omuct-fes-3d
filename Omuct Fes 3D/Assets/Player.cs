@@ -82,6 +82,19 @@ abstract public class Player : MonoBehaviour
     }
 
     private void FixedUpdate() {
+        //efect
+        List<int>removeEffectTypes=new List<int>();
+        foreach(Effect e in effects.Values){
+            e.Tick(this);
+            e.time--;
+            if(e.time<=0){
+                removeEffectTypes.Add(e.type);
+            }
+        }
+        foreach(int type in removeEffectTypes){
+            effects.Remove(type);
+        }
+
         //update camera
         cameraVec2=new Vector3(
             -Mathf.Cos(cameraRotation),
@@ -111,5 +124,15 @@ abstract public class Player : MonoBehaviour
         GameMaster.instance.OnDamaged(e);
         if(e.isAvailable)
             this.hp-=damageSource.amount;
+    }
+
+    public void AddEffect(Effect e){
+        //エフェクトが存在しないなら追加し、あれば、エフェクトの持続時間を長いほうにする。
+        if(!effects.ContainsKey(e.type)){
+            effects.Add(e.type,e);
+        }else{
+            Effect pastEffect=effects.GetValueOrDefault(e.type);
+            pastEffect.time=Mathf.Max(pastEffect.time,e.time);
+        }
     }
 }
