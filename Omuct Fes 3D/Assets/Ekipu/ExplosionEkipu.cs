@@ -6,18 +6,16 @@ public class ExplosionEkipu : MonoBehaviour {
     public Player parent;
 
     private void Start() {
-        startTime=DateTime.Now.Hour * 60 *60 * 1000 + DateTime.Now.Minute * 60 * 1000 + 
-    DateTime.Now.Second * 1000 + DateTime.Now.Millisecond;
+        startTime=GameMaster.instance.gameTime;
     transform.localScale=new Vector3(0f,0f,0f);
     }
     private void FixedUpdate() {
-        long currentTime=(DateTime.Now.Hour * 60 *60 * 1000 + DateTime.Now.Minute * 60 * 1000 + 
-        DateTime.Now.Second * 1000 + DateTime.Now.Millisecond);
-        if(currentTime-startTime>1000){
+        long currentTime=GameMaster.instance.gameTime;
+        if(currentTime-startTime>100){
         Destroy(this.gameObject);
         return;
     }
-        transform.localScale=new Vector3(1f,1f,1f)*Mathf.Sin((currentTime-startTime)*0.001f*Mathf.PI/2)*10;
+        transform.localScale=new Vector3(1f,1f,1f)*Mathf.Sin((currentTime-startTime)*0.01f*Mathf.PI/2)*10;
     }
     private void OnTriggerEnter(Collider other) {
         Debug.Log(parent);

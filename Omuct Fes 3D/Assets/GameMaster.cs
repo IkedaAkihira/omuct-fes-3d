@@ -5,7 +5,9 @@ using UnityEngine;
 public class GameMaster : MonoBehaviour,EventListener
 {
     static public GameMaster instance=null;
+    public long gameTime;
     private void Awake() {
+        this.gameTime=0;
         if(instance==null)
             instance=this;
         else
@@ -25,6 +27,10 @@ public class GameMaster : MonoBehaviour,EventListener
     void Update()
     {
         
+    }
+
+    private void FixedUpdate() {
+        this.gameTime++;
     }
 
     public void OnAttack(AttackEvent e){

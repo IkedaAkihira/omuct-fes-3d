@@ -8,11 +8,10 @@ public class PlayerEkipu : Player{
     public int attackInterval=200;
     private long lastAttackTime=0;
     override protected void Attack(){
-        long time=DateTime.Now.Hour * 60 *60 * 1000 + DateTime.Now.Minute * 60 * 1000 + 
-    DateTime.Now.Second * 1000 + DateTime.Now.Millisecond;
-        if(time<lastAttackTime+attackInterval)
+        
+        if(GameMaster.instance.gameTime<lastAttackTime+attackInterval)
             return;
-        lastAttackTime=time;
+        lastAttackTime=GameMaster.instance.gameTime;
         RaycastHit hit;
         Vector3 attackVec;
         if(

@@ -888,7 +888,7 @@ MonoBehaviour:
   cameraDistance: 3
   attackObject: {fileID: 8970168126409952239, guid: b495777f4234c5d42be215c5a6bdaf8a, type: 3}
   attackForce: 700
-  attackInterval: 500
+  attackInterval: 25
 --- !u!65 &1008456606
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1098,6 +1098,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4abfb6577c7395c4593fee738b221d38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameTime: 0
 --- !u!4 &1849553888
 Transform:
   m_ObjectHideFlags: 0
