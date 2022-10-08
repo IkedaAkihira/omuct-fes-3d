@@ -5,7 +5,7 @@ using UnityEngine;
 abstract public class Player : MonoBehaviour
 {
     public int id;
-    protected int hp;
+    protected int hp=20;
     public Item item;
     public Dictionary<int,Effect>effects=new Dictionary<int, Effect>();
     
@@ -82,6 +82,7 @@ abstract public class Player : MonoBehaviour
     }
 
     private void FixedUpdate() {
+        Debug.Log(this.hp);
         //efect
         List<int>removeEffectTypes=new List<int>();
         foreach(Effect e in effects.Values){
@@ -93,6 +94,14 @@ abstract public class Player : MonoBehaviour
         }
         foreach(int type in removeEffectTypes){
             effects.Remove(type);
+        }
+
+        //hp
+        if(hp<=0){
+            transform.position=new Vector3(0,10,0);
+            playerVelocity=new Vector3(0,0,0);
+            hp=20;
+            return;
         }
 
         //update camera
