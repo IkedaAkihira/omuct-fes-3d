@@ -110,9 +110,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c964db78f861fd74eb88223bb2a54863, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  time: 1000
+  duration: 10
   parent: {fileID: 0}
-  attackObject: {fileID: 8970168126409952239, guid: b495777f4234c5d42be215c5a6bdaf8a, type: 3}
-  attackForce: 2000
+  attackObject: {fileID: 7469841746631366496, guid: c1bc5de159543bc4ebad905cee002693, type: 3}
+  attackForce: 1000
   moveAsympotic: 1
   rotationAsympotic: 10
   relativeRotation: 1.5707964

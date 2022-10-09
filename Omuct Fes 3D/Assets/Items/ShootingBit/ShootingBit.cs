@@ -2,7 +2,8 @@ using UnityEngine;
 using System;
 
 public class ShootingBit : MonoBehaviour {
-    int time=1000;
+    public int time=1000;
+    public int duration=50;
     public Player parent;
     public GameObject attackObject;
     public float attackForce=2000f;
@@ -20,27 +21,26 @@ public class ShootingBit : MonoBehaviour {
             Destroy(this.gameObject);
             return;
         }
-        currentRoation=(currentRoation*rotationAsympotic+parent.cameraRotation)/(rotationAsympotic+1);
-        Vector3 goalPosition=parent.transform.position+new Vector3(Mathf.Cos(currentRoation+relativeRotation),0,Mathf.Sin(currentRoation+relativeRotation));
-        transform.position=(transform.position*(moveAsympotic)+goalPosition)/(moveAsympotic+1);
+        currentRoation=(currentRoation*rotationAsympotic+parent.cameraRotation+relativeRotation)/(rotationAsympotic+1);
+        transform.position=parent.transform.position+new Vector3(Mathf.Cos(currentRoation),0,Mathf.Sin(currentRoation));
 
 
-        if(time%10!=0)
+        if(time%duration!=0)
             return;
         RaycastHit hit;
         Vector3 attackVec;
         if(
-            Physics.Raycast(parent.cameraPos,parent.cameraVec3,out hit,Mathf.Infinity)
+            Physics.Raycast(parent.cameraPos,parent.cameraVec3,out hit,Mathf.Infinity,1<<3|1<<6)
             &&hit.collider.GetComponent<Player>()!=parent
         ){
             attackVec=(hit.point-transform.position).normalized;
         }else{
             attackVec=parent.cameraVec3.normalized;
         }
-        GameObject cloneObject=Instantiate(attackObject,transform.position+attackVec*2,Quaternion.identity);
+        GameObject cloneObject=Instantiate(attackObject,transform.position,Quaternion.identity);
         Rigidbody rb=cloneObject.GetComponent<Rigidbody>();
         rb.AddForce(attackVec*attackForce);
-        BulletEkipu bullet=cloneObject.GetComponent<BulletEkipu>();
+        BulletShootingBit bullet=cloneObject.GetComponent<BulletShootingBit>();
         bullet.parent=parent;
 
     }
