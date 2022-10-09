@@ -4,6 +4,15 @@ using UnityEngine;
 
 abstract public class Player : MonoBehaviour
 {
+    public string jumpButton="Jump";
+    public string attackButton="Attack";
+    public string useItemButton="UseItem";
+    public string cameraHorizontalButton="cameraHorizontal";
+    public string cameraVerticalButton="cameraVertical";
+    public string moveVerticalButton="Vertical";
+    public string moveHorizontalButton="Horizontal";
+
+
     public int id;
     protected int hp=20;
     public Item item;
@@ -43,29 +52,29 @@ abstract public class Player : MonoBehaviour
     void Update()
     {
         //camera rotation
-        cameraRotation=-Input.mousePosition.x*0.005f;
-        cameraRotationY=Mathf.Min(Mathf.Max(-1.0f,(-Input.mousePosition.y)*0.01f),1.0f);
+        cameraRotation+=Input.GetAxis(cameraHorizontalButton)*0.005f;
+        cameraRotationY=Mathf.Min(Mathf.Max(-1.0f,cameraRotationY+Input.GetAxis(cameraVerticalButton)*0.01f),1.0f);
 
         //move
-        move = cameraVec2*Input.GetAxis("Vertical")
+        move = cameraVec2*Input.GetAxis(moveVerticalButton)
         +new Vector3(
             -Mathf.Sin(cameraRotation),
             0,
             Mathf.Cos(cameraRotation)
-            )*Input.GetAxis("Horizontal");
+            )*Input.GetAxis(moveHorizontalButton);
         if (move != Vector3.zero)
         {
             gameObject.transform.forward = move;
         }
 
         //jump
-        if (Input.GetButtonDown("Jump") && groundedPlayer)
+        if (Input.GetButtonDown(jumpButton) && groundedPlayer)
         {
             playerVelocity.y += jumpForce;
         }
         
         //attack
-        if(Input.GetKey(KeyCode.E)){
+        if(Input.GetButtonDown(attackButton)){
             AttackEvent e=new AttackEvent(this);
             GameMaster.instance.OnAttack(e);
             if(e.isAvailable){
@@ -74,7 +83,7 @@ abstract public class Player : MonoBehaviour
         }
 
         //use item
-        if(Input.GetKey(KeyCode.Q)){
+        if(Input.GetButtonDown(useItemButton)){
             if(item!=null){
                 item.Use(this);
                 item=null;
