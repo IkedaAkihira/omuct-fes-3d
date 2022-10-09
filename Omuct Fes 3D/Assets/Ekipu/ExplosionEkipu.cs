@@ -11,11 +11,11 @@ public class ExplosionEkipu : MonoBehaviour {
     }
     private void FixedUpdate() {
         long currentTime=GameMaster.instance.gameTime;
-        if(currentTime-startTime>100){
+        if(currentTime-startTime>25){
         Destroy(this.gameObject);
         return;
     }
-        transform.localScale=new Vector3(1f,1f,1f)*Mathf.Sin((currentTime-startTime)*0.01f*Mathf.PI/2)*1;
+        transform.localScale=new Vector3(1f,1f,1f)*(Mathf.Sin((currentTime-startTime)*0.05f*Mathf.PI/2)*1+1.2f);
     }
     private void OnTriggerEnter(Collider other) {
         Debug.Log(parent);
