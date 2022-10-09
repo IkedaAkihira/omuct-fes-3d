@@ -14,7 +14,7 @@ abstract public class Player : MonoBehaviour
 
 
     public int id;
-    protected int hp=20;
+    protected int hp=100;
     public Item item;
     public Dictionary<int,Effect>effects=new Dictionary<int, Effect>();
     
