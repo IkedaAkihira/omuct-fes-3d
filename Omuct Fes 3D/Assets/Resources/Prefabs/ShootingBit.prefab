@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 7278385515659910388}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.855258, y: 2.5794525, z: 1.0498724}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -93,7 +93,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7278385515659910388}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
@@ -113,3 +113,7 @@ MonoBehaviour:
   parent: {fileID: 0}
   attackObject: {fileID: 8970168126409952239, guid: b495777f4234c5d42be215c5a6bdaf8a, type: 3}
   attackForce: 2000
+  moveAsympotic: 1
+  rotationAsympotic: 10
+  relativeRotation: 1.5707964
+  currentRoation: 0

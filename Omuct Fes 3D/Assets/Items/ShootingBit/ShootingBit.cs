@@ -7,14 +7,22 @@ public class ShootingBit : MonoBehaviour {
     public GameObject attackObject;
     public float attackForce=2000f;
 
+    public uint moveAsympotic=1;
+    public uint rotationAsympotic=1;
+
+    public float relativeRotation=Mathf.PI/2;
+
+    public float currentRoation=0f;
+
     private void FixedUpdate() {
         time--;
         if(time<=0){
             Destroy(this.gameObject);
             return;
         }
-
-        transform.position=parent.transform.position+new Vector3(Mathf.Sin(parent.cameraRotation),0,-Mathf.Cos(parent.cameraRotation));
+        currentRoation=(currentRoation*rotationAsympotic+parent.cameraRotation)/(rotationAsympotic+1);
+        Vector3 goalPosition=parent.transform.position+new Vector3(Mathf.Cos(currentRoation+relativeRotation),0,Mathf.Sin(currentRoation+relativeRotation));
+        transform.position=(transform.position*(moveAsympotic)+goalPosition)/(moveAsympotic+1);
 
 
         if(time%10!=0)
