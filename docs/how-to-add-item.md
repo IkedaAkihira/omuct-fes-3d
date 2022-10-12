@@ -42,7 +42,7 @@ using UnityEngine;
 using System;
 
 
-public class BulletPoison : MonoBehavior
+public class BulletPoison : MonoBehaviour
 {
     //外部からparentを設定したいので、publicにする。
     public Player parent;
