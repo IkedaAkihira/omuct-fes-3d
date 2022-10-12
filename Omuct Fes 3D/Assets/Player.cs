@@ -153,7 +153,6 @@ abstract public class Player : MonoBehaviour
 
         //プレイヤーからターゲットに向かう正規化されたベクトルを更新
         RaycastHit hit;
-        playerToTargetVec;
         if(
             Physics.Raycast(cameraPos,cameraVec3,out hit,Mathf.Infinity,1<<3|1<<6)
             &&hit.collider.GetComponent<Player>()!=this

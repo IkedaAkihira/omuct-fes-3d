@@ -1,9 +1,11 @@
 using UnityEngine;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 
 public class ItemBox : MonoBehaviour {
-    List<Item>items=new List<Item>();
-
+    List<Item>  items=new List<Item>();
+    
     void Start()
     {
         //ここに作成したItemクラスを追加していく。
@@ -20,7 +22,7 @@ public class ItemBox : MonoBehaviour {
         if(player.item!=null)
             return;
         
-        Random random=new Random();
+        System.Random random=new System.Random();
         player.item=items[random.Next(0,items.Count)];
         Destroy(gameObject);
     }
