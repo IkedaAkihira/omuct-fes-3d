@@ -106,6 +106,7 @@ public class EffectPoison : Effect{
 ```
 
 次に、放置してたPoisonObjectを作ろう。Unity側で作業するよ。
+![screenshot](https://user-images.githubusercontent.com/91947939/195354373-4f32d62d-1692-4cfb-8bdf-741afb82a492.png)
 
 Unityで①上に任意のゲームオブジェクトを作成します。モデルとかないなら、とりあえずSphereとかでいいと思います。
 次に、②でResources/Prefabsフォルダを開きます。ここに、さっき作ったオブジェクトをドラッグ&ドロップします。  
@@ -113,6 +114,7 @@ Unityで①上に任意のゲームオブジェクトを作成します。モデ
 ②にあるオブジェクトの名前をPoisonObjectに変更します。
 PoisonObjectを開いて、③の下のほうにあるAdd ComponentからRigidbodyとBulletPoisonを追加します。  
 次に、③から なんたら Colliderと書いてあるものを探し、中のIs Triggerにチェックを入れます。
+また、③のRigidbodyからUse Gravityのチェックを外し、弾がまっすぐ飛ぶようにします。
 
 これで、アイテム自体の作成は終わりです。
 # アイテムの追加
