@@ -28,7 +28,7 @@ abstract public class Player : MonoBehaviour
     public float cameraRotationY = 0f;
     public Vector3 cameraVec2;
     public Vector3 cameraVec3;
-    public Vector3 playerToTargetVec;
+    public Vector3 toTargetVec;
     public Vector3 cameraPos;
 
     //操作関係
@@ -66,7 +66,7 @@ abstract public class Player : MonoBehaviour
         move=new Vector3(0,0,0);
         cameraVec2=new Vector3(0,0,0);
         cameraVec3=new Vector3(0,0,0);
-        playerToTargetVec=new Vector3(0,0,0);
+        toTargetVec=new Vector3(0,0,0);
     }
 
     //操作関係はUpdateで処理してる
@@ -157,9 +157,9 @@ abstract public class Player : MonoBehaviour
             Physics.Raycast(cameraPos,cameraVec3,out hit,Mathf.Infinity,1<<3|1<<6)
             &&hit.collider.GetComponent<Player>()!=this
         ){
-            playerToTargetVec=(hit.point-transform.position).normalized;
+            toTargetVec=(hit.point-transform.position).normalized;
         }else{
-            playerToTargetVec=cameraVec3.normalized;
+            toTargetVec=cameraVec3.normalized;
         }
         
         //g重力の処理

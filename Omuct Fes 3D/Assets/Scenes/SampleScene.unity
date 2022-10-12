@@ -572,7 +572,7 @@ MonoBehaviour:
   cameraVerticalButton: CameraVertical
   moveVerticalButton: Vertical
   moveHorizontalButton: Horizontal
-  id: 0
+  maxHp: 20
   playerSpeed: 5
   gravityValue: -20
   jumpForce: 15
@@ -580,7 +580,13 @@ MonoBehaviour:
   cameraRotationY: 0
   cameraVec2: {x: 0, y: 0, z: 0}
   cameraVec3: {x: 0, y: 0, z: 0}
+  toTargetVec: {x: 0, y: 0, z: 0}
   cameraPos: {x: 0, y: 0, z: 0}
+  cameraRotationVelocity: 1
+  cameraRotationYVelocity: 1
+  horizontal: 1
+  vertical: 1
+  th: 0.2
   tpsCamera: {fileID: 1182092718}
   cameraDistance: 5
   attackObject: {fileID: 8970168126409952239, guid: b495777f4234c5d42be215c5a6bdaf8a, type: 3}
@@ -1012,7 +1018,7 @@ MonoBehaviour:
   cameraVerticalButton: Mouse Y
   moveVerticalButton: Mouse X
   moveHorizontalButton: Mouse Y
-  id: 0
+  maxHp: 20
   playerSpeed: 5
   gravityValue: -20
   jumpForce: 15
@@ -1020,7 +1026,13 @@ MonoBehaviour:
   cameraRotationY: 0
   cameraVec2: {x: 0, y: 0, z: 0}
   cameraVec3: {x: 0, y: 0, z: 0}
+  toTargetVec: {x: 0, y: 0, z: 0}
   cameraPos: {x: 0, y: 0, z: 0}
+  cameraRotationVelocity: 1
+  cameraRotationYVelocity: 1
+  horizontal: 1
+  vertical: 1
+  th: 0.2
   tpsCamera: {fileID: 963194225}
   cameraDistance: 5
   attackObject: {fileID: 8970168126409952239, guid: b495777f4234c5d42be215c5a6bdaf8a, type: 3}

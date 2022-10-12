@@ -36,7 +36,7 @@ public class GameMaster : MonoBehaviour,EventListener
 
     private void FixedUpdate() {
         this.gameTime++;
-        if(gameTime%1500==0){
+        if(gameTime%500==0){
             GameObject itemBox=Resources.Load<GameObject>("Prefabs/ItemBox");
             Instantiate(itemBox,itemBoxPositions[(new System.Random()).Next(0,2)],Quaternion.identity);
         }

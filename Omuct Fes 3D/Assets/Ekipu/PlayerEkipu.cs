@@ -15,7 +15,7 @@ public class PlayerEkipu : Player{
         
         GameObject cloneObject=Instantiate(attackObject,transform.position+new Vector3(0f,0.5f,0f),Quaternion.identity);
         Rigidbody rb=cloneObject.GetComponent<Rigidbody>();
-        rb.AddForce(playerToTargetVec*attackForce);
+        rb.AddForce(toTargetVec*attackForce);
         BulletEkipu bullet=cloneObject.GetComponent<BulletEkipu>();
         bullet.parent=this;
     }
