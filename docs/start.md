@@ -27,7 +27,9 @@ $ git branch poison
 とかでいいと思います。
 次に、Unity Hubで、さっきのフォルダ/omuct-fes-3d/Omuct Fes 3Dを開くと、プロジェクトを開けると思います。
 ここからは適宜ドキュメントを参照して作業を進めてください。
-
+## ドキュメントたち
+* [アイテムを作ろう](./how-to-add-item.md)
+# ある程度作業が進んだら
 ある程度作業が進んだら、同じディレクトリで、
 ```
 $ git add *
@@ -36,7 +38,7 @@ $ git push
 ```
 を行ってください。
 作業をgithub上にアップするやつです。
-
+# 作業が形になったら
 作業が完了、一旦形になったら、[ここ](https://github.com/IkedaAkihira/omuct-fes-3d)を開いてください。  
 すると、黄色い枠内にCompareなんたら、みたいなボタンがあると思うので、押してください。
 ![プレゼンテーション1](https://user-images.githubusercontent.com/91947939/195361751-f5e78223-fcce-4e79-98f8-aa76ffe44f13.png)
@@ -45,5 +47,3 @@ Leave Commentの欄に説明を入力して、Create Pull Requestを押してく
 ここまでやってくれたら、俺がコードを確認して、統合します。
 
 説明くそ適当なので、わからんことは適宜聞くなり調べたりしてください。
-# リンク
-* [アイテムを作ろう](./how-to-add-item.md)
