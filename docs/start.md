@@ -37,5 +37,13 @@ $ git push
 を行ってください。
 作業をgithub上にアップするやつです。
 
+作業が完了、一旦形になったら、[ここ](https://github.com/IkedaAkihira/omuct-fes-3d)を開いてください。  
+すると、黄色い枠内にCompareなんたら、みたいなボタンがあると思うので、押してください。
+![プレゼンテーション1](https://user-images.githubusercontent.com/91947939/195361751-f5e78223-fcce-4e79-98f8-aa76ffe44f13.png)
+Leave Commentの欄に説明を入力して、Create Pull Requestを押してください。  
+これで、"プルリク"が作成できます。これは、作業の完了を報告するやつです。説明には[MarkDown記法](https://qiita.com/tbpgr/items/989c6badefff69377da7)が使え、画像が盛り込めたりするので、適宜活用してください。  
+ここまでやってくれたら、俺がコードを確認して、統合します。
+
+説明くそ適当なので、わからんことは適宜聞くなり調べたりしてください。
 # リンク
 * [アイテムを作ろう](./how-to-add-item.md)
