@@ -7,8 +7,6 @@ public class EffectPoison : Effect{
     public EffectPoison(int time)
     {
         this.time=time;
-        this.interval=interval;
-        this.damage=damage;
     }
 
     //毎秒50回呼ばれる。
