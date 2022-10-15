@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 abstract public class Player : MonoBehaviour
 {
@@ -13,7 +14,8 @@ abstract public class Player : MonoBehaviour
     public string moveVerticalButton="Vertical";
     public string moveHorizontalButton="Horizontal";
 
-
+    //UI
+    public Slider hpSlider;
 
     //ステータスなど
     public int maxHp=20;
@@ -112,6 +114,9 @@ abstract public class Player : MonoBehaviour
                 item=null;
             }
         }
+
+        //update ui
+        hpSlider.value=(float)hp/(float)maxHp;
     }
 
     //内部の処理はコンスタントに行いたいので、ほぼ確実に毎秒50回実行してくれるFixedUpdateで行う。
