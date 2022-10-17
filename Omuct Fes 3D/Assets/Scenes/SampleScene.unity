@@ -740,7 +740,7 @@ MonoBehaviour:
   th: 0.2
   tpsCamera: {fileID: 1182092718}
   cameraDistance: 5
-  attackObject: {fileID: 8970168126409952239, guid: b495777f4234c5d42be215c5a6bdaf8a, type: 3}
+  attackObject: {fileID: 4358696385323467273, guid: 4e3cab90edf90324b9012a73be2c7bf7, type: 3}
   attackForce: 1000
   attackInterval: 25
 --- !u!1 &521928413
