@@ -140,7 +140,8 @@ abstract public class Player : MonoBehaviour
         if(hp<=0){
             transform.position=new Vector3(0,10,0);
             playerVelocity=new Vector3(0,0,0);
-            hp=20;
+            effects.Clear();
+            hp=maxHp;
             return;
         }
 
@@ -185,6 +186,7 @@ abstract public class Player : MonoBehaviour
     
     abstract protected void Attack();
     public void Damage(DamageSource damageSource){
+        Debug.Log("Damaged");
         DamageEvent e=new DamageEvent(this,damageSource);
         GameMaster.instance.OnDamaged(e);
         if(e.isAvailable)
