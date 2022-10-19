@@ -26,12 +26,12 @@ abstract public class Player : MonoBehaviour
     public float jumpForce = 1.0f;
 
     //カメラ周り
-    public float cameraRotation = 0f;
-    public float cameraRotationY = 0f;
-    public Vector3 cameraVec2;
-    public Vector3 cameraVec3;
-    public Vector3 toTargetVec;
-    public Vector3 cameraPos;
+    public float cameraRotation{get;set;}
+    public float cameraRotationY{get;set;}
+    public Vector3 cameraVec2{get;set;}
+    public Vector3 cameraVec3{get;set;}
+    public Vector3 toTargetVec{get;set;}
+    public Vector3 cameraPos{get;set;}
 
     //操作関係
     public float cameraRotationVelocity=1f;
@@ -58,22 +58,37 @@ abstract public class Player : MonoBehaviour
 
     //移動方向を格納
     private Vector3 move;
+    private Animator animator;
 
-    private void Start()
+    
+    public int attackInterval=200;
+    private long lastAttackTime=0;
+
+    protected bool isAttacking = false;
+    private void Awake()
     {
+        cameraRotation = 0f;
+        cameraRotationY = 0f;
         hp=maxHp;
         item=null;
         controller = this.GetComponent<CharacterController>();
         cameraMover=tpsCamera.GetComponent<CameraMover>();
+        animator=GetComponent<Animator>();
         move=new Vector3(0,0,0);
         cameraVec2=new Vector3(0,0,0);
         cameraVec3=new Vector3(0,0,0);
         toTargetVec=new Vector3(0,0,0);
     }
 
+
     //操作関係はUpdateで処理してる
     private void Update()
     {
+        Debug.Log(IsAttackable);
+        
+        if(IsAttackable)
+            animator.SetTrigger("return");
+        
         //camera rotation
         cameraRotation+=Th(Input.GetAxis(cameraHorizontalButton),th)*0.005f*cameraRotationVelocity;
         cameraRotationY=Mathf.Min(Mathf.Max(-1.0f,cameraRotationY+
@@ -87,7 +102,7 @@ abstract public class Player : MonoBehaviour
             0,
             Mathf.Cos(cameraRotation)
             )*Th(Input.GetAxis(moveHorizontalButton),th)*vertical;
-        if (move != Vector3.zero)
+        if (move != Vector3.zero && !isAttacking)
         {
             gameObject.transform.forward = move;
         }
@@ -99,11 +114,15 @@ abstract public class Player : MonoBehaviour
         }
         
         //attack
-        if(Input.GetButtonDown(attackButton)){
+        if(Input.GetButtonDown(attackButton)&&IsAttackable){
+            animator.SetTrigger("attack");
+            gameObject.transform.forward = cameraVec2;
             AttackEvent e=new AttackEvent(this);
             GameMaster.instance.OnAttack(e);
             if(e.isAvailable){
                 Attack();
+                isAttacking = true;
+                lastAttackTime=GameMaster.instance.gameTime;
             }
         }
 
@@ -121,7 +140,8 @@ abstract public class Player : MonoBehaviour
 
     //内部の処理はコンスタントに行いたいので、ほぼ確実に毎秒50回実行してくれるFixedUpdateで行う。
     private void FixedUpdate() {
-        Debug.Log(this.hp);
+        if(IsAttackable)
+            isAttacking = false;
 
         //プレイヤーにかかったエフェクトの処理
         List<int>removeEffectTypes=new List<int>();
@@ -204,4 +224,6 @@ abstract public class Player : MonoBehaviour
     private float Th(float val,float th){
         return (Mathf.Abs(val)<th)?0:val;
     }
+
+    public bool IsAttackable{get{return GameMaster.instance.gameTime>=lastAttackTime+attackInterval;}}
 }
