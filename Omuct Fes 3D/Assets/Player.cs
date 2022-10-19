@@ -59,14 +59,18 @@ abstract public class Player : MonoBehaviour
     //移動方向を格納
     private Vector3 move;
     private Animator animator;
+    public Image itemImage;
 
     
     public int attackInterval=200;
     private long lastAttackTime=0;
 
     protected bool isAttacking = false;
+
+    private Texture2D noItemTexture;
     private void Awake()
     {
+        noItemTexture= Resources.Load<Texture2D>("Textures/null");
         cameraRotation = 0f;
         cameraRotationY = 0f;
         hp=maxHp;
@@ -84,7 +88,10 @@ abstract public class Player : MonoBehaviour
     //操作関係はUpdateで処理してる
     private void Update()
     {
-        Debug.Log(IsAttackable);
+        if(this.item != null)
+            this.itemImage.sprite = Sprite.Create(this.item.itemImage, new Rect(0,0,this.item.itemImage.width,this.item.itemImage.height), Vector2.zero);
+        else
+            this.itemImage.sprite = Sprite.Create(this.noItemTexture, new Rect(0,0,this.noItemTexture.width,this.noItemTexture.height), Vector2.zero);
         
         if(IsAttackable)
             animator.SetTrigger("return");
