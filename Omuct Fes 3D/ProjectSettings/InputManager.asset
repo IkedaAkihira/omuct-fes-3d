@@ -20,7 +20,7 @@ InputManager:
     invert: 0
     type: 2
     axis: 0
-    joyNum: 3
+    joyNum: 4
   - serializedVersion: 3
     m_Name: Vertical
     descriptiveName: 
@@ -36,13 +36,13 @@ InputManager:
     invert: 0
     type: 2
     axis: 1
-    joyNum: 3
+    joyNum: 4
   - serializedVersion: 3
     m_Name: Jump
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: joystick 3 button 2
+    positiveButton: joystick 4 button 0
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1000
@@ -52,7 +52,7 @@ InputManager:
     invert: 0
     type: 0
     axis: 0
-    joyNum: 1
+    joyNum: 4
   - serializedVersion: 3
     m_Name: CameraHorizontal
     descriptiveName: 
@@ -67,8 +67,8 @@ InputManager:
     snap: 1
     invert: 0
     type: 2
-    axis: 2
-    joyNum: 3
+    axis: 3
+    joyNum: 4
   - serializedVersion: 3
     m_Name: CameraVertical
     descriptiveName: 
@@ -83,14 +83,14 @@ InputManager:
     snap: 1
     invert: 0
     type: 2
-    axis: 3
-    joyNum: 3
+    axis: 4
+    joyNum: 4
   - serializedVersion: 3
     m_Name: UseItem
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: joystick 3 button 1
+    positiveButton: joystick 4 button 3
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1000
@@ -100,13 +100,13 @@ InputManager:
     invert: 0
     type: 0
     axis: 1
-    joyNum: 1
+    joyNum: 4
   - serializedVersion: 3
     m_Name: Attack
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: joystick 3 button 0
+    positiveButton: joystick 4 button 2
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1000
@@ -116,7 +116,7 @@ InputManager:
     invert: 0
     type: 0
     axis: 1
-    joyNum: 1
+    joyNum: 4
   - serializedVersion: 3
     m_Name: OppHorizontal
     descriptiveName: 
@@ -154,7 +154,7 @@ InputManager:
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: joystick 2 button 2
+    positiveButton: joystick 2 button 1
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1000
@@ -179,7 +179,7 @@ InputManager:
     snap: 0
     invert: 0
     type: 2
-    axis: 3
+    axis: 2
     joyNum: 2
   - serializedVersion: 3
     m_Name: OppCameraVertical
@@ -195,14 +195,14 @@ InputManager:
     snap: 0
     invert: 0
     type: 2
-    axis: 4
+    axis: 3
     joyNum: 2
   - serializedVersion: 3
     m_Name: OppUseItem
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: joystick 2 button 1
+    positiveButton: joystick 2 button 3
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1000

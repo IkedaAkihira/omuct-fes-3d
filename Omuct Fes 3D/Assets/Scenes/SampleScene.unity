@@ -666,6 +666,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: monsuter.by-ikehara
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5183a767517c0344880777d8ccbe9217, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5183a767517c0344880777d8ccbe9217, type: 3}
 --- !u!1001 &479881758
@@ -675,6 +679,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8812064692277331442, guid: 081977373e6566b41adabee137b0980d, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 081977373e6566b41adabee137b0980d, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -697,7 +705,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 081977373e6566b41adabee137b0980d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.61
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 081977373e6566b41adabee137b0980d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -731,9 +739,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5931372751300003811, guid: 081977373e6566b41adabee137b0980d, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 235035775646520546, guid: 081977373e6566b41adabee137b0980d, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 081977373e6566b41adabee137b0980d, type: 3}
       propertyPath: m_Name
       value: Ekipu
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 081977373e6566b41adabee137b0980d, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6190895122249085732, guid: 081977373e6566b41adabee137b0980d, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 081977373e6566b41adabee137b0980d, type: 3}
@@ -753,8 +777,8 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 2
-  m_Radius: 0.5
+  m_Height: 5
+  m_Radius: 1.6
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
@@ -794,12 +818,26 @@ MonoBehaviour:
   cameraRotationYVelocity: 1
   horizontal: -1
   vertical: 1
-  th: 0.2
+  th: 0.05
   tpsCamera: {fileID: 1182092718}
   cameraDistance: 5
   attackObject: {fileID: 4358696385323467273, guid: 4e3cab90edf90324b9012a73be2c7bf7, type: 3}
   attackForce: 1000
   attackInterval: 25
+--- !u!64 &484074122
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 484074118}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1101733005453906574, guid: 081977373e6566b41adabee137b0980d, type: 3}
 --- !u!1 &521928413
 GameObject:
   m_ObjectHideFlags: 0
@@ -1194,7 +1232,7 @@ MonoBehaviour:
   cameraRotationYVelocity: 1
   horizontal: -1
   vertical: 1
-  th: 0.2
+  th: 0.05
   tpsCamera: {fileID: 963194225}
   cameraDistance: 5
   attackObject: {fileID: 8970168126409952239, guid: b495777f4234c5d42be215c5a6bdaf8a, type: 3}
