@@ -26,6 +26,7 @@ public class ItemBox : MonoBehaviour {
         System.Random random=new System.Random();
         int randomIndex=random.Next(0,items.Count);
         player.item=items[randomIndex];
+        player.itemImage.sprite = Sprite.Create(items[randomIndex].itemImage, new Rect(0,0,items[randomIndex].itemImage.width,items[randomIndex].itemImage.height), Vector2.zero);
         Destroy(gameObject);
     }
 }

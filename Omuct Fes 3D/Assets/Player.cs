@@ -88,11 +88,6 @@ abstract public class Player : MonoBehaviour
     //操作関係はUpdateで処理してる
     private void Update()
     {
-        if(this.item != null)
-            this.itemImage.sprite = Sprite.Create(this.item.itemImage, new Rect(0,0,this.item.itemImage.width,this.item.itemImage.height), Vector2.zero);
-        else
-            this.itemImage.sprite = Sprite.Create(this.noItemTexture, new Rect(0,0,this.noItemTexture.width,this.noItemTexture.height), Vector2.zero);
-        
         if(IsAttackable)
             animator.SetTrigger("return");
         
@@ -138,6 +133,7 @@ abstract public class Player : MonoBehaviour
             if(item!=null){
                 item.Use(this);
                 item=null;
+                this.itemImage.sprite = Sprite.Create(this.noItemTexture, new Rect(0,0,this.noItemTexture.width,this.noItemTexture.height), Vector2.zero);
             }
         }
 
