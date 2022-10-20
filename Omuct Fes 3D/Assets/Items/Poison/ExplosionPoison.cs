@@ -15,8 +15,7 @@ public class ExplosionPoison : MonoBehaviour {
             return;
         }
     }
-    private void OnTriggerEnter(Collider other) {
-        Debug.Log(parent);
+    private void OnTriggerStay(Collider other) {        
         Player player=other.GetComponent<Player>();
         if(!player)
             return;

@@ -6,7 +6,7 @@ using System;
 public class BulletPoison : MonoBehaviour
 {
     //外部からparentを設定したいので、publicにする。
-    public Player parent;
+    public Player parent = null;
 
     private GameObject explosion;
 
@@ -28,7 +28,7 @@ public class BulletPoison : MonoBehaviour
             return;
         
         //弾丸自身を消す。
-        Destroy(this.gameObject);
         Instantiate(this.explosion,this.transform.position,Quaternion.identity);
+        Destroy(this.gameObject);
     }
 }
