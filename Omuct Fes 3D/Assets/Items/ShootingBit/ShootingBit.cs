@@ -7,6 +7,7 @@ public class ShootingBit : MonoBehaviour {
     public Player parent;
     public GameObject attackObject;
     public float attackForce=2000f;
+    public float range=1.2f;
 
     public uint moveAsympotic=1;
     public uint rotationAsympotic=1;
@@ -22,7 +23,7 @@ public class ShootingBit : MonoBehaviour {
             return;
         }
         currentRoation=(currentRoation*rotationAsympotic+parent.cameraRotation+relativeRotation)/(rotationAsympotic+1);
-        transform.position=parent.transform.position+new Vector3(Mathf.Cos(currentRoation),0,Mathf.Sin(currentRoation));
+        transform.position=parent.transform.position+new Vector3(Mathf.Cos(currentRoation),0,Mathf.Sin(currentRoation))*1.2f;
 
 
         if(time%duration!=0)
@@ -37,6 +38,7 @@ public class ShootingBit : MonoBehaviour {
         }else{
             attackVec=parent.cameraVec3.normalized;
         }
+        transform.forward = attackVec;
         GameObject cloneObject=Instantiate(attackObject,transform.position,Quaternion.identity);
         Rigidbody rb=cloneObject.GetComponent<Rigidbody>();
         rb.AddForce(attackVec*attackForce);
