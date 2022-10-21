@@ -104,12 +104,15 @@ abstract public class Player : MonoBehaviour
         *0.01f*((isFocusTarget)?cameraRotationYVelocityAssisted:cameraRotationYVelocity)),verticalCameraLimit);
 
         //move
-        move = cameraVec2*Th(Input.GetAxis(moveVerticalButton),th)*horizontal
+        move = cameraVec2*Input.GetAxis(moveVerticalButton)*horizontal
         +new Vector3(
             -Mathf.Sin(cameraRotation),
             0,
             Mathf.Cos(cameraRotation)
-            )*Th(Input.GetAxis(moveHorizontalButton),th)*vertical;
+            )*Input.GetAxis(moveHorizontalButton)*vertical;
+        if(move.magnitude>1.0f)
+            move=move.normalized;
+        move = move*move.magnitude;
         if (move != Vector3.zero && !isAttacking)
         {
             gameObject.transform.forward = move;
