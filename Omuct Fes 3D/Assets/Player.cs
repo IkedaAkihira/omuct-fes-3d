@@ -35,7 +35,9 @@ abstract public class Player : MonoBehaviour
 
     //操作関係
     public float cameraRotationVelocity=1f;
+    public float cameraRotationVelocityAssisted=0.1f;
     public float cameraRotationYVelocity=1f;
+    public float cameraRotationYVelocityAssisted=0.1f;
     public float horizontal=1f;
     public float vertical=1f;
     public float th=0.2f;
@@ -67,6 +69,8 @@ abstract public class Player : MonoBehaviour
 
     protected bool isAttacking = false;
 
+    protected bool isFocusTarget = false;
+
     private Texture2D noItemTexture;
     private void Awake()
     {
@@ -92,10 +96,10 @@ abstract public class Player : MonoBehaviour
             animator.SetTrigger("return");
         
         //camera rotation
-        cameraRotation+=Th(Input.GetAxis(cameraHorizontalButton),th)*0.005f*cameraRotationVelocity;
+        cameraRotation+=Th(Input.GetAxis(cameraHorizontalButton),th)*0.005f*((isFocusTarget)?cameraRotationVelocityAssisted:cameraRotationVelocity);
         cameraRotationY=Mathf.Min(Mathf.Max(-1.0f,cameraRotationY+
         Th(Input.GetAxis(cameraVerticalButton),th)
-        *0.01f*cameraRotationYVelocity),1.0f);
+        *0.01f*((isFocusTarget)?cameraRotationYVelocityAssisted:cameraRotationYVelocity)),1.0f);
 
         //move
         move = cameraVec2*Th(Input.GetAxis(moveVerticalButton),th)*horizontal
@@ -181,13 +185,16 @@ abstract public class Player : MonoBehaviour
 
         //プレイヤーからターゲットに向かう正規化されたベクトルを更新
         RaycastHit hit;
-        if(
-            Physics.Raycast(cameraPos,cameraVec3,out hit,Mathf.Infinity,1<<3|1<<6)
-            &&hit.collider.GetComponent<Player>()!=this
-        ){
+        Player targetedPlayer = null;
+        if(Physics.Raycast(cameraPos,cameraVec3,out hit,Mathf.Infinity,1<<3|1<<6)){
+            targetedPlayer = hit.collider.GetComponent<Player>();
+        }
+        if(targetedPlayer!=null&&targetedPlayer!=this){
             toTargetVec=(hit.point-transform.position).normalized;
+            isFocusTarget = true;
         }else{
             toTargetVec=cameraVec3.normalized;
+            isFocusTarget = false;
         }
         
         //g重力の処理
