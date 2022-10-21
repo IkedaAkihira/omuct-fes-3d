@@ -87,6 +87,7 @@ abstract public class Player : MonoBehaviour
         cameraVec2=new Vector3(0,0,0);
         cameraVec3=new Vector3(0,0,0);
         toTargetVec=new Vector3(0,0,0);
+        this.itemImage.sprite = Sprite.Create(this.noItemTexture, new Rect(0,0,this.noItemTexture.width,this.noItemTexture.height), Vector2.zero);
     }
 
 
