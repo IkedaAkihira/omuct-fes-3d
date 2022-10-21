@@ -41,6 +41,7 @@ abstract public class Player : MonoBehaviour
     public float horizontal=1f;
     public float vertical=1f;
     public float th=0.2f;
+    public float verticalCameraLimit = Mathf.PI/6.0f;
     //カメラオブジェクトを格納
     public GameObject tpsCamera;
     //カメラの距離
@@ -92,14 +93,15 @@ abstract public class Player : MonoBehaviour
     //操作関係はUpdateで処理してる
     private void Update()
     {
+        Debug.Log(isFocusTarget);
         if(IsAttackable)
             animator.SetTrigger("return");
         
         //camera rotation
         cameraRotation+=Th(Input.GetAxis(cameraHorizontalButton),th)*0.005f*((isFocusTarget)?cameraRotationVelocityAssisted:cameraRotationVelocity);
-        cameraRotationY=Mathf.Min(Mathf.Max(-1.0f,cameraRotationY+
+        cameraRotationY=Mathf.Min(Mathf.Max(-verticalCameraLimit,cameraRotationY+
         Th(Input.GetAxis(cameraVerticalButton),th)
-        *0.01f*((isFocusTarget)?cameraRotationYVelocityAssisted:cameraRotationYVelocity)),1.0f);
+        *0.01f*((isFocusTarget)?cameraRotationYVelocityAssisted:cameraRotationYVelocity)),verticalCameraLimit);
 
         //move
         move = cameraVec2*Th(Input.GetAxis(moveVerticalButton),th)*horizontal
