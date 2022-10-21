@@ -10,7 +10,7 @@ public class ExplosionPoison : MonoBehaviour {
     }
     private void FixedUpdate() {
         long currentTime=GameMaster.instance.gameTime;
-        if(currentTime-startTime>1000){
+        if(currentTime-startTime>250){
             Destroy(this.gameObject);
             return;
         }
@@ -21,6 +21,6 @@ public class ExplosionPoison : MonoBehaviour {
             return;
         if(player==parent)
             return;
-        player.AddEffect(new EffectPoison(500));
+        player.AddEffect(new EffectPoison(50));
     }
 }

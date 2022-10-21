@@ -18,14 +18,11 @@ public class EffectPoison : Effect{
     override public void Tick(Player player)
     {
         //ゲーム内時間をintervalで割ったあまりが0の時、つまり、interval回ごとにプレイヤーにダメージを与える。
-        if(time%interval==interval-5)
+        if(GameMaster.instance.gameTime%interval==0)
         {
             //player.Damage(damageSource)でプレイヤーにダメージを与えられる。
             //damageSourceはダメージの情報を保持してる。
             player.Damage(new DamageSource(damage));
-        }else if(time%interval==0)
-        {
-
             ParticleSystem clone=GameObject.Instantiate(poisonParticle);
             clone.transform.position=player.transform.position;
         }
