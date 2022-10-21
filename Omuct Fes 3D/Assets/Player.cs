@@ -193,12 +193,14 @@ abstract public class Player : MonoBehaviour
         Player targetedPlayer = null;
         if(Physics.Raycast(cameraPos,cameraVec3,out hit,Mathf.Infinity,1<<3|1<<6)){
             targetedPlayer = hit.collider.GetComponent<Player>();
+            if(targetedPlayer!=this)
+                toTargetVec=(hit.point-transform.position).normalized;
+            else
+                toTargetVec=cameraVec3.normalized;
         }
         if(targetedPlayer!=null&&targetedPlayer!=this){
-            toTargetVec=(hit.point-transform.position).normalized;
             isFocusTarget = true;
         }else{
-            toTargetVec=cameraVec3.normalized;
             isFocusTarget = false;
         }
         
