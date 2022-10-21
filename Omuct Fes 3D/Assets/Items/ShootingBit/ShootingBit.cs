@@ -44,6 +44,6 @@ public class ShootingBit : MonoBehaviour {
         rb.AddForce(attackVec*attackForce);
         BulletShootingBit bullet=cloneObject.GetComponent<BulletShootingBit>();
         bullet.parent=parent;
-
+        bullet.transform.right = attackVec;
     }
 }
