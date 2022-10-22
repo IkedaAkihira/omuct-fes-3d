@@ -198,6 +198,8 @@ abstract public class Player : MonoBehaviour
                 toTargetVec=(hit.point-transform.position).normalized;
             else
                 toTargetVec=cameraVec3.normalized;
+        }else{
+            toTargetVec=cameraVec3.normalized;
         }
         if(targetedPlayer!=null&&targetedPlayer!=this){
             isFocusTarget = true;

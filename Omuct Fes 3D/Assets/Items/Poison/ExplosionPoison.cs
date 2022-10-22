@@ -10,7 +10,7 @@ public class ExplosionPoison : MonoBehaviour {
     }
     private void FixedUpdate() {
         long currentTime=GameMaster.instance.gameTime;
-        if(currentTime-startTime>250){
+        if(currentTime-startTime>500){
             Destroy(this.gameObject);
             return;
         }

@@ -7,9 +7,12 @@ public class EffectPoison : Effect{
 
     private ParticleSystem poisonParticle;
 
+    public static int TYPE=1;
+
     //コンストラクタ　new EffectPoison(...)をやったときの処理を書いてある。
     public EffectPoison(int time)
     {
+        this.type=1;
         this.time=time;
         this.poisonParticle=Resources.Load<ParticleSystem>("Prefabs/PoisonEffect");
     }
