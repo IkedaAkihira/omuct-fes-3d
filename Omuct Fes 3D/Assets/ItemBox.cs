@@ -10,7 +10,7 @@ public class ItemBox : MonoBehaviour {
     {
         //ここに作成したItemクラスを追加していく。
         //テスト時は不要なものをコメントアウトすると良い。
-        items.Add(new ItemPoison());
+        //items.Add(new ItemPoison());
         items.Add(new ItemTokeito());
     }
     private void Update() {

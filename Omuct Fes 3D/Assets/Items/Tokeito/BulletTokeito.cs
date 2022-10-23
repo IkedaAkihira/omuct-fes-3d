@@ -9,6 +9,15 @@ public class BulletTokeito : MonoBehaviour
     //外部からparentを設定したいので、publicにする。
     public Player parent;
 
+    private void Update()
+    {
+        Rigidbody rb = this.GetComponent<Rigidbody>();
+        if(rb.velocity.magnitude >= 1.0e-4)
+        {
+            transform.forward = rb.velocity;
+        }
+    }
+
     //何かにあたったときの処理を行う。
     private void OnTriggerEnter(Collider other)
     {
