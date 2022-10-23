@@ -21,6 +21,7 @@ public class ItemBox : MonoBehaviour {
         //テスト時は不要なものをコメントアウトすると良い。
         items.Add(new ItemPoison());
         items.Add(new ItemShootingBit());
+        items.Add(new ItemGrenade());
     }
     private void OnTriggerEnter(Collider other) {
         if(isOpened)
