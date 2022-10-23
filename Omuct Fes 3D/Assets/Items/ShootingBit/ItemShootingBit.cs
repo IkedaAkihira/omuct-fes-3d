@@ -2,6 +2,9 @@ using UnityEngine;
 using System;
 
 public class ItemShootingBit : Item{
+    public ItemShootingBit(){
+        this.itemImage=Resources.Load<Texture2D>("Textures/ShootingBit");
+    }
     public override void Use(Player user)
     {
         GameObject bitObject=Resources.Load<GameObject>("Prefabs/ShootingBit");
