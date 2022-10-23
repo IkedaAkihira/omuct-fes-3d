@@ -9,6 +9,8 @@ public class PlayerEkipu : Player{
     
     override protected void Attack(){
         
+
+        
         GameObject cloneObject=Instantiate(attackObject,transform.position+new Vector3(0f,0f,0f),Quaternion.identity);
         Rigidbody rb=cloneObject.GetComponent<Rigidbody>();
         rb.AddForce(toTargetVec*attackForce);
