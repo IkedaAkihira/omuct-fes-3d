@@ -36,12 +36,12 @@ public class BulletTokeito : MonoBehaviour
         //弾丸自身を消す。
         Destroy(this.gameObject);
 
-        //playerがnullではない、つまり、あたった対象がplayerであれば、毒を与える。
-        if (player != null)
-        {
-            //AddEffectで状態異常などを与える。EffectPoisonも後で作ろうね。
-            //EffectPoisonの引数はゲーム内時間(1秒で50進む)で効果時間を指定している。これは10秒。
-            player.AddEffect(new EffectPoison(500));
-        }
+        // 当たった場所に時計塔を生やす
+        Vector3 pos = transform.position + new Vector3(0.0f, 0.0f, 0.0f);
+        pos.y = 0.0f;
+        // RealTokeito ファイルを読み込みます。作ったつもり。
+        GameObject realTokeitoObject = Resources.Load("Prefabs/RealTokeito") as GameObject;
+        // tokeitoObjectを具現化して、tokeitoCloneに格納する。第2引数で位置、第3引数で向きを指定する。
+        GameObject tokeitoClone = GameObject.Instantiate(realTokeitoObject, pos, Quaternion.identity);
     }
 }
