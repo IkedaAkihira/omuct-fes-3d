@@ -680,6 +680,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8089291190072284153}
   - component: {fileID: 8631243273958717420}
+  - component: {fileID: 5094546512964550527}
   m_Layer: 0
   m_Name: RealTokeito
   m_TagString: Untagged
@@ -722,8 +723,21 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 54.4, z: 10}
+  m_Size: {x: 10, y: 55, z: 10}
   m_Center: {x: 0, y: 26, z: 0}
+--- !u!114 &5094546512964550527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8865687533674350915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9ab44e5f10d50345b198a7ddf76fe00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  centerPos: {x: 0, y: 0, z: 0}
 --- !u!1 &8886681120352879700
 GameObject:
   m_ObjectHideFlags: 0
