@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -140,13 +140,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dc12d6464484824180e6433c6ef7c19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpButton: OppJump
-  attackButton: OppAttack
-  useItemButton: OppUseItem
-  cameraHorizontalButton: OppCameraHorizontal
-  cameraVerticalButton: OppCameraVertical
-  moveVerticalButton: OppVertical
-  moveHorizontalButton: OppHorizontal
+  jumpButton: Jump
+  attackButton: Attack
+  useItemButton: UseItem
+  cameraHorizontalButton: CameraHorizontal
+  cameraVerticalButton: CameraVertical
+  moveVerticalButton: Vertical
+  moveHorizontalButton: Horizontal
   hpSlider: {fileID: 598876358}
   maxHp: 20
   playerSpeed: 2
@@ -163,8 +163,8 @@ MonoBehaviour:
   tpsCamera: {fileID: 1182092718}
   cameraDistance: 8
   itemImage: {fileID: 1629441222}
-  attackInterval: 200
-  attackObject: {fileID: 0}
+  attackInterval: 25
+  attackObject: {fileID: 8970168126409952239, guid: b495777f4234c5d42be215c5a6bdaf8a, type: 3}
   attackForce: 1000
 --- !u!1001 &159489929
 PrefabInstance:
@@ -1318,13 +1318,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dc12d6464484824180e6433c6ef7c19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpButton: Jump
-  attackButton: Attack
-  useItemButton: UseItem
-  cameraHorizontalButton: CameraHorizontal
-  cameraVerticalButton: CameraVertical
-  moveVerticalButton: Vertical
-  moveHorizontalButton: Horizontal
+  jumpButton: Fire1
+  attackButton: Fire2
+  useItemButton: Fire3
+  cameraHorizontalButton: Mouse X
+  cameraVerticalButton: Mouse Y
+  moveVerticalButton: Mouse Y
+  moveHorizontalButton: Mouse X
   hpSlider: {fileID: 1864168654}
   maxHp: 30
   playerSpeed: 10
