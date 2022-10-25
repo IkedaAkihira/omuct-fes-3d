@@ -7,9 +7,12 @@ public class RealTokeito : MonoBehaviour
 
     public Vector3 centerPos;
     private float realT;
-    private readonly float TOKEITO_HEIGHT = 27.0f; // [m]
-    private readonly float GROW_SPEED = 0.1f; // [/sec]
-    private readonly float GROW_DELAY = 4.0f; // [sec]
+    [SerializeField] private float TOKEITO_HEIGHT = 27.0f; // [m]
+    [SerializeField] private float GROW_DELAY = 4.0f; // [sec]
+    [SerializeField] private float GROW_SPEED = 0.1f; // [/sec]
+    [SerializeField] private float STAY_INTERVAL = 30.0f; // [sec]
+    [SerializeField] private float DRAWN_SPEED = 0.2f; // [sec]
+    [SerializeField] private float DELETE_DELAY = 4.0f; // [sec]
 
     // Start is called before the first frame update
     void Start()
@@ -23,17 +26,34 @@ public class RealTokeito : MonoBehaviour
         float dt = Time.deltaTime;
         realT += dt;
 
-        float growT = ((realT - GROW_DELAY) * GROW_SPEED) * 2.0f - 1.0f;
         float h = -0.5f;
-        if (growT <= 1.01)
+
+        float GROW_TIMESTAMP = GROW_DELAY + 1.0f / GROW_SPEED;
+        float STAY_TIMESTAMP = GROW_TIMESTAMP + STAY_INTERVAL;
+        float DRAWN_TIMESTAMP = STAY_TIMESTAMP + 1.0f / DRAWN_SPEED + DELETE_DELAY;
+
+        if (realT < GROW_TIMESTAMP)
         {
+            float growT = ((realT - GROW_DELAY) * GROW_SPEED) * 2.0f - 1.0f;
             h = Mathf.Atan(growT * 3.0f / Mathf.PI) + (growT / 4.0f);
-            h = (h + 1.0f) / 2.0f;
             h = Mathf.Min(h, 1.0f);
+            h = (h + 1.0f) / 2.0f;
+        }
+        else if(realT < STAY_TIMESTAMP)
+        {
+            h = 1.0f;
+        }
+        else if(realT < DRAWN_TIMESTAMP)
+        {
+            float drawnOffsetT = DRAWN_TIMESTAMP - DELETE_DELAY - realT;
+            float growT = (drawnOffsetT * DRAWN_SPEED) * 2.0f - 1.0f;
+            h = Mathf.Atan(growT * 3.0f / Mathf.PI) + (growT / 4.0f);
+            h = Mathf.Min(h, 1.0f);
+            h = (h + 1.0f) / 2.0f;
         }
         else
         {
-            h = 1.0f;
+            Destroy(this.gameObject);
         }
 
         Vector3 pos = centerPos + new Vector3(0.0f, 0.0f, 0.0f);
