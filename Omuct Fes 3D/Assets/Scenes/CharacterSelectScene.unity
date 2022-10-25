@@ -1148,6 +1148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbac81b0661534e4da1ae08374468554, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cursorIndex: 0
   selectAxis: Horizontal
   selectButton: Submit
   cancelButton: Cancel
@@ -1762,6 +1763,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbac81b0661534e4da1ae08374468554, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cursorIndex: 0
   selectAxis: OppHorizontal
   selectButton: OppSubmit
   cancelButton: OppCancel

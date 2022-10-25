@@ -7,7 +7,7 @@ public class ItemGrenade : Item
 {
     GameObject grenadeObject;
     public ItemGrenade(){
-        this.itemImage=Resources.Load<Texture2D>("Textures/poison_effect");
+        this.itemImage=Resources.Load<Texture2D>("Textures/Grenade");
         this.grenadeObject = Resources.Load("Prefabs/Grenade") as GameObject;
     }
     //この関数の中にアイテムを使った時の処理を書きます。

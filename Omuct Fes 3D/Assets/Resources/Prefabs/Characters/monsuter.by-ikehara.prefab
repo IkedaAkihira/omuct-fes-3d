@@ -356,7 +356,7 @@ MonoBehaviour:
   verticalCameraLimit: 0.7
   cameraDistance: 8
   attackInterval: 10
-  attackObject: {fileID: 8970168126409952239, guid: b495777f4234c5d42be215c5a6bdaf8a, type: 3}
+  attackObject: {fileID: 2860335441664142213, guid: 322cfc4209bb1174dbe686334ad43ddc, type: 3}
   attackForce: 1000
 --- !u!1 &2196317924424290529
 GameObject:
