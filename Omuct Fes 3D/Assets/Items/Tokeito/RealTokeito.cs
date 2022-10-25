@@ -6,34 +6,37 @@ public class RealTokeito : MonoBehaviour
 {
 
     public Vector3 centerPos;
-    private float t;
-    private readonly float TOKEITO_HEIGHT = 27.0f;
-    private readonly float GROW_SPEED = 0.05f;
+    private float realT;
+    private readonly float TOKEITO_HEIGHT = 27.0f; // [m]
+    private readonly float GROW_SPEED = 0.1f; // [/sec]
+    private readonly float GROW_DELAY = 4.0f; // [sec]
 
     // Start is called before the first frame update
     void Start()
     {
-        t = 0.0f;
+        realT = 0.0f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        float dt = Time.deltaTime * GROW_SPEED;
-        t += dt;
+        float dt = Time.deltaTime;
+        realT += dt;
 
-        Vector3 pos = centerPos + new Vector3(0.0f, 0.0f, 0.0f);
-        float x = (t - 0.005f) * 2.0f - 1.0f;
+        float growT = ((realT - GROW_DELAY) * GROW_SPEED) * 2.0f - 1.0f;
         float h = -0.5f;
-        if (x <= 1.01)
+        if (growT <= 1.01)
         {
-            h = Mathf.Atan(x * 3.0f / Mathf.PI) + (x / 4.0f);
-            h = Mathf.Min(h);
+            h = Mathf.Atan(growT * 3.0f / Mathf.PI) + (growT / 4.0f);
+            h = (h + 1.0f) / 2.0f;
+            h = Mathf.Min(h, 1.0f);
         }
         else
         {
             h = 1.0f;
         }
+
+        Vector3 pos = centerPos + new Vector3(0.0f, 0.0f, 0.0f);
         pos.y = TOKEITO_HEIGHT * (h - 1.0f);
 
         transform.position = pos;
