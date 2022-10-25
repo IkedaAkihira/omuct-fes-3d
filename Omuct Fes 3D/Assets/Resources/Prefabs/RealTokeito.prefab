@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2032617820667824663}
   - component: {fileID: 2614749468837860233}
   - component: {fileID: 3895186210497129268}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: saijoukai.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 6981688334136022127}
   - component: {fileID: 4796424726525789104}
   - component: {fileID: 3387043334081450008}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: chousinn.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -179,7 +179,7 @@ GameObject:
   - component: {fileID: 3935809706504056197}
   - component: {fileID: 6191178196079370998}
   - component: {fileID: 7594993540690530347}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: tokeinopure-to.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -262,7 +262,7 @@ GameObject:
   - component: {fileID: 8048974164201398946}
   - component: {fileID: 9068597392270529895}
   - component: {fileID: 2406831945011741124}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: naka.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -347,7 +347,7 @@ GameObject:
   - component: {fileID: 4818928221474223907}
   - component: {fileID: 2585400726179581936}
   - component: {fileID: 1385613549635738992}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: chousinn.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -430,7 +430,7 @@ GameObject:
   - component: {fileID: 3120865200984897731}
   - component: {fileID: 4596331137620591986}
   - component: {fileID: 8529757191499740693}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: tobira.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -515,7 +515,7 @@ GameObject:
   - component: {fileID: 3843114557064968720}
   - component: {fileID: 9166195217574115227}
   - component: {fileID: 7989573760488799853}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: tannsinn.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -598,7 +598,7 @@ GameObject:
   - component: {fileID: 3255809803525466737}
   - component: {fileID: 3078231006473806365}
   - component: {fileID: 8674273413679020036}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: hiraisinn.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -681,7 +681,7 @@ GameObject:
   - component: {fileID: 8089291190072284153}
   - component: {fileID: 8631243273958717420}
   - component: {fileID: 5094546512964550527}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RealTokeito
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -749,7 +749,7 @@ GameObject:
   - component: {fileID: 1609704761617604984}
   - component: {fileID: 1339064677473550215}
   - component: {fileID: 5030899780676139475}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: tannsinn.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
