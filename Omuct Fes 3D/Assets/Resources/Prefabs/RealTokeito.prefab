@@ -739,10 +739,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   centerPos: {x: 0, y: 0, z: 0}
   TOKEITO_HEIGHT: 27
-  GROW_DELAY: 4
-  GROW_SPEED: 1
-  STAY_INTERVAL: 2
-  DRAWN_SPEED: 2
+  GROW_DELAY: 3
+  GROW_TIME: 7
+  STAY_INTERVAL: 15
+  DRAWN_TIME: 5
   DELETE_DELAY: 4
 --- !u!1 &8886681120352879700
 GameObject:

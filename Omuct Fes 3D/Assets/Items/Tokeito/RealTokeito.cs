@@ -9,9 +9,9 @@ public class RealTokeito : MonoBehaviour
     private float realT;
     [SerializeField] private float TOKEITO_HEIGHT = 27.0f; // [m]
     [SerializeField] private float GROW_DELAY = 4.0f; // [sec]
-    [SerializeField] private float GROW_SPEED = 0.1f; // [/sec]
+    [SerializeField] private float GROW_TIME = 10.0f; // [sec]
     [SerializeField] private float STAY_INTERVAL = 30.0f; // [sec]
-    [SerializeField] private float DRAWN_SPEED = 0.2f; // [sec]
+    [SerializeField] private float DRAWN_TIME = 5.0f; // [sec]
     [SerializeField] private float DELETE_DELAY = 4.0f; // [sec]
 
     // Start is called before the first frame update
@@ -28,13 +28,13 @@ public class RealTokeito : MonoBehaviour
 
         float h = -0.5f;
 
-        float GROW_TIMESTAMP = GROW_DELAY + 1.0f / GROW_SPEED;
+        float GROW_TIMESTAMP = GROW_DELAY + GROW_TIME;
         float STAY_TIMESTAMP = GROW_TIMESTAMP + STAY_INTERVAL;
-        float DRAWN_TIMESTAMP = STAY_TIMESTAMP + 1.0f / DRAWN_SPEED + DELETE_DELAY;
+        float DRAWN_TIMESTAMP = STAY_TIMESTAMP + DRAWN_TIME + DELETE_DELAY;
 
         if (realT < GROW_TIMESTAMP)
         {
-            float growT = ((realT - GROW_DELAY) * GROW_SPEED) * 2.0f - 1.0f;
+            float growT = ((realT - GROW_DELAY) / GROW_TIME) * 2.0f - 1.0f;
             h = Mathf.Atan(growT * 3.0f / Mathf.PI) + (growT / 4.0f);
             h = Mathf.Min(h, 1.0f);
             h = (h + 1.0f) / 2.0f;
@@ -46,7 +46,7 @@ public class RealTokeito : MonoBehaviour
         else if(realT < DRAWN_TIMESTAMP)
         {
             float drawnOffsetT = DRAWN_TIMESTAMP - DELETE_DELAY - realT;
-            float growT = (drawnOffsetT * DRAWN_SPEED) * 2.0f - 1.0f;
+            float growT = (drawnOffsetT / DRAWN_TIME) * 2.0f - 1.0f;
             h = Mathf.Atan(growT * 3.0f / Mathf.PI) + (growT / 4.0f);
             h = Mathf.Min(h, 1.0f);
             h = (h + 1.0f) / 2.0f;
