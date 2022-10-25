@@ -234,13 +234,13 @@ InputManager:
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: joystick button 0
+    positiveButton: joystick 2 button 0
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1000
     dead: 0.001
     sensitivity: 1000
-    snap: 0
+    snap: 1
     invert: 0
     type: 0
     axis: 1
@@ -250,15 +250,47 @@ InputManager:
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: joystick button 0
+    positiveButton: joystick 2 button 1
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1000
     dead: 0.001
     sensitivity: 1000
-    snap: 0
+    snap: 1
     invert: 0
     type: 0
     axis: 1
     joyNum: 2
+  - serializedVersion: 3
+    m_Name: OppSubmit
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: joystick 3 button 2
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 1000
+    dead: 0.001
+    sensitivity: 1000
+    snap: 1
+    invert: 0
+    type: 0
+    axis: 1
+    joyNum: 3
+  - serializedVersion: 3
+    m_Name: OppCancel
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: joystick 3 button 1
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 1000
+    dead: 0.001
+    sensitivity: 1000
+    snap: 1
+    invert: 0
+    type: 0
+    axis: 1
+    joyNum: 3
   m_UsePhysicalKeys: 0

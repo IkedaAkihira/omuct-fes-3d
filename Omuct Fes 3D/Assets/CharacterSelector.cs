@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class CharacterSelector : MonoBehaviour {
-    private long cursorIndex = 0;
+    public long cursorIndex = 0;
 
     private int interval = 0;
 
