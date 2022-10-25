@@ -5,6 +5,9 @@ using System;
 
 public class ItemTokeito : Item
 {
+    public ItemTokeito(){
+        this.itemImage=Resources.Load<Texture2D>("Textures/Tokeito");
+    }
     //この関数の中にアイテムを使った時の処理を書きます。
     public override void Use(Player user)
     {

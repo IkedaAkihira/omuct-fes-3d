@@ -7,10 +7,6 @@ public class GameMaster : MonoBehaviour,EventListener
     static public GameMaster instance=null;
     public long gameTime;
 
-    Vector3[] itemBoxPositions={
-        new Vector3(0f,0.5f,0f),
-        new Vector3(-10f,6.5f,10f)
-    };
     private void Awake() {
         this.gameTime=0;
         if(instance==null)
@@ -36,10 +32,6 @@ public class GameMaster : MonoBehaviour,EventListener
 
     private void FixedUpdate() {
         this.gameTime++;
-        if(gameTime%500==0){
-            GameObject itemBox=Resources.Load<GameObject>("Prefabs/ItemBox");
-            Instantiate(itemBox,itemBoxPositions[(new System.Random()).Next(0,2)],Quaternion.identity);
-        }
     }
 
     public void OnAttack(AttackEvent e){
