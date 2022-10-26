@@ -122,7 +122,10 @@ abstract public class Player : MonoBehaviour
         //jump
         if (Input.GetButtonDown(jumpButton) && groundedPlayer)
         {
-            playerVelocity.y += jumpForce;
+            JumpEvent e = new JumpEvent(this,this.jumpForce);
+            GameMaster.instance.OnJump(e);
+            if(e.isAvailable)
+                playerVelocity.y += e.JumpForce;
         }
         
         //attack
@@ -219,7 +222,10 @@ abstract public class Player : MonoBehaviour
         playerVelocity.y += gravityValue * Time.deltaTime;
 
         //移動の処理
-        controller.Move((move*playerSpeed+playerVelocity) * Time.deltaTime);
+        MoveEvent moveEvent = new MoveEvent(this,this.playerSpeed);
+        GameMaster.instance.OnMove(moveEvent);
+        if(moveEvent.isAvailable)
+            controller.Move((move*moveEvent.Speed+playerVelocity) * Time.deltaTime);
     }
 
     public int Hp{

@@ -32,6 +32,7 @@ public class GameMaster : MonoBehaviour,EventListener
     private Player playerL;
     private Player playerR;
     [SerializeField] private string[] characterPaths;
+    List<EventListener>listeners=new List<EventListener>();
 
     private void Awake() {
         GameMaster.instance=this;
@@ -64,12 +65,11 @@ public class GameMaster : MonoBehaviour,EventListener
         this.player1PoisonUI.player=pl;
         this.player2PoisonUI.player=pr;
 
-
+        listeners.Add(new PoisonListener());
 
         this.gameTime=0;
     }
 
-    List<EventListener>listeners=new List<EventListener>();
     // Start is called before the first frame update
     void Start()
     {
@@ -101,6 +101,18 @@ public class GameMaster : MonoBehaviour,EventListener
     public void OnUseItem(UseItemEvent e){
         for(int i=0;i<listeners.Count;i++){
             listeners[i].OnUseItem(e);
+        }
+    }
+
+    public void OnMove(MoveEvent e){
+        for(int i=0;i<listeners.Count;i++){
+            listeners[i].OnMove(e);
+        }
+    }
+
+    public void OnJump(JumpEvent e){
+        for(int i=0;i<listeners.Count;i++){
+            listeners[i].OnJump(e);
         }
     }
 }
