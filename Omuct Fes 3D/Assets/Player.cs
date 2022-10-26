@@ -174,6 +174,10 @@ abstract public class Player : MonoBehaviour
             effects.Remove(type);
         }
 
+        if(this.transform.position.y<=-1f){
+            this.Damage(new DamageSource(-(int)(this.transform.position.y/10f)));
+        }
+
         //死んだとき
         if(hp<=0){
             transform.position=new Vector3(0,10,0);
