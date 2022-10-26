@@ -140,13 +140,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dc12d6464484824180e6433c6ef7c19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpButton: OppJump
-  attackButton: OppAttack
-  useItemButton: OppUseItem
-  cameraHorizontalButton: OppCameraHorizontal
-  cameraVerticalButton: OppCameraVertical
-  moveVerticalButton: OppVertical
-  moveHorizontalButton: OppHorizontal
+  jumpButton: Jump
+  attackButton: Attack
+  useItemButton: UseItem
+  cameraHorizontalButton: CameraHorizontal
+  cameraVerticalButton: CameraVertical
+  moveVerticalButton: Vertical
+  moveHorizontalButton: Horizontal
   hpSlider: {fileID: 598876358}
   maxHp: 40
   playerSpeed: 25
@@ -1318,13 +1318,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dc12d6464484824180e6433c6ef7c19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpButton: Jump
-  attackButton: Attack
-  useItemButton: UseItem
-  cameraHorizontalButton: CameraHorizontal
-  cameraVerticalButton: CameraVertical
-  moveVerticalButton: Vertical
-  moveHorizontalButton: Horizontal
+  jumpButton: Fire1
+  attackButton: Fire2
+  useItemButton: Fire3
+  cameraHorizontalButton: Mouse X
+  cameraVerticalButton: Mouse Y
+  moveVerticalButton: Mouse Y
+  moveHorizontalButton: Mouse X
   hpSlider: {fileID: 1864168654}
   maxHp: 30
   playerSpeed: 10
