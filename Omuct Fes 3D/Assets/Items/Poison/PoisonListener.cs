@@ -1,7 +1,7 @@
 public class PoisonListener: EventListener{
     public void OnMove(MoveEvent e){
         if(e.player.effects.ContainsKey(EffectPoison.TYPE))
-            e.Multiply(0.4f);
+            e.Multiply(0.6f);
     }
     public void OnAttack(AttackEvent e){
 
