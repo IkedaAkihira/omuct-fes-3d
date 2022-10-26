@@ -483,9 +483,9 @@ MonoBehaviour:
   th: 0.05
   verticalCameraLimit: 0.7
   cameraDistance: 8
-  attackInterval: 25
+  attackInterval: 20
   attackObject: {fileID: 4358696385323467273, guid: 4e3cab90edf90324b9012a73be2c7bf7, type: 3}
-  attackForce: 700
+  attackForce: 1500
 --- !u!1 &2734417882892927546
 GameObject:
   m_ObjectHideFlags: 0

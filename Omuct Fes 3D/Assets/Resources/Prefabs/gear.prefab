@@ -232,7 +232,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parent: {fileID: 0}
   damage: 2
-  lifeTime: 200
+  lifeTime: 400
   magnification: 0.02
   defaultSize: 1
 --- !u!65 &8716430593448550307
