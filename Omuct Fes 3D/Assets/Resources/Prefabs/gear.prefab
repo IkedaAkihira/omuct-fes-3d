@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 3978617908418599091}
   - component: {fileID: -7738539341929687664}
   - component: {fileID: 3054033381850423106}
-  - component: {fileID: -637536563772506878}
+  - component: {fileID: 8716430593448550307}
   m_Layer: 0
   m_Name: gear
   m_TagString: Untagged
@@ -231,8 +231,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 0}
---- !u!64 &-637536563772506878
-MeshCollider:
+  damage: 2
+  lifeTime: 200
+  magnification: 0.02
+  defaultSize: 1
+--- !u!65 &8716430593448550307
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -241,7 +245,6 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -1101733005453906574, guid: bab9a6c3a7c573d489a34a7247c4c647, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 0.9, y: 0.3, z: 0.9}
+  m_Center: {x: 0, y: 0.15, z: 0}

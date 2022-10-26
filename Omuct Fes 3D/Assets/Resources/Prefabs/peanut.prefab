@@ -93,7 +93,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3544395465278650394}
   - component: {fileID: 5800587370442704591}
-  - component: {fileID: 6385682566833610757}
+  - component: {fileID: -5011787303864118408}
+  - component: {fileID: -3670733488189298003}
   m_Layer: 0
   m_Name: peanut
   m_TagString: Untagged
@@ -134,7 +135,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &6385682566833610757
+--- !u!64 &-5011787303864118408
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4214217276863292064}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1101733005453906574, guid: 45d1153393ff49b489604ce931c677a3, type: 3}
+--- !u!114 &-3670733488189298003
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -143,7 +158,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4214217276863292064}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 375cd96161e813342b52b8e97d68019b, type: 3}
+  m_Script: {fileID: 11500000, guid: 3bdea4a1351937048846167d21bd7059, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 0}
