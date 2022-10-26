@@ -71,6 +71,10 @@ abstract public class Player : MonoBehaviour
 
     protected bool isFocusTarget = false;
 
+    protected float cursorDistance = 0f;
+
+    public float assistUnder = 1f;
+
     private bool isAvailable = false;
     private Texture2D noItemTexture;
     private void Awake()
@@ -99,10 +103,11 @@ abstract public class Player : MonoBehaviour
             animator.SetTrigger("return");
         
         //camera rotation
-        cameraRotation+=Th(Input.GetAxis(cameraHorizontalButton),th)*0.005f*((isFocusTarget)?cameraRotationVelocityAssisted:cameraRotationVelocity);
+        float assistMagnification = Mathf.Pow(assistUnder,cursorDistance);
+        cameraRotation+=Mathf.Pow(Input.GetAxis(cameraHorizontalButton),3f)*0.005f*((isFocusTarget)?cameraRotationVelocityAssisted*assistMagnification:cameraRotationVelocity);
         cameraRotationY=Mathf.Min(Mathf.Max(-verticalCameraLimit,cameraRotationY+
-        Th(Input.GetAxis(cameraVerticalButton),th)
-        *0.01f*((isFocusTarget)?cameraRotationYVelocityAssisted:cameraRotationYVelocity)),verticalCameraLimit);
+        Mathf.Pow(Input.GetAxis(cameraVerticalButton),3f)
+        *0.01f*((isFocusTarget)?cameraRotationYVelocityAssisted*assistMagnification:cameraRotationYVelocity)),verticalCameraLimit);
 
         //move
         move = cameraVec2*Input.GetAxis(moveVerticalButton)*horizontal
@@ -204,12 +209,18 @@ abstract public class Player : MonoBehaviour
         Player targetedPlayer = null;
         if(Physics.Raycast(cameraPos,cameraVec3,out hit,Mathf.Infinity,1<<3|1<<6)){
             targetedPlayer = hit.collider.GetComponent<Player>();
-            if(targetedPlayer!=this)
-                toTargetVec=(hit.point-transform.position).normalized;
-            else
+            if(targetedPlayer!=this){
+                Vector3 ptot=(hit.point-transform.position);
+                toTargetVec=ptot.normalized;
+                cursorDistance = ptot.magnitude;
+            }
+            else{
                 toTargetVec=cameraVec3.normalized;
+                cursorDistance = -1f;
+            }
         }else{
             toTargetVec=cameraVec3.normalized;
+            cursorDistance = -1f;
         }
         if(targetedPlayer!=null&&targetedPlayer!=this){
             isFocusTarget = true;
