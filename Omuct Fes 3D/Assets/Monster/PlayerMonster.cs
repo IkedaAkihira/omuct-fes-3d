@@ -19,7 +19,7 @@ public class PlayerMonster : Player{
                 (float)rand.NextDouble()*randomSize*2-randomSize,
                 (float)rand.NextDouble()*randomSize*2-randomSize)
             ).normalized*attackForce);
-            BulletEkipu bullet=cloneObject.GetComponent<BulletEkipu>();
+            BulletMonster bullet=cloneObject.GetComponent<BulletMonster>();
             bullet.parent=this;
         }
     }
