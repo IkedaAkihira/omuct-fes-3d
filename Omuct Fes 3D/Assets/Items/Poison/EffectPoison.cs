@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EffectPoison : Effect{
     //あとで調整できるように、ダメージを受ける間隔と毎回のダメージを指定している。今回は1damage/sec * 10sec = 10damage
-    int interval=50;
+    int interval=20;
     int damage=1;
 
     private ParticleSystem poisonParticle;

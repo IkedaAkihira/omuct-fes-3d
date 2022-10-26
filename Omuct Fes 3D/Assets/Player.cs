@@ -6,16 +6,18 @@ using UnityEngine.UI;
 abstract public class Player : MonoBehaviour
 {
     //コントローラ関係
-    public string jumpButton="Jump";
-    public string attackButton="Attack";
-    public string useItemButton="UseItem";
-    public string cameraHorizontalButton="cameraHorizontal";
-    public string cameraVerticalButton="cameraVertical";
-    public string moveVerticalButton="Vertical";
-    public string moveHorizontalButton="Horizontal";
+    protected bool isPlayerAvailable = false;
+    private string jumpButton="Jump";
+    private string attackButton="Attack";
+    private string useItemButton="UseItem";
+    private string cameraHorizontalButton="CameraHorizontal";
+    private string cameraVerticalButton="CameraVertical";
+    private string moveVerticalButton="Vertical";
+    private string moveHorizontalButton="Horizontal";
 
     //UI
-    public Slider hpSlider;
+    private Slider hpSlider;
+    public Image itemImage;
 
     //ステータスなど
     public int maxHp=20;
@@ -42,8 +44,6 @@ abstract public class Player : MonoBehaviour
     public float vertical=1f;
     public float th=0.2f;
     public float verticalCameraLimit = Mathf.PI/6.0f;
-    //カメラオブジェクトを格納
-    public GameObject tpsCamera;
     //カメラの距離
     public float cameraDistance = 10.0f;
 
@@ -62,7 +62,6 @@ abstract public class Player : MonoBehaviour
     //移動方向を格納
     private Vector3 move;
     private Animator animator;
-    public Image itemImage;
 
     
     public int attackInterval=200;
@@ -72,6 +71,7 @@ abstract public class Player : MonoBehaviour
 
     protected bool isFocusTarget = false;
 
+    private bool isAvailable = false;
     private Texture2D noItemTexture;
     private void Awake()
     {
@@ -81,20 +81,20 @@ abstract public class Player : MonoBehaviour
         hp=maxHp;
         item=null;
         controller = this.GetComponent<CharacterController>();
-        cameraMover=tpsCamera.GetComponent<CameraMover>();
         animator=GetComponent<Animator>();
         move=new Vector3(0,0,0);
         cameraVec2=new Vector3(0,0,0);
         cameraVec3=new Vector3(0,0,0);
         toTargetVec=new Vector3(0,0,0);
-        this.itemImage.sprite = Sprite.Create(this.noItemTexture, new Rect(0,0,this.noItemTexture.width,this.noItemTexture.height), Vector2.zero);
     }
 
 
     //操作関係はUpdateで処理してる
     private void Update()
     {
-        Debug.Log(isFocusTarget);
+        if(!isAvailable)
+            return;
+        Debug.Log("aaa");
         if(IsAttackable)
             animator.SetTrigger("return");
         
@@ -122,7 +122,10 @@ abstract public class Player : MonoBehaviour
         //jump
         if (Input.GetButtonDown(jumpButton) && groundedPlayer)
         {
-            playerVelocity.y += jumpForce;
+            JumpEvent e = new JumpEvent(this,this.jumpForce);
+            GameMaster.instance.OnJump(e);
+            if(e.isAvailable)
+                playerVelocity.y += e.JumpForce;
         }
         
         //attack
@@ -153,6 +156,8 @@ abstract public class Player : MonoBehaviour
 
     //内部の処理はコンスタントに行いたいので、ほぼ確実に毎秒50回実行してくれるFixedUpdateで行う。
     private void FixedUpdate() {
+        if(!isAvailable)
+            return;
         if(IsAttackable)
             isAttacking = false;
 
@@ -173,7 +178,8 @@ abstract public class Player : MonoBehaviour
         if(hp<=0){
             transform.position=new Vector3(0,10,0);
             playerVelocity=new Vector3(0,0,0);
-            hp=20;
+            effects.Clear();
+            hp=maxHp;
             return;
         }
 
@@ -216,7 +222,10 @@ abstract public class Player : MonoBehaviour
         playerVelocity.y += gravityValue * Time.deltaTime;
 
         //移動の処理
-        controller.Move((move*playerSpeed+playerVelocity) * Time.deltaTime);
+        MoveEvent moveEvent = new MoveEvent(this,this.playerSpeed);
+        GameMaster.instance.OnMove(moveEvent);
+        if(moveEvent.isAvailable)
+            controller.Move((move*moveEvent.Speed+playerVelocity) * Time.deltaTime);
     }
 
     public int Hp{
@@ -225,6 +234,7 @@ abstract public class Player : MonoBehaviour
     
     abstract protected void Attack();
     public void Damage(DamageSource damageSource){
+        Debug.Log("Damaged");
         DamageEvent e=new DamageEvent(this,damageSource);
         GameMaster.instance.OnDamaged(e);
         if(e.isAvailable)
@@ -245,5 +255,39 @@ abstract public class Player : MonoBehaviour
         return (Mathf.Abs(val)<th)?0:val;
     }
 
+    public Player SetInputs(
+        string jumpButton,
+        string attackButton,
+        string useItemButton,
+        string cameraHorizontalButton,
+        string cameraVerticalButton,
+        string moveHorizontalButton,
+        string moveVerticalButton
+    ){
+        this.jumpButton=jumpButton;
+        this.attackButton=attackButton;
+        this.useItemButton=useItemButton;
+        this.cameraHorizontalButton=cameraHorizontalButton;
+        this.cameraVerticalButton=cameraVerticalButton;
+        this.moveHorizontalButton=moveHorizontalButton;
+        this.moveVerticalButton=moveVerticalButton;
+        return this;
+    }
+
+    public Player SetUI(Slider hpSlider,Image itemImage){
+        this.hpSlider=hpSlider;
+        this.itemImage=itemImage;
+        return this;
+    }
+
+    public Player SetTPSCamera(CameraMover cameraMover){
+        this.cameraMover=cameraMover;
+        return this;
+    }
+
+    public void MakeAvailable(){
+        this.isAvailable = true;
+        this.itemImage.sprite = Sprite.Create(this.noItemTexture, new Rect(0,0,this.noItemTexture.width,this.noItemTexture.height), Vector2.zero);
+    }
     public bool IsAttackable{get{return GameMaster.instance.gameTime>=lastAttackTime+attackInterval;}}
 }

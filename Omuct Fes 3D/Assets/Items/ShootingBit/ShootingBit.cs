@@ -39,7 +39,7 @@ public class ShootingBit : MonoBehaviour {
             attackVec=parent.cameraVec3.normalized;
         }
         transform.forward = attackVec;
-        GameObject cloneObject=Instantiate(attackObject,transform.position,Quaternion.identity);
+        GameObject cloneObject=Instantiate(attackObject,transform.position+attackVec,Quaternion.identity);
         Rigidbody rb=cloneObject.GetComponent<Rigidbody>();
         rb.AddForce(attackVec*attackForce);
         BulletShootingBit bullet=cloneObject.GetComponent<BulletShootingBit>();

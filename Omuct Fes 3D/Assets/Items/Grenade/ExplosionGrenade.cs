@@ -1,10 +1,11 @@
 using UnityEngine;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 
-public class ExplosionPoison : MonoBehaviour {
+public class ExplosionGrenade : MonoBehaviour {
     long startTime;
-    public Player parent;
-
+    HashSet<Player>blackList = new HashSet<Player>();
     private void Start() {
         startTime=GameMaster.instance.gameTime;
     }
@@ -15,12 +16,13 @@ public class ExplosionPoison : MonoBehaviour {
             return;
         }
     }
-    private void OnTriggerStay(Collider other) {        
+    private void OnTriggerEnter(Collider other) {        
         Player player=other.GetComponent<Player>();
         if(!player)
             return;
-        if(player==parent)
+        if(blackList.Contains(player))
             return;
-        player.AddEffect(new EffectPoison(50));
+        blackList.Add(player);
+        player.Damage(new DamageSource(2));
     }
 }
