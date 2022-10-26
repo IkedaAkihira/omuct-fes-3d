@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -148,23 +148,23 @@ MonoBehaviour:
   moveVerticalButton: OppVertical
   moveHorizontalButton: OppHorizontal
   hpSlider: {fileID: 598876358}
-  maxHp: 20
-  playerSpeed: 2
+  maxHp: 40
+  playerSpeed: 25
   gravityValue: -20
   jumpForce: 15
-  cameraRotationVelocity: 1
-  cameraRotationVelocityAssisted: 0.1
+  cameraRotationVelocity: -8
+  cameraRotationVelocityAssisted: -0.1
   cameraRotationYVelocity: 1
-  cameraRotationYVelocityAssisted: 0.1
-  horizontal: 1
-  vertical: 1
+  cameraRotationYVelocityAssisted: 0.025
+  horizontal: -4
+  vertical: 4
   th: 0.2
   verticalCameraLimit: 0.5235988
   tpsCamera: {fileID: 1182092718}
   cameraDistance: 8
   itemImage: {fileID: 1629441222}
-  attackInterval: 200
-  attackObject: {fileID: 0}
+  attackInterval: 25
+  attackObject: {fileID: 8970168126409952239, guid: b495777f4234c5d42be215c5a6bdaf8a, type: 3}
   attackForce: 1000
 --- !u!1001 &159489929
 PrefabInstance:
@@ -1331,9 +1331,9 @@ MonoBehaviour:
   gravityValue: -20
   jumpForce: 15
   cameraRotationVelocity: -10
-  cameraRotationVelocityAssisted: -4
+  cameraRotationVelocityAssisted: -1
   cameraRotationYVelocity: 1
-  cameraRotationYVelocityAssisted: 1
+  cameraRotationYVelocityAssisted: 0.1
   horizontal: -1
   vertical: 1
   th: 0.05
