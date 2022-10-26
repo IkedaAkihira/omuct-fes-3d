@@ -266,7 +266,7 @@ GameObject:
   - component: {fileID: 1227064125181618725}
   - component: {fileID: 1625185041558581593}
   - component: {fileID: 1625185041558581596}
-  - component: {fileID: 4722757131564114203}
+  - component: {fileID: 6453462609844820711}
   m_Layer: 6
   m_Name: monsuter.by-ikehara
   m_TagString: Untagged
@@ -329,7 +329,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &4722757131564114203
+--- !u!114 &6453462609844820711
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -338,7 +338,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1895092946569736351}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2dc12d6464484824180e6433c6ef7c19, type: 3}
+  m_Script: {fileID: 11500000, guid: bcd555107a77acf45870030e8be2c28d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   itemImage: {fileID: 0}
