@@ -34,6 +34,7 @@ public class GameMaster : MonoBehaviour,EventListener
     [SerializeField] private string[] characterPaths;
     List<EventListener>listeners=new List<EventListener>();
 
+    public SEPlayer sePlayer;
     private void Awake() {
         GameMaster.instance=this;
         this.playerL=Resources.Load<Player>(this.characterPaths[DataTransfer.player1CharacterNumber]);
@@ -68,6 +69,7 @@ public class GameMaster : MonoBehaviour,EventListener
         this.player2PoisonUI.player=pr;
 
         listeners.Add(new PoisonListener());
+        //listeners.Add(new DamageSEListener(this.sePlayer));
 
         this.gameTime=0;
     }

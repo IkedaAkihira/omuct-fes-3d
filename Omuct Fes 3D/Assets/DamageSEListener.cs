@@ -10,6 +10,7 @@ public class DamageSEListener: EventListener{
 
     }
     public void OnDamaged(DamageEvent e){
+        //Debug.Log("damage");
         player.Play("damage");
     }
     public void OnUseItem(UseItemEvent e){

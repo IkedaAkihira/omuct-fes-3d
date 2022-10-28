@@ -145,7 +145,7 @@ abstract public class Player : MonoBehaviour
             JumpEvent e = new JumpEvent(this, this.jumpForce);
             GameMaster.instance.OnJump(e);
             if (e.isAvailable)
-                playerVelocity.y += e.JumpForce;
+                playerVelocity.y = e.JumpForce;
         }
 
         //attack

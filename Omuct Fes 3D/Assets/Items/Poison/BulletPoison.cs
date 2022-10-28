@@ -27,6 +27,9 @@ public class BulletPoison : MonoBehaviour
         if(other.GetComponent<Player>()==this.parent)
             return;
         
+        //割れる音
+        GameMaster.instance.sePlayer.Play("poison explode");
+
         //弾丸自身を消す。
         Instantiate(this.explosion,this.transform.position,Quaternion.identity);
         Destroy(this.gameObject);
