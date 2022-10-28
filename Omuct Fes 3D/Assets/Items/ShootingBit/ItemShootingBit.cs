@@ -3,7 +3,7 @@ using System;
 
 public class ItemShootingBit : Item{
     public ItemShootingBit(){
-        this.itemImage=Resources.Load<Texture2D>("Textures/ShootingBit");
+        this.itemSprite=Resources.Load<Sprite>("Textures/ShootingBit");
     }
     public override void Use(Player user)
     {
