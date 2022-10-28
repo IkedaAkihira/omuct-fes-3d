@@ -37,7 +37,7 @@ public class ChinanagoListener: EventListener{
             PlayerChinanago chinanago = (PlayerChinanago)e.player;
             if(chinanago.diveTime==0&&chinanago.surfaceTime==0){
                 chinanago.animator.SetTrigger("Dive");
-                chinanago.diveTime = 100;
+                chinanago.diveTime = 250;
             }
         }
     }

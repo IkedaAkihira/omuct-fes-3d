@@ -4,8 +4,18 @@ public class PlayerChinanago : Player {
     public int diveTime = 0;
     public int surfaceTime = 0;
 
-    override protected void Attack(){
+    public float attackForce=1000f;
 
+    public GameObject attackObject;
+    override protected void Attack(){
+        
+
+        
+        GameObject cloneObject=Instantiate(attackObject,transform.position+new Vector3(0f,0f,0f),Quaternion.identity);
+        Rigidbody rb=cloneObject.GetComponent<Rigidbody>();
+        rb.AddForce(toTargetVec*attackForce);
+        BulletEkipu bullet=cloneObject.GetComponent<BulletEkipu>();
+        bullet.parent=this;
     }
         
     override protected void AdditionalFixed()

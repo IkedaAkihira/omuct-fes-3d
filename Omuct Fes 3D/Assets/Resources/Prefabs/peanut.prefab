@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2685685098697907886}
   - component: {fileID: 5712938297504231536}
   - component: {fileID: 294226690733112837}
+  - component: {fileID: 3884458640975804775}
   m_Layer: 0
   m_Name: "\u5186"
   m_TagString: Untagged
@@ -83,6 +84,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &3884458640975804775
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3889283042332003091}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1101733005453906574, guid: 45d1153393ff49b489604ce931c677a3, type: 3}
 --- !u!1 &4214217276863292064
 GameObject:
   m_ObjectHideFlags: 0
@@ -93,7 +108,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3544395465278650394}
   - component: {fileID: 5800587370442704591}
-  - component: {fileID: -5011787303864118408}
   - component: {fileID: -3670733488189298003}
   m_Layer: 0
   m_Name: peanut
@@ -135,20 +149,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!64 &-5011787303864118408
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4214217276863292064}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -1101733005453906574, guid: 45d1153393ff49b489604ce931c677a3, type: 3}
 --- !u!114 &-3670733488189298003
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,6 +162,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 0}
+  damage: 1
+  lifeTime: 100
 --- !u!1 &7156496648306683093
 GameObject:
   m_ObjectHideFlags: 0

@@ -550,11 +550,13 @@ MonoBehaviour:
   verticalCameraLimit: 0.7
   cameraDistance: 8
   animator: {fileID: 0}
-  attackInterval: 200
+  attackInterval: 25
   assistUnder: 1
   playerIndex: 0
   diveTime: 0
   surfaceTime: 0
+  attackForce: 1000
+  attackObject: {fileID: 4358696385323467273, guid: 4e3cab90edf90324b9012a73be2c7bf7, type: 3}
 --- !u!95 &-8355163244115065052
 Animator:
   serializedVersion: 4
@@ -592,7 +594,7 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: -1.5, y: 1, z: 0}
+  m_Center: {x: -1.5, y: 0.5, z: 0}
 --- !u!1 &5418282262380208744
 GameObject:
   m_ObjectHideFlags: 0
