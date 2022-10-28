@@ -76,10 +76,10 @@ abstract public class Player : MonoBehaviour
     public float assistUnder = 1f;
 
     private bool isAvailable = false;
-    private Texture2D noItemTexture;
+    private Sprite noItemTexture;
     private void Awake()
     {
-        noItemTexture= Resources.Load<Texture2D>("Textures/null");
+        noItemTexture= Resources.Load<Sprite>("Textures/null");
         cameraRotation = 0f;
         cameraRotationY = 0f;
         hp=maxHp;
@@ -151,7 +151,7 @@ abstract public class Player : MonoBehaviour
             if(item!=null){
                 item.Use(this);
                 item=null;
-                this.itemImage.sprite = Sprite.Create(this.noItemTexture, new Rect(0,0,this.noItemTexture.width,this.noItemTexture.height), Vector2.zero);
+                this.itemImage.sprite = this.noItemTexture;
             }
         }
 
@@ -302,7 +302,7 @@ abstract public class Player : MonoBehaviour
 
     public void MakeAvailable(){
         this.isAvailable = true;
-        this.itemImage.sprite = Sprite.Create(this.noItemTexture, new Rect(0,0,this.noItemTexture.width,this.noItemTexture.height), Vector2.zero);
+        this.itemImage.sprite = this.noItemTexture;
     }
     public bool IsAttackable{get{return GameMaster.instance.gameTime>=lastAttackTime+attackInterval;}}
 }
