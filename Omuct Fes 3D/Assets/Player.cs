@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 abstract public class Player : MonoBehaviour
 {
@@ -92,13 +93,25 @@ abstract public class Player : MonoBehaviour
         toTargetVec=new Vector3(0,0,0);
     }
 
+    public int playerIndex = 0;
+    public PlayerController playerController = null;
+
+    public void SetPlayerIndex(int playerIndex)
+    {
+        this.playerIndex = playerIndex;
+        GameObject playerControllerObject = GameObject.Find("PlayerDispenser"); // suppose null
+        PlayerDispenser playerDispenser = playerControllerObject.GetComponent<PlayerDispenser>();
+        playerController = playerDispenser.GetController(playerIndex);
+    }
 
     //操作関係はUpdateで処理してる
     private void Update()
     {
         if(!isAvailable)
             return;
-        Debug.Log("aaa");
+
+        //Debug.Log("aaa");
+
         if(IsAttackable)
             animator.SetTrigger("return");
         
@@ -110,6 +123,7 @@ abstract public class Player : MonoBehaviour
         *0.01f*((isFocusTarget)?cameraRotationYVelocityAssisted*assistMagnification:cameraRotationYVelocity)),verticalCameraLimit);
 
         //move
+        /*
         move = cameraVec2*Input.GetAxis(moveVerticalButton)*horizontal
         +new Vector3(
             -Mathf.Sin(cameraRotation),
@@ -119,6 +133,21 @@ abstract public class Player : MonoBehaviour
         if(move.magnitude>1.0f)
             move=move.normalized;
         move = move*move.magnitude;
+        if (move != Vector3.zero && !isAttacking)
+        {
+            gameObject.transform.forward = move;
+        }
+         */
+        Vector2 leftStickValue = playerController.GetMoveValue();
+        move = cameraVec2 * leftStickValue.y * horizontal
+        + new Vector3(
+            -Mathf.Sin(cameraRotation),
+            0,
+            Mathf.Cos(cameraRotation)
+            ) * leftStickValue.x * vertical;
+        if (move.magnitude > 1.0f)
+            move = move.normalized;
+        move = move * move.magnitude;
         if (move != Vector3.zero && !isAttacking)
         {
             gameObject.transform.forward = move;
