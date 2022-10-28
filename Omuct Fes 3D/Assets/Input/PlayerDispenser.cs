@@ -37,6 +37,24 @@ public class PlayerDispenser : MonoBehaviour
             if (gamepad is null) return Vector2.zero;
             return gamepad.rightStick.ReadValue();
         }
+
+        public bool GetUseItemValue()
+        {
+            if (gamepad is null) return false;
+            return gamepad.leftShoulder.isPressed;
+        }
+
+        public bool GetAttack1Value()
+        {
+            if (gamepad is null) return false;
+            return gamepad.rightShoulder.isPressed;
+        }
+
+        public bool GetJumpValue()
+        {
+            if (gamepad is null) return false;
+            return gamepad.buttonSouth.isPressed;
+        }
     }
 
     private static PlayerControllerInternal player0 = new PlayerControllerInternal();

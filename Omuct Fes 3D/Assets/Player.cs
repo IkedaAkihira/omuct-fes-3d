@@ -114,37 +114,23 @@ abstract public class Player : MonoBehaviour
 
         if(IsAttackable)
             animator.SetTrigger("return");
-        
+
         //camera rotation
+        Vector2 cameraValue = playerController.GetCameraValue();
         float assistMagnification = Mathf.Pow(assistUnder,cursorDistance);
-        cameraRotation+=Mathf.Pow(Input.GetAxis(cameraHorizontalButton),3f)*0.005f*((isFocusTarget)?cameraRotationVelocityAssisted*assistMagnification:cameraRotationVelocity);
-        cameraRotationY=Mathf.Min(Mathf.Max(-verticalCameraLimit,cameraRotationY+
-        Mathf.Pow(Input.GetAxis(cameraVerticalButton),3f)
-        *0.01f*((isFocusTarget)?cameraRotationYVelocityAssisted*assistMagnification:cameraRotationYVelocity)),verticalCameraLimit);
+        cameraRotation += Mathf.Pow(cameraValue.x, 3f) * 0.005f * ((isFocusTarget) ? cameraRotationVelocityAssisted * assistMagnification : cameraRotationVelocity);
+        cameraRotationY = Mathf.Min(Mathf.Max(-verticalCameraLimit, cameraRotationY +
+        Mathf.Pow(cameraValue.y, 3f)
+        * 0.01f * ((isFocusTarget) ? cameraRotationYVelocityAssisted * assistMagnification : cameraRotationYVelocity)), verticalCameraLimit);
 
         //move
-        /*
-        move = cameraVec2*Input.GetAxis(moveVerticalButton)*horizontal
-        +new Vector3(
-            -Mathf.Sin(cameraRotation),
-            0,
-            Mathf.Cos(cameraRotation)
-            )*Input.GetAxis(moveHorizontalButton)*vertical;
-        if(move.magnitude>1.0f)
-            move=move.normalized;
-        move = move*move.magnitude;
-        if (move != Vector3.zero && !isAttacking)
-        {
-            gameObject.transform.forward = move;
-        }
-         */
-        Vector2 leftStickValue = playerController.GetMoveValue();
-        move = cameraVec2 * leftStickValue.y * horizontal
+        Vector2 moveValue = playerController.GetMoveValue();
+        move = cameraVec2 * moveValue.y * horizontal
         + new Vector3(
             -Mathf.Sin(cameraRotation),
             0,
             Mathf.Cos(cameraRotation)
-            ) * leftStickValue.x * vertical;
+            ) * moveValue.x * vertical;
         if (move.magnitude > 1.0f)
             move = move.normalized;
         move = move * move.magnitude;
@@ -154,38 +140,42 @@ abstract public class Player : MonoBehaviour
         }
 
         //jump
-        if (Input.GetButtonDown(jumpButton) && groundedPlayer)
+        if (playerController.GetJumpValue() && groundedPlayer)
         {
-            JumpEvent e = new JumpEvent(this,this.jumpForce);
+            JumpEvent e = new JumpEvent(this, this.jumpForce);
             GameMaster.instance.OnJump(e);
-            if(e.isAvailable)
+            if (e.isAvailable)
                 playerVelocity.y += e.JumpForce;
         }
-        
+
         //attack
-        if(Input.GetButtonDown(attackButton)&&IsAttackable){
+        if (playerController.GetAttack1Value() && IsAttackable)
+        {
             animator.SetTrigger("attack");
             gameObject.transform.forward = cameraVec2;
-            AttackEvent e=new AttackEvent(this);
+            AttackEvent e = new AttackEvent(this);
             GameMaster.instance.OnAttack(e);
-            if(e.isAvailable){
+            if (e.isAvailable)
+            {
                 Attack();
                 isAttacking = true;
-                lastAttackTime=GameMaster.instance.gameTime;
+                lastAttackTime = GameMaster.instance.gameTime;
             }
         }
 
         //use item
-        if(Input.GetButtonDown(useItemButton)){
-            if(item!=null){
+        if (playerController.GetUseItemValue())
+        {
+            if (item != null)
+            {
                 item.Use(this);
-                item=null;
-                this.itemImage.sprite = Sprite.Create(this.noItemTexture, new Rect(0,0,this.noItemTexture.width,this.noItemTexture.height), Vector2.zero);
+                item = null;
+                this.itemImage.sprite = Sprite.Create(this.noItemTexture, new Rect(0, 0, this.noItemTexture.width, this.noItemTexture.height), Vector2.zero);
             }
         }
 
         //update ui
-        hpSlider.value=(float)hp/(float)maxHp;
+        hpSlider.value = (float)hp / (float)maxHp;
     }
 
     //内部の処理はコンスタントに行いたいので、ほぼ確実に毎秒50回実行してくれるFixedUpdateで行う。

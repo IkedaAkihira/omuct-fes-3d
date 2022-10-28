@@ -28,4 +28,19 @@ public class PlayerController
         return core.GetCameraValue();
     }
 
+    public bool GetUseItemValue()
+    {
+        return core.GetUseItemValue();
+    }
+
+    public bool GetAttack1Value()
+    {
+        return core.GetAttack1Value();
+    }
+
+    public bool GetJumpValue()
+    {
+        return core.GetJumpValue();
+    }
+
 }
