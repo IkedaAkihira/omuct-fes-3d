@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -594,7 +594,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &308626145
 GameObject:
@@ -953,7 +953,7 @@ Light:
     m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 1
+    m_Strength: 0
     m_Bias: 0.05
     m_NormalBias: 0.4
     m_NearPlane: 0.2
@@ -1486,7 +1486,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1230851674 stripped
 GameObject:
@@ -2294,7 +2294,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 80e0e533b7e640b429b0c7f3164951f9, type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 80e0e533b7e640b429b0c7f3164951f9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2663,7 +2663,7 @@ MonoBehaviour:
   player2MoveVerticalButton: OppVertical
   player2MoveHorizontalButton: OppHorizontal
   characterPaths:
-  - Prefabs/Characters/monsuter.by-ikehara
+  - Prefabs/Characters/chinanago
   - Prefabs/Characters/monsuter.by-ikehara
   - Prefabs/Characters/ekipu
 --- !u!4 &1849553888
@@ -2993,7 +2993,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4688435209661172716, guid: e33b0c27cd241a84684f943b0a226d14, type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 4688435209661172716, guid: e33b0c27cd241a84684f943b0a226d14, type: 3}
       propertyPath: m_LocalPosition.x

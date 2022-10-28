@@ -61,7 +61,7 @@ abstract public class Player : MonoBehaviour
 
     //移動方向を格納
     private Vector3 move;
-    private Animator animator;
+    public Animator animator;
 
     
     public int attackInterval=200;
@@ -241,6 +241,8 @@ abstract public class Player : MonoBehaviour
         GameMaster.instance.OnMove(moveEvent);
         if(moveEvent.isAvailable)
             controller.Move((move*moveEvent.Speed+playerVelocity) * Time.deltaTime);
+        
+        AdditionalFixed();
     }
 
     public int Hp{
@@ -305,4 +307,8 @@ abstract public class Player : MonoBehaviour
         this.itemImage.sprite = Sprite.Create(this.noItemTexture, new Rect(0,0,this.noItemTexture.width,this.noItemTexture.height), Vector2.zero);
     }
     public bool IsAttackable{get{return GameMaster.instance.gameTime>=lastAttackTime+attackInterval;}}
+
+    protected void AdditionalFixed(){
+
+    }
 }
