@@ -78,6 +78,8 @@ abstract public class Player : MonoBehaviour
 
     private bool isAvailable = false;
     private Texture2D noItemTexture;
+
+    protected bool isLeftPlayer;
     private void Awake()
     {
         noItemTexture= Resources.Load<Texture2D>("Textures/null");
@@ -134,10 +136,6 @@ abstract public class Player : MonoBehaviour
         if (move.magnitude > 1.0f)
             move = move.normalized;
         move = move * move.magnitude;
-        if (move != Vector3.zero && !isAttacking)
-        {
-            gameObject.transform.forward = move;
-        }
 
         //jump
         if (playerController.GetJumpValue() && groundedPlayer)
@@ -151,12 +149,12 @@ abstract public class Player : MonoBehaviour
         //attack
         if (playerController.GetAttack1Value() && IsAttackable)
         {
-            animator.SetTrigger("attack");
-            gameObject.transform.forward = cameraVec2;
             AttackEvent e = new AttackEvent(this);
             GameMaster.instance.OnAttack(e);
             if (e.isAvailable)
             {
+                animator.SetTrigger("attack");
+                gameObject.transform.forward = cameraVec2;
                 Attack();
                 isAttacking = true;
                 lastAttackTime = GameMaster.instance.gameTime;
@@ -168,9 +166,13 @@ abstract public class Player : MonoBehaviour
         {
             if (item != null)
             {
-                item.Use(this);
-                item = null;
-                this.itemImage.sprite = Sprite.Create(this.noItemTexture, new Rect(0, 0, this.noItemTexture.width, this.noItemTexture.height), Vector2.zero);
+                UseItemEvent e = new UseItemEvent(this,item);
+                GameMaster.instance.OnUseItem(e);
+                if(e.isAvailable){
+                    item.Use(this);
+                    item = null;
+                    this.itemImage.sprite = Sprite.Create(this.noItemTexture, new Rect(0, 0, this.noItemTexture.width, this.noItemTexture.height), Vector2.zero);
+                }
             }
         }
 
@@ -258,8 +260,14 @@ abstract public class Player : MonoBehaviour
         //移動の処理
         MoveEvent moveEvent = new MoveEvent(this,this.playerSpeed);
         GameMaster.instance.OnMove(moveEvent);
-        if(moveEvent.isAvailable)
+        if(moveEvent.isAvailable){
+            
+            if (move != Vector3.zero && !isAttacking)
+            {
+                gameObject.transform.forward = move;
+            }
             controller.Move((move*moveEvent.Speed+playerVelocity) * Time.deltaTime);
+        }
         
         AdditionalFixed();
     }
@@ -325,9 +333,14 @@ abstract public class Player : MonoBehaviour
         this.isAvailable = true;
         this.itemImage.sprite = Sprite.Create(this.noItemTexture, new Rect(0,0,this.noItemTexture.width,this.noItemTexture.height), Vector2.zero);
     }
+
+    public Player SetIsLeftPlayer(bool isLeftPlayer){
+        this.isLeftPlayer=isLeftPlayer;
+        return this;
+    }
     public bool IsAttackable{get{return GameMaster.instance.gameTime>=lastAttackTime+attackInterval;}}
 
-    protected void AdditionalFixed(){
+    virtual protected void AdditionalFixed(){
 
     }
 }

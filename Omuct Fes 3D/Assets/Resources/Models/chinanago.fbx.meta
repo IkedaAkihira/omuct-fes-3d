@@ -7,22 +7,15 @@ ModelImporter:
       74: -2633449835764047963
     second: "\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2|teleport.1"
   - first:
+      74: 6531650766603828919
+    second: "\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2|teleport.2"
+  - first:
       74: 5004041584230489543
     second: "\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2|walk"
   - first:
       74: 7035095356208265773
     second: "\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2|water_shot"
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: "\u30DE\u30C6\u30EA\u30A2\u30EB"
-    second: {fileID: 2100000, guid: 8df9e9c61ee98224eb0fef9d0f84146f, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: "\u30DE\u30C6\u30EA\u30A2\u30EB.003"
-    second: {fileID: 2100000, guid: 8df9e9c61ee98224eb0fef9d0f84146f, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0

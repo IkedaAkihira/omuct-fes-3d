@@ -8,16 +8,19 @@ public class PlayerChinanago : Player {
 
     }
         
-    void AdditionalFixed()
+    override protected void AdditionalFixed()
     {
         if(diveTime>0){
             diveTime--;
             if(diveTime == 0){
-                this.transform.position= new Vector3(0f,0f,0f);
                 this.animator.SetTrigger("Surface");
-                surfaceTime = 50;
-
+                this.transform.position = GameMaster.instance.GetPlayer(!this.isLeftPlayer).transform.position;
+                surfaceTime = 100;
             }
+        }
+
+        if(surfaceTime>0){
+            surfaceTime--;
         }
 
 
