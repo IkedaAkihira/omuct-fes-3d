@@ -2692,20 +2692,6 @@ MonoBehaviour:
   player2Camera: {fileID: 1182092719}
   player2ItemImage: {fileID: 1629441222}
   player2PoisonUI: {fileID: 1541891028}
-  player1JumpButton: Jump
-  player1AttackButton: Attack
-  player1UseItemButton: UseItem
-  player1CameraHorizontalButton: CameraHorizontal
-  player1CameraVerticalButton: CameraVertical
-  player1MoveVerticalButton: Vertical
-  player1MoveHorizontalButton: Horizontal
-  player2JumpButton: OppJump
-  player2AttackButton: OppAttack
-  player2UseItemButton: OppUseItem
-  player2CameraHorizontalButton: OppCameraHorizontal
-  player2CameraVerticalButton: OppCameraVertical
-  player2MoveVerticalButton: OppVertical
-  player2MoveHorizontalButton: OppHorizontal
   characterPaths:
   - Prefabs/Characters/monsuter.by-ikehara
   - Prefabs/Characters/monsuter.by-ikehara

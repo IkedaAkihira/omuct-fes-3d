@@ -8,13 +8,6 @@ abstract public class Player : MonoBehaviour
 {
     //コントローラ関係
     protected bool isPlayerAvailable = false;
-    private string jumpButton="Jump";
-    private string attackButton="Attack";
-    private string useItemButton="UseItem";
-    private string cameraHorizontalButton="CameraHorizontal";
-    private string cameraVerticalButton="CameraVertical";
-    private string moveVerticalButton="Vertical";
-    private string moveHorizontalButton="Horizontal";
 
     //UI
     private Slider hpSlider;
@@ -109,8 +102,6 @@ abstract public class Player : MonoBehaviour
     {
         if(!isAvailable)
             return;
-
-        //Debug.Log("aaa");
 
         if(IsAttackable)
             animator.SetTrigger("return");
@@ -287,25 +278,6 @@ abstract public class Player : MonoBehaviour
 
     private float Th(float val,float th){
         return (Mathf.Abs(val)<th)?0:val;
-    }
-
-    public Player SetInputs(
-        string jumpButton,
-        string attackButton,
-        string useItemButton,
-        string cameraHorizontalButton,
-        string cameraVerticalButton,
-        string moveHorizontalButton,
-        string moveVerticalButton
-    ){
-        this.jumpButton=jumpButton;
-        this.attackButton=attackButton;
-        this.useItemButton=useItemButton;
-        this.cameraHorizontalButton=cameraHorizontalButton;
-        this.cameraVerticalButton=cameraVerticalButton;
-        this.moveHorizontalButton=moveHorizontalButton;
-        this.moveVerticalButton=moveVerticalButton;
-        return this;
     }
 
     public Player SetUI(Slider hpSlider,Image itemImage){
