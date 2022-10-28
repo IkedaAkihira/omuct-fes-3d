@@ -348,14 +348,16 @@ MonoBehaviour:
   jumpForce: 15
   cameraRotationVelocity: -10
   cameraRotationVelocityAssisted: -1
-  cameraRotationYVelocity: 1
+  cameraRotationYVelocity: -1
   cameraRotationYVelocityAssisted: 0.1
-  horizontal: -1
+  horizontal: 1
   vertical: 1
   th: 0.2
   verticalCameraLimit: 0.7
   cameraDistance: 8
   attackInterval: 10
+  assistUnder: 1
+  playerIndex: 0
   attackObject: {fileID: 4214217276863292064, guid: 322cfc4209bb1174dbe686334ad43ddc, type: 3}
   attackForce: 1000
 --- !u!1 &2196317924424290529
