@@ -48,6 +48,7 @@ public class GameMaster : MonoBehaviour,EventListener
         .SetUI(player1HPSlider,player1ItemImage)
         .SetTPSCamera(player1Camera)
         .MakeAvailable();
+        pl.SetPlayerIndex(0);
 
         this.playerR=Resources.Load<Player>(this.characterPaths[DataTransfer.player2CharacterNumber]);
         Player pr = Instantiate(playerR.gameObject,new Vector3(0f,10f,-10f),Quaternion.identity).GetComponent<Player>();
@@ -61,6 +62,7 @@ public class GameMaster : MonoBehaviour,EventListener
         .SetUI(player2HPSlider,player2ItemImage)
         .SetTPSCamera(player2Camera)
         .MakeAvailable();
+        pr.SetPlayerIndex(1);
 
         this.player1PoisonUI.player=pl;
         this.player2PoisonUI.player=pr;
