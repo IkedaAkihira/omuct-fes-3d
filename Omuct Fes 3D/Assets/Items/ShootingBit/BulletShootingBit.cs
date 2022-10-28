@@ -9,12 +9,12 @@ public class BulletShootingBit : MonoBehaviour {
     private void OnTriggerEnter(Collider other) {
         if(other.isTrigger)
             return;
-        Destroy(gameObject);
         Player player=other.GetComponent<Player>();
-        if(player==null)
-            return;
         if(player==parent)
             return;
+        if(player==null)
+            return;
+        Destroy(gameObject);
         player.Damage(new DamageSource(1));
     }
 
