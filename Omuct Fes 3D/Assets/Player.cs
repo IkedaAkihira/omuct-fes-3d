@@ -66,7 +66,7 @@ abstract public class Player : MonoBehaviour
 
     
     public int attackInterval=200;
-    private long lastAttackTime=0;
+    protected long lastAttackTime=0;
 
     protected bool isAttacking = false;
 

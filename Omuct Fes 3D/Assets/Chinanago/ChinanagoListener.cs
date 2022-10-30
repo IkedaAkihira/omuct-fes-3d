@@ -18,7 +18,7 @@ public class ChinanagoListener: EventListener{
     public void OnDamaged(DamageEvent e){
         if(e.damagedPlayer is PlayerChinanago){
             PlayerChinanago chinanago = (PlayerChinanago)e.damagedPlayer;
-            if(chinanago.diveTime>0 || chinanago.surfaceTime>0){
+            if(chinanago.diveTime>0){
                 e.isAvailable = false;
             }
         }
@@ -37,7 +37,7 @@ public class ChinanagoListener: EventListener{
             PlayerChinanago chinanago = (PlayerChinanago)e.player;
             if(chinanago.diveTime==0&&chinanago.surfaceTime==0){
                 chinanago.animator.SetTrigger("Dive");
-                chinanago.diveTime = 250;
+                chinanago.diveTime = 150;
             }
         }
     }

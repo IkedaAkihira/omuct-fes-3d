@@ -550,13 +550,15 @@ MonoBehaviour:
   verticalCameraLimit: 0.7
   cameraDistance: 8
   animator: {fileID: 0}
-  attackInterval: 25
+  attackInterval: 50
   assistUnder: 1
   playerIndex: 0
   diveTime: 0
   surfaceTime: 0
-  attackForce: 1000
-  attackObject: {fileID: 4358696385323467273, guid: 4e3cab90edf90324b9012a73be2c7bf7, type: 3}
+  attackForce: 500
+  bubbleDuration: 8
+  maxBubbleCount: 6
+  attackObject: {fileID: 4481297703299403087, guid: f1f1c6e63eb4a4849a4bf25ff90af889, type: 3}
 --- !u!95 &-8355163244115065052
 Animator:
   serializedVersion: 4
