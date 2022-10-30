@@ -6,9 +6,9 @@ using UnityEngine.InputSystem;
 public class PlayerDispenser : MonoBehaviour
 {
 
-    // 1P, 2P ‚ğ•\‚·ƒIƒuƒWƒFƒNƒg‚ğƒtƒB[ƒ‹ƒh‚É‚à‚Â
-    // ƒƒ\ƒbƒh‚Å‹ó‚¢‚Ä‚é‚Ì‚ğæ“¾‚·‚é
-    // 1P, 2P ‚Ì“ü—Í‚ğ Update ‚ÅXV
+    // 1P, 2P ï¿½ï¿½\ï¿½ï¿½ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ï¿½ï¿½tï¿½Bï¿½[ï¿½ï¿½ï¿½hï¿½É‚ï¿½ï¿½ï¿½
+    // ï¿½ï¿½ï¿½\ï¿½bï¿½hï¿½Å‹ó‚¢‚Ä‚ï¿½Ì‚ï¿½ï¿½æ“¾ï¿½ï¿½ï¿½ï¿½
+    // 1P, 2P ï¿½Ì“ï¿½ï¿½Í‚ï¿½ Update ï¿½ÅXï¿½V
 
     public class PlayerControllerInternal
     {
@@ -55,6 +55,16 @@ public class PlayerDispenser : MonoBehaviour
             if (gamepad is null) return false;
             return gamepad.buttonSouth.isPressed;
         }
+        public bool GetSubmitValue()
+        {
+            if (gamepad is null) return false;
+            return gamepad.buttonEast.isPressed;
+        }
+        public bool GetCancelValue()
+        {
+            if (gamepad is null) return false;
+            return gamepad.buttonSouth.isPressed;
+        }
     }
 
     private static PlayerControllerInternal player0 = new PlayerControllerInternal();
@@ -62,8 +72,8 @@ public class PlayerDispenser : MonoBehaviour
 
     public PlayerController GetController(int playerid)
     {
-        if (playerid == 0 && !(player0 is null) && !player0.beingUsed) return new PlayerController(player0);
-        if (playerid == 1 && !(player1 is null) && !player1.beingUsed) return new PlayerController(player1);
+        if (playerid == 0 && !(player0 is null) /*&& !player0.beingUsed*/) return new PlayerController(player0);
+        if (playerid == 1 && !(player1 is null) /*&& !player1.beingUsed*/) return new PlayerController(player1);
         Debug.LogWarning("PlayerController GetController() returned null");
         return null;
     }

@@ -12,9 +12,10 @@ public class BulletShootingBit : MonoBehaviour {
         Player player=other.GetComponent<Player>();
         if(player==parent)
             return;
+        Destroy(gameObject);
+
         if(player==null)
             return;
-        Destroy(gameObject);
         player.Damage(new DamageSource(1));
     }
 

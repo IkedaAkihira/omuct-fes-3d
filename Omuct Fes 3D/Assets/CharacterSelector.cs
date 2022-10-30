@@ -7,19 +7,24 @@ public class CharacterSelector : MonoBehaviour {
     private int interval = 0;
 
     private bool _isDone = false;
-    [SerializeField] private string selectAxis = "Horizontal";
-    [SerializeField] private string selectButton = "Submit";
-    [SerializeField] private string cancelButton = "Cancel";
+    [SerializeField] private int controllerIndex = 0;
     [SerializeField] private float threshold = 0.5f;
     [SerializeField] private int maxInterval = 10;
     [SerializeField] private Image[] cursors;
     [SerializeField] private Sprite unselectedCursorSprite;
     [SerializeField] private Sprite selectedCursorSprite;
+    [SerializeField] private PlayerDispenser dispenser;
+    [SerializeField] private int cursorNum;
+
+    private PlayerController pc;
+
+    
     private void Awake() {
         cursors[0].sprite = selectedCursorSprite;
         for(int i=1;i<cursors.Length;i++){
             cursors[i].sprite = unselectedCursorSprite;
         }
+        pc=dispenser.GetController(cursorNum);
     }
 
     private void MoveCursor(bool isCorrect){
@@ -29,12 +34,12 @@ public class CharacterSelector : MonoBehaviour {
     }
 
     private void Update() {
-        if(!_isDone && Input.GetButtonDown(selectButton)){
+        if(!_isDone && pc.GetSubmitValue()){
             _isDone = true;
             cursors[cursorIndex].sprite = unselectedCursorSprite;
         }
 
-        if(_isDone && Input.GetButtonDown(cancelButton)){
+        if(_isDone && pc.GetCancelValue()){
             _isDone = false;
             cursors[cursorIndex].sprite = selectedCursorSprite;
         }
@@ -42,7 +47,7 @@ public class CharacterSelector : MonoBehaviour {
             return;
         if(_isDone)
             return;
-        float v = Input.GetAxis(selectAxis);
+        float v = pc.GetMoveValue().x;
         if(v>threshold){
             MoveCursor(true);
             interval = maxInterval;

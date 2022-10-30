@@ -104,6 +104,7 @@ abstract public class Player : MonoBehaviour
         GameObject playerControllerObject = GameObject.Find("PlayerDispenser"); // suppose null
         PlayerDispenser playerDispenser = playerControllerObject.GetComponent<PlayerDispenser>();
         playerController = playerDispenser.GetController(playerIndex);
+        Debug.Log(playerController);
     }
 
     //操作関係はUpdateで処理してる

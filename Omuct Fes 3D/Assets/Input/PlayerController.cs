@@ -43,4 +43,14 @@ public class PlayerController
         return core.GetJumpValue();
     }
 
+    public bool GetSubmitValue()
+    {
+        return core.GetSubmitValue();
+    }
+
+    public bool GetCancelValue()
+    {
+        return core.GetCancelValue();
+    }
+
 }
