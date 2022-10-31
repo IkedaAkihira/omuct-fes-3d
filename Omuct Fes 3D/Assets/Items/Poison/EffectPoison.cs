@@ -28,6 +28,8 @@ public class EffectPoison : Effect{
             player.Damage(new DamageSource(damage));
             ParticleSystem clone=GameObject.Instantiate(poisonParticle);
             clone.transform.position=player.transform.position;
+
+            GameMaster.instance.sePlayer.Play("poison");
         }
     }
 }
