@@ -15,20 +15,6 @@ public class GameMaster : MonoBehaviour,EventListener
     [SerializeField] private CameraMover player2Camera;
     [SerializeField] private Image player2ItemImage;
     [SerializeField] private UIPoison player2PoisonUI;
-    [SerializeField] private string player1JumpButton="Jump";
-    [SerializeField] private string player1AttackButton="Attack";
-    [SerializeField] private string player1UseItemButton="UseItem";
-    [SerializeField] private string player1CameraHorizontalButton="CameraHorizontal";
-    [SerializeField] private string player1CameraVerticalButton="CameraVertical";
-    [SerializeField] private string player1MoveVerticalButton="Vertical";
-    [SerializeField] private string player1MoveHorizontalButton="Horizontal";
-    [SerializeField] private string player2JumpButton="OppJump";
-    [SerializeField] private string player2AttackButton="OppAttack";
-    [SerializeField] private string player2UseItemButton="OppUseItem";
-    [SerializeField] private string player2CameraHorizontalButton="OppCameraHorizontal";
-    [SerializeField] private string player2CameraVerticalButton="OppCameraVertical";
-    [SerializeField] private string player2MoveVerticalButton="OppVertical";
-    [SerializeField] private string player2MoveHorizontalButton="OppHorizontal";
     private Player playerL;
     private Player playerR;
     private Player pl;
@@ -37,17 +23,14 @@ public class GameMaster : MonoBehaviour,EventListener
     List<EventListener>listeners=new List<EventListener>();
 
     public SEPlayer sePlayer;
+
+    [SerializeField] Vector3 spawnPlayer1;
+    [SerializeField] Vector3 spawnPlayer2;
     private void Awake() {
         GameMaster.instance=this;
         this.playerL=Resources.Load<Player>(this.characterPaths[DataTransfer.player1CharacterNumber]);
-        this.pl = Instantiate(playerL.gameObject,new Vector3(0f,10f,10f),Quaternion.identity).GetComponent<Player>();
-        this.pl.SetInputs(player1JumpButton,
-            player1AttackButton,
-            player1UseItemButton,
-            player1CameraHorizontalButton,
-            player1CameraVerticalButton,
-            player1MoveHorizontalButton,
-            player1MoveVerticalButton)
+        this.pl = Instantiate(playerL.gameObject,spawnPlayer1,Quaternion.identity).GetComponent<Player>();
+        this.pl
         .SetUI(player1HPSlider,player1ItemImage)
         .SetTPSCamera(player1Camera)
         .SetIsLeftPlayer(true)
@@ -55,14 +38,8 @@ public class GameMaster : MonoBehaviour,EventListener
         this.pl.SetPlayerIndex(0);
 
         this.playerR=Resources.Load<Player>(this.characterPaths[DataTransfer.player2CharacterNumber]);
-        this.pr = Instantiate(playerR.gameObject,new Vector3(0f,10f,-10f),Quaternion.identity).GetComponent<Player>();
-        this.pr.SetInputs(player2JumpButton,
-            player2AttackButton,
-            player2UseItemButton,
-            player2CameraHorizontalButton,
-            player2CameraVerticalButton,
-            player2MoveHorizontalButton,
-            player2MoveVerticalButton)
+        this.pr = Instantiate(playerR.gameObject,spawnPlayer2,Quaternion.identity).GetComponent<Player>();
+        this.pr
         .SetUI(player2HPSlider,player2ItemImage)
         .SetTPSCamera(player2Camera)
         .SetIsLeftPlayer(false)
