@@ -6,7 +6,7 @@ using System;
 public class ItemPoison : Item
 {
     public ItemPoison(){
-        this.itemImage=Resources.Load<Texture2D>("Textures/Poison");
+        this.itemSprite = Resources.Load<Sprite>("Textures/Poison");
     }
     //この関数の中にアイテムを使った時の処理を書きます。
     public override void Use(Player user)

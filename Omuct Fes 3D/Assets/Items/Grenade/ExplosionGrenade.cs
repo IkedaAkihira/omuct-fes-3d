@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class ExplosionGrenade : MonoBehaviour {
+    long life = 25;
     long startTime;
     HashSet<Player>blackList = new HashSet<Player>();
     private void Start() {
@@ -11,7 +12,7 @@ public class ExplosionGrenade : MonoBehaviour {
     }
     private void FixedUpdate() {
         long currentTime=GameMaster.instance.gameTime;
-        if(currentTime-startTime>1000){
+        if(currentTime-startTime>life){
             Destroy(this.gameObject);
             return;
         }
