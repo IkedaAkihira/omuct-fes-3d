@@ -133,8 +133,10 @@ abstract public class Player : MonoBehaviour
             0,
             Mathf.Cos(cameraRotation)
             ) * moveValue.x * vertical;
-        if (move.magnitude > 1.0f)
+        if (move.magnitude > 1.0f){
             move = move.normalized;
+            animator.SetTrigger("walk");
+        }
         move = move * move.magnitude;
 
         //jump
@@ -142,8 +144,10 @@ abstract public class Player : MonoBehaviour
         {
             JumpEvent e = new JumpEvent(this, this.jumpForce);
             GameMaster.instance.OnJump(e);
-            if (e.isAvailable)
+            if (e.isAvailable){
+                animator.SetTrigger("jump");
                 playerVelocity.y = e.JumpForce;
+            }
         }
 
         //attack
