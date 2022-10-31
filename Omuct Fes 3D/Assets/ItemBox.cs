@@ -24,7 +24,7 @@ public class ItemBox : MonoBehaviour{
         items.Add(new ItemShootingBit());
         itemsOccurence.Add(1.0);
         items.Add(new ItemGrenade());
-        itemsOccurence.Add(1000.0);
+        itemsOccurence.Add(1.0);
         items.Add(new ItemTokeito());
         itemsOccurence.Add(1.0);
     }
@@ -63,11 +63,7 @@ public class ItemBox : MonoBehaviour{
 
         int randomIndex = ChooseItem();
         player.item = items[randomIndex];
-        player.itemImage.sprite = Sprite.Create(
-            items[randomIndex].itemImage,
-            new Rect(0, 0, items[randomIndex].itemImage.width, items[randomIndex].itemImage.height),
-            Vector2.zero
-            );
+        player.itemImage.sprite = items[randomIndex].itemSprite;
     }
 
     private void FixedUpdate(){
