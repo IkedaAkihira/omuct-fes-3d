@@ -231,9 +231,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 0}
-  damage: 2
+  damage: 3
   lifeTime: 400
-  magnification: 0.02
+  magnification: 0.05
   defaultSize: 1
 --- !u!65 &8716430593448550307
 BoxCollider:

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 abstract public class Player : MonoBehaviour
 {
@@ -61,11 +62,11 @@ abstract public class Player : MonoBehaviour
 
     //移動方向を格納
     private Vector3 move;
-    private Animator animator;
+    public Animator animator;
 
     
     public int attackInterval=200;
-    private long lastAttackTime=0;
+    protected long lastAttackTime=0;
 
     protected bool isAttacking = false;
 
@@ -77,6 +78,7 @@ abstract public class Player : MonoBehaviour
 
     private bool isAvailable = false;
     private Sprite noItemSprite;
+    protected bool isLeftPlayer;
     private void Awake()
     {
         noItemSprite= Resources.Load<Sprite>("Textures/null");
@@ -92,71 +94,90 @@ abstract public class Player : MonoBehaviour
         toTargetVec=new Vector3(0,0,0);
     }
 
+    public int playerIndex = 0;
+    public PlayerController playerController = null;
+
+    public void SetPlayerIndex(int playerIndex)
+    {
+        this.playerIndex = playerIndex;
+        GameObject playerControllerObject = GameObject.Find("PlayerDispenser"); // suppose null
+        PlayerDispenser playerDispenser = playerControllerObject.GetComponent<PlayerDispenser>();
+        playerController = playerDispenser.GetController(playerIndex);
+        Debug.Log(playerController);
+    }
 
     //操作関係はUpdateで処理してる
     private void Update()
     {
         if(!isAvailable)
             return;
-        Debug.Log("aaa");
+
+        //Debug.Log("aaa");
+
         if(IsAttackable)
             animator.SetTrigger("return");
-        
+
         //camera rotation
+        Vector2 cameraValue = playerController.GetCameraValue();
         float assistMagnification = Mathf.Pow(assistUnder,cursorDistance);
-        cameraRotation+=Mathf.Pow(Input.GetAxis(cameraHorizontalButton),3f)*0.005f*((isFocusTarget)?cameraRotationVelocityAssisted*assistMagnification:cameraRotationVelocity);
-        cameraRotationY=Mathf.Min(Mathf.Max(-verticalCameraLimit,cameraRotationY+
-        Mathf.Pow(Input.GetAxis(cameraVerticalButton),3f)
-        *0.01f*((isFocusTarget)?cameraRotationYVelocityAssisted*assistMagnification:cameraRotationYVelocity)),verticalCameraLimit);
+        cameraRotation += Mathf.Pow(cameraValue.x, 3f) * 0.005f * ((isFocusTarget) ? cameraRotationVelocityAssisted * assistMagnification : cameraRotationVelocity);
+        cameraRotationY = Mathf.Min(Mathf.Max(-verticalCameraLimit, cameraRotationY +
+        Mathf.Pow(cameraValue.y, 3f)
+        * 0.01f * ((isFocusTarget) ? cameraRotationYVelocityAssisted * assistMagnification : cameraRotationYVelocity)), verticalCameraLimit);
 
         //move
-        move = cameraVec2*Input.GetAxis(moveVerticalButton)*horizontal
-        +new Vector3(
+        Vector2 moveValue = playerController.GetMoveValue();
+        move = cameraVec2 * moveValue.y * horizontal
+        + new Vector3(
             -Mathf.Sin(cameraRotation),
             0,
             Mathf.Cos(cameraRotation)
-            )*Input.GetAxis(moveHorizontalButton)*vertical;
-        if(move.magnitude>1.0f)
-            move=move.normalized;
-        move = move*move.magnitude;
-        if (move != Vector3.zero && !isAttacking)
-        {
-            gameObject.transform.forward = move;
-        }
+            ) * moveValue.x * vertical;
+        if (move.magnitude > 1.0f)
+            move = move.normalized;
+        move = move * move.magnitude;
 
         //jump
-        if (Input.GetButtonDown(jumpButton) && groundedPlayer)
+        if (playerController.GetJumpValue() && groundedPlayer)
         {
-            JumpEvent e = new JumpEvent(this,this.jumpForce);
+            JumpEvent e = new JumpEvent(this, this.jumpForce);
             GameMaster.instance.OnJump(e);
-            if(e.isAvailable)
-                playerVelocity.y += e.JumpForce;
+            if (e.isAvailable)
+                playerVelocity.y = e.JumpForce;
         }
-        
+
         //attack
-        if(Input.GetButtonDown(attackButton)&&IsAttackable){
-            animator.SetTrigger("attack");
-            gameObject.transform.forward = cameraVec2;
-            AttackEvent e=new AttackEvent(this);
+        if (playerController.GetAttack1Value() && IsAttackable)
+        {
+            AttackEvent e = new AttackEvent(this);
             GameMaster.instance.OnAttack(e);
-            if(e.isAvailable){
+            if (e.isAvailable)
+            {
+                animator.SetTrigger("attack");
+                gameObject.transform.forward = cameraVec2;
                 Attack();
                 isAttacking = true;
-                lastAttackTime=GameMaster.instance.gameTime;
+                lastAttackTime = GameMaster.instance.gameTime;
             }
         }
 
         //use item
-        if(Input.GetButtonDown(useItemButton)){
-            if(item!=null){
-                item.Use(this);
-                item=null;
+        if (playerController.GetUseItemValue())
+        {
+            if (item != null)
+            {
+                UseItemEvent e = new UseItemEvent(this,item);
+                GameMaster.instance.OnUseItem(e);
+                if(e.isAvailable){
+                    item.Use(this);
+                    item = null;
                 this.itemImage.sprite = this.noItemSprite;
+                }
             }
         }
 
         //update ui
-        hpSlider.value=(float)hp/(float)maxHp;
+        hpSlider.value = (float)hp / (float)maxHp;
     }
 
     //内部の処理はコンスタントに行いたいので、ほぼ確実に毎秒50回実行してくれるFixedUpdateで行う。
@@ -239,8 +260,16 @@ abstract public class Player : MonoBehaviour
         //移動の処理
         MoveEvent moveEvent = new MoveEvent(this,this.playerSpeed);
         GameMaster.instance.OnMove(moveEvent);
-        if(moveEvent.isAvailable)
+        if(moveEvent.isAvailable){
+            
+            if (move != Vector3.zero && !isAttacking)
+            {
+                gameObject.transform.forward = move;
+            }
             controller.Move((move*moveEvent.Speed+playerVelocity) * Time.deltaTime);
+        }
+        
+        AdditionalFixed();
     }
 
     public int Hp{
@@ -304,5 +333,14 @@ abstract public class Player : MonoBehaviour
         this.isAvailable = true;
         this.itemImage.sprite = this.noItemSprite;
     }
+
+    public Player SetIsLeftPlayer(bool isLeftPlayer){
+        this.isLeftPlayer=isLeftPlayer;
+        return this;
+    }
     public bool IsAttackable{get{return GameMaster.instance.gameTime>=lastAttackTime+attackInterval;}}
+
+    virtual protected void AdditionalFixed(){
+
+    }
 }

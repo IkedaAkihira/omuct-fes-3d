@@ -31,14 +31,17 @@ public class GameMaster : MonoBehaviour,EventListener
     [SerializeField] private string player2MoveHorizontalButton="OppHorizontal";
     private Player playerL;
     private Player playerR;
+    private Player pl;
+    private Player pr;
     [SerializeField] private string[] characterPaths;
     List<EventListener>listeners=new List<EventListener>();
 
+    public SEPlayer sePlayer;
     private void Awake() {
         GameMaster.instance=this;
         this.playerL=Resources.Load<Player>(this.characterPaths[DataTransfer.player1CharacterNumber]);
-        Player pl = Instantiate(playerL.gameObject,new Vector3(0f,10f,10f),Quaternion.identity).GetComponent<Player>();
-        pl.SetInputs(player1JumpButton,
+        this.pl = Instantiate(playerL.gameObject,new Vector3(0f,10f,10f),Quaternion.identity).GetComponent<Player>();
+        this.pl.SetInputs(player1JumpButton,
             player1AttackButton,
             player1UseItemButton,
             player1CameraHorizontalButton,
@@ -47,11 +50,13 @@ public class GameMaster : MonoBehaviour,EventListener
             player1MoveVerticalButton)
         .SetUI(player1HPSlider,player1ItemImage)
         .SetTPSCamera(player1Camera)
+        .SetIsLeftPlayer(true)
         .MakeAvailable();
+        this.pl.SetPlayerIndex(0);
 
         this.playerR=Resources.Load<Player>(this.characterPaths[DataTransfer.player2CharacterNumber]);
-        Player pr = Instantiate(playerR.gameObject,new Vector3(0f,10f,-10f),Quaternion.identity).GetComponent<Player>();
-        pr.SetInputs(player2JumpButton,
+        this.pr = Instantiate(playerR.gameObject,new Vector3(0f,10f,-10f),Quaternion.identity).GetComponent<Player>();
+        this.pr.SetInputs(player2JumpButton,
             player2AttackButton,
             player2UseItemButton,
             player2CameraHorizontalButton,
@@ -60,12 +65,15 @@ public class GameMaster : MonoBehaviour,EventListener
             player2MoveVerticalButton)
         .SetUI(player2HPSlider,player2ItemImage)
         .SetTPSCamera(player2Camera)
+        .SetIsLeftPlayer(false)
         .MakeAvailable();
+        this.pr.SetPlayerIndex(1);
 
         this.player1PoisonUI.player=pl;
         this.player2PoisonUI.player=pr;
 
         listeners.Add(new PoisonListener());
+        listeners.Add(new ChinanagoListener());
 
         this.gameTime=0;
     }
@@ -114,5 +122,9 @@ public class GameMaster : MonoBehaviour,EventListener
         for(int i=0;i<listeners.Count;i++){
             listeners[i].OnJump(e);
         }
+    }
+
+    public Player GetPlayer(bool isLeftPlayer){
+        return isLeftPlayer?pl:pr;
     }
 }

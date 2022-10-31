@@ -305,7 +305,7 @@ CharacterController:
   m_Height: 4
   m_Radius: 1.5
   m_SlopeLimit: 45
-  m_StepOffset: 0.01
+  m_StepOffset: 1
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.4, z: 0}
@@ -347,16 +347,19 @@ MonoBehaviour:
   gravityValue: -20
   jumpForce: 15
   cameraRotationVelocity: -10
-  cameraRotationVelocityAssisted: -1
-  cameraRotationYVelocity: 1
-  cameraRotationYVelocityAssisted: 0.1
-  horizontal: -1
+  cameraRotationVelocityAssisted: -10
+  cameraRotationYVelocity: -3
+  cameraRotationYVelocityAssisted: -3
+  horizontal: 1
   vertical: 1
   th: 0.2
-  verticalCameraLimit: 0.7
+  verticalCameraLimit: 0.9
   cameraDistance: 8
+  animator: {fileID: 0}
   attackInterval: 10
-  attackObject: {fileID: 4214217276863292064, guid: 322cfc4209bb1174dbe686334ad43ddc, type: 3}
+  assistUnder: 1
+  playerIndex: 0
+  attackObject: {fileID: 4385019632303509958, guid: 5f886973b296d42498f9ce2a9b83293a, type: 3}
   attackForce: 1000
 --- !u!1 &2196317924424290529
 GameObject:
