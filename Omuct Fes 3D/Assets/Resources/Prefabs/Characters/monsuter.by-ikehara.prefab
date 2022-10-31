@@ -347,13 +347,13 @@ MonoBehaviour:
   gravityValue: -20
   jumpForce: 15
   cameraRotationVelocity: -10
-  cameraRotationVelocityAssisted: -1
-  cameraRotationYVelocity: -1
-  cameraRotationYVelocityAssisted: 0.1
+  cameraRotationVelocityAssisted: -10
+  cameraRotationYVelocity: -3
+  cameraRotationYVelocityAssisted: -3
   horizontal: 1
   vertical: 1
   th: 0.2
-  verticalCameraLimit: 0.7
+  verticalCameraLimit: 0.9
   cameraDistance: 8
   animator: {fileID: 0}
   attackInterval: 10

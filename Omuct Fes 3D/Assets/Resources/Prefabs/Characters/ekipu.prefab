@@ -476,12 +476,12 @@ MonoBehaviour:
   jumpForce: 15
   cameraRotationVelocity: -10
   cameraRotationVelocityAssisted: -1
-  cameraRotationYVelocity: -1
-  cameraRotationYVelocityAssisted: 0.1
+  cameraRotationYVelocity: -3
+  cameraRotationYVelocityAssisted: -0.3
   horizontal: 1
   vertical: 1
   th: 0.05
-  verticalCameraLimit: 0.7
+  verticalCameraLimit: 0.9
   cameraDistance: 8
   animator: {fileID: 0}
   attackInterval: 17
