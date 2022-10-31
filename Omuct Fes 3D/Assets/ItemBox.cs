@@ -24,7 +24,7 @@ public class ItemBox : MonoBehaviour{
         items.Add(new ItemShootingBit());
         itemsOccurence.Add(1.0);
         items.Add(new ItemGrenade());
-        itemsOccurence.Add(1.0);
+        itemsOccurence.Add(1000.0);
         items.Add(new ItemTokeito());
         itemsOccurence.Add(1.0);
     }
