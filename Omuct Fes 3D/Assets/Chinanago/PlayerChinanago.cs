@@ -39,6 +39,7 @@ public class PlayerChinanago : Player {
 
     void Bubble(){
         GameObject cloneObject=Instantiate(attackObject,transform.position+new Vector3(0f,0f,0f),Quaternion.identity);
+        cloneObject.transform.forward = cameraVec2;
         Rigidbody rb=cloneObject.GetComponent<Rigidbody>();
         rb.AddForce((cameraVec2+new Vector3(0f,bubbleVerticalForce,0f))*attackForce);
         BulletChinanago bullet=cloneObject.GetComponent<BulletChinanago>();
