@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameMaster : MonoBehaviour,EventListener
 {
@@ -103,5 +104,11 @@ public class GameMaster : MonoBehaviour,EventListener
 
     public Player GetPlayer(bool isLeftPlayer){
         return isLeftPlayer?pl:pr;
+    }
+
+    public void Finish(){
+        DataTransfer.player1ResultData=pl.GetResultData();
+        DataTransfer.player2ResultData=pr.GetResultData();
+        SceneManager.LoadScene("ResultScene");
     }
 }

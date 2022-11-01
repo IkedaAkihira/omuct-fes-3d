@@ -6,6 +6,12 @@ using UnityEngine.InputSystem;
 
 abstract public class Player : MonoBehaviour
 {
+    //行動情報
+    private int attackCount = 0;
+    private int hitCount = 0;
+    private int useItemCount = 0;
+    private int jumpCount = 0;
+
     //コントローラ関係
     protected bool isPlayerAvailable = false;
     private string jumpButton="Jump";
@@ -146,6 +152,7 @@ abstract public class Player : MonoBehaviour
             GameMaster.instance.OnJump(e);
             if (e.isAvailable){
                 animator.SetTrigger("jump");
+                this.jumpCount++;
                 playerVelocity.y = e.JumpForce;
             }
         }
@@ -157,6 +164,7 @@ abstract public class Player : MonoBehaviour
             GameMaster.instance.OnAttack(e);
             if (e.isAvailable)
             {
+                this.attackCount++;
                 animator.SetTrigger("attack");
                 gameObject.transform.forward = cameraVec2;
                 Attack();
@@ -173,6 +181,7 @@ abstract public class Player : MonoBehaviour
                 UseItemEvent e = new UseItemEvent(this,item);
                 GameMaster.instance.OnUseItem(e);
                 if(e.isAvailable){
+                    this.useItemCount++;
                     item.Use(this);
                     item = null;
                 this.itemImage.sprite = this.noItemSprite;
@@ -210,10 +219,7 @@ abstract public class Player : MonoBehaviour
 
         //死んだとき
         if(hp<=0){
-            transform.position=new Vector3(0,10,0);
-            playerVelocity=new Vector3(0,0,0);
-            effects.Clear();
-            hp=maxHp;
+            OnDeath();
             return;
         }
 
@@ -322,6 +328,10 @@ abstract public class Player : MonoBehaviour
         return this;
     }
 
+    public void addHitCount(){
+        this.hitCount++;
+    }
+
     public Player SetUI(Slider hpSlider,Image itemImage){
         this.hpSlider=hpSlider;
         this.itemImage=itemImage;
@@ -346,5 +356,13 @@ abstract public class Player : MonoBehaviour
 
     virtual protected void AdditionalFixed(){
 
+    }
+
+    void OnDeath(){
+        GameMaster.instance.Finish();
+    }
+
+    public ResultData GetResultData(){
+        return new ResultData((hp>0),this.hp,this.attackCount,this.hitCount,this.useItemCount,this.jumpCount);
     }
 }
