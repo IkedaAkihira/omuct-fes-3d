@@ -1,14 +1,23 @@
 fileFormatVersion: 2
-guid: 5183a767517c0344880777d8ccbe9217
+guid: 3840b192b733fdd40a1b1f25f8699672
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable:
   - first:
-      74: 6396828155121186910
-    second: "\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2|Attack"
+      74: 5727235085776209123
+    second: "\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2|jump1"
   - first:
-      74: -6140374235425719669
-    second: "\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2|\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2Action"
+      74: 433095428815718318
+    second: "\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2|jump1.001"
+  - first:
+      74: -3805793130146591410
+    second: "\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2|walk1"
+  - first:
+      74: -7278208982167697899
+    second: "\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2|\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2|\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2|Attack|\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2"
+  - first:
+      74: 6295579034565890078
+    second: "\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2|\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2|\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2|\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2Action|"
   externalObjects: {}
   materials:
     materialImportMode: 2
