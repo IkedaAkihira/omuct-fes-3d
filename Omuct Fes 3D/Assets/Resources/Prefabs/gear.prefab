@@ -233,7 +233,7 @@ MonoBehaviour:
   parent: {fileID: 0}
   damage: 3
   lifeTime: 400
-  magnification: 0.05
+  magnification: 0.03
   defaultSize: 1
 --- !u!65 &8716430593448550307
 BoxCollider:
