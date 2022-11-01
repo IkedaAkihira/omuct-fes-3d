@@ -72,6 +72,9 @@ abstract public class Player : MonoBehaviour
     private bool isAvailable = false;
     private Texture2D noItemTexture;
 
+    // 操作硬直フラグ
+    public bool doStopPlayerControl = true;
+
     protected bool isLeftPlayer;
     private void Awake()
     {
@@ -110,15 +113,17 @@ abstract public class Player : MonoBehaviour
             animator.SetTrigger("return");
 
         //camera rotation
-        Vector2 cameraValue = playerController.GetCameraValue();
-        float assistMagnification = Mathf.Pow(assistUnder,cursorDistance);
+        Vector2 cameraValue = Vector2.zero;
+        if(doStopPlayerControl) cameraValue = playerController.GetCameraValue();
+        float assistMagnification = Mathf.Pow(assistUnder, cursorDistance);
         cameraRotation += Mathf.Pow(cameraValue.x, 3f) * 0.005f * ((isFocusTarget) ? cameraRotationVelocityAssisted * assistMagnification : cameraRotationVelocity);
         cameraRotationY = Mathf.Min(Mathf.Max(-verticalCameraLimit, cameraRotationY +
         Mathf.Pow(cameraValue.y, 3f)
         * 0.01f * ((isFocusTarget) ? cameraRotationYVelocityAssisted * assistMagnification : cameraRotationYVelocity)), verticalCameraLimit);
 
         //move
-        Vector2 moveValue = playerController.GetMoveValue();
+        Vector2 moveValue = Vector2.zero;
+        if (doStopPlayerControl) moveValue = playerController.GetMoveValue();
         move = cameraVec2 * moveValue.y * horizontal
         + new Vector3(
             -Mathf.Sin(cameraRotation),
@@ -130,7 +135,7 @@ abstract public class Player : MonoBehaviour
         move = move * move.magnitude;
 
         //jump
-        if (playerController.GetJumpValue() && groundedPlayer)
+        if (doStopPlayerControl && playerController.GetJumpValue() && groundedPlayer)
         {
             JumpEvent e = new JumpEvent(this, this.jumpForce);
             GameMaster.instance.OnJump(e);
@@ -139,7 +144,7 @@ abstract public class Player : MonoBehaviour
         }
 
         //attack
-        if (playerController.GetAttack1Value() && IsAttackable)
+        if (doStopPlayerControl && playerController.GetAttack1Value() && IsAttackable)
         {
             AttackEvent e = new AttackEvent(this);
             GameMaster.instance.OnAttack(e);
@@ -154,7 +159,7 @@ abstract public class Player : MonoBehaviour
         }
 
         //use item
-        if (playerController.GetUseItemValue())
+        if (doStopPlayerControl && playerController.GetUseItemValue())
         {
             if (item != null)
             {
