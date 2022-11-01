@@ -46,5 +46,7 @@ public class BulletTokeito : MonoBehaviour
         GameObject tokeitoClone = GameObject.Instantiate(realTokeitoObject, pos, Quaternion.identity);
         RealTokeito realTokeito = tokeitoClone.GetComponent<RealTokeito>();
         realTokeito.centerPos = pos + new Vector3(0.0f, 0.0f, 0.0f);
+
+        GameMaster.instance.sePlayer.Play("tokeito");
     }
 }

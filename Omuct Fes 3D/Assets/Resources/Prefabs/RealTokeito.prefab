@@ -755,7 +755,7 @@ MonoBehaviour:
   centerPos: {x: 0, y: 0, z: 0}
   TOKEITO_HEIGHT: 27
   GROW_DELAY: 3
-  GROW_TIME: 7
+  GROW_TIME: 12
   STAY_INTERVAL: 15
   DRAWN_TIME: 5
   DELETE_DELAY: 4
