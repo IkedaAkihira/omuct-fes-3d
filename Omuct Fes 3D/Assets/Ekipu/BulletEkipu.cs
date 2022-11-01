@@ -2,6 +2,11 @@ using UnityEngine;
 
 public class BulletEkipu : MonoBehaviour {
     public Player parent;
+    public int damage = 2;
+    public int lifeTime = 100;
+    public float magnification = 0.1f;
+
+    public float defaultSize = 1f;
 
     long startTime;
 
@@ -13,8 +18,10 @@ public class BulletEkipu : MonoBehaviour {
     }
 
     private void FixedUpdate() {
-        if(GameMaster.instance.gameTime-startTime>100)
+        long life = GameMaster.instance.gameTime-startTime;
+        if(life>lifeTime)
             Destroy(this.gameObject);
+        transform.localScale = new Vector3(1f,1f,1f)*(defaultSize+(float)life*magnification);
     }
 
     private void Update() {
@@ -29,7 +36,7 @@ public class BulletEkipu : MonoBehaviour {
         
 
         if(p!=null)
-            p.Damage(new DamageSource(2));
+            p.Damage(new DamageSource(damage));
         
         Destroy(this.gameObject);
 

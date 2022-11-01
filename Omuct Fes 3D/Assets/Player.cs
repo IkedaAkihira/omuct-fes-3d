@@ -2,20 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 abstract public class Player : MonoBehaviour
 {
+    //行動情報
+    private int attackCount = 0;
+    private int hitCount = 0;
+    private int useItemCount = 0;
+    private int jumpCount = 0;
+
     //コントローラ関係
-    public string jumpButton="Jump";
-    public string attackButton="Attack";
-    public string useItemButton="UseItem";
-    public string cameraHorizontalButton="cameraHorizontal";
-    public string cameraVerticalButton="cameraVertical";
-    public string moveVerticalButton="Vertical";
-    public string moveHorizontalButton="Horizontal";
+    protected bool isPlayerAvailable = false;
+    private string jumpButton="Jump";
+    private string attackButton="Attack";
+    private string useItemButton="UseItem";
+    private string cameraHorizontalButton="CameraHorizontal";
+    private string cameraVerticalButton="CameraVertical";
+    private string moveVerticalButton="Vertical";
+    private string moveHorizontalButton="Horizontal";
 
     //UI
-    public Slider hpSlider;
+    private Slider hpSlider;
+    public Image itemImage;
 
     //ステータスなど
     public int maxHp=20;
@@ -42,8 +51,6 @@ abstract public class Player : MonoBehaviour
     public float vertical=1f;
     public float th=0.2f;
     public float verticalCameraLimit = Mathf.PI/6.0f;
-    //カメラオブジェクトを格納
-    public GameObject tpsCamera;
     //カメラの距離
     public float cameraDistance = 10.0f;
 
@@ -61,98 +68,132 @@ abstract public class Player : MonoBehaviour
 
     //移動方向を格納
     private Vector3 move;
-    private Animator animator;
-    public Image itemImage;
+    public Animator animator;
 
     
     public int attackInterval=200;
-    private long lastAttackTime=0;
+    protected long lastAttackTime=0;
 
     protected bool isAttacking = false;
 
     protected bool isFocusTarget = false;
 
-    private Texture2D noItemTexture;
+    protected float cursorDistance = 0f;
+
+    public float assistUnder = 1f;
+
+    private bool isAvailable = false;
+    private Sprite noItemSprite;
+    protected bool isLeftPlayer;
     private void Awake()
     {
-        noItemTexture= Resources.Load<Texture2D>("Textures/null");
+        noItemSprite= Resources.Load<Sprite>("Textures/null");
         cameraRotation = 0f;
         cameraRotationY = 0f;
         hp=maxHp;
         item=null;
         controller = this.GetComponent<CharacterController>();
-        cameraMover=tpsCamera.GetComponent<CameraMover>();
         animator=GetComponent<Animator>();
         move=new Vector3(0,0,0);
         cameraVec2=new Vector3(0,0,0);
         cameraVec3=new Vector3(0,0,0);
         toTargetVec=new Vector3(0,0,0);
-        this.itemImage.sprite = Sprite.Create(this.noItemTexture, new Rect(0,0,this.noItemTexture.width,this.noItemTexture.height), Vector2.zero);
     }
 
+    public int playerIndex = 0;
+    public PlayerController playerController = null;
+
+    public void SetPlayerIndex(int playerIndex)
+    {
+        this.playerIndex = playerIndex;
+        GameObject playerControllerObject = GameObject.Find("PlayerDispenser"); // suppose null
+        PlayerDispenser playerDispenser = playerControllerObject.GetComponent<PlayerDispenser>();
+        playerController = playerDispenser.GetController(playerIndex);
+        Debug.Log(playerController);
+    }
 
     //操作関係はUpdateで処理してる
     private void Update()
     {
-        Debug.Log(isFocusTarget);
+        if(!isAvailable)
+            return;
+
+        //Debug.Log("aaa");
+
         if(IsAttackable)
             animator.SetTrigger("return");
-        
+
         //camera rotation
-        cameraRotation+=Th(Input.GetAxis(cameraHorizontalButton),th)*0.005f*((isFocusTarget)?cameraRotationVelocityAssisted:cameraRotationVelocity);
-        cameraRotationY=Mathf.Min(Mathf.Max(-verticalCameraLimit,cameraRotationY+
-        Th(Input.GetAxis(cameraVerticalButton),th)
-        *0.01f*((isFocusTarget)?cameraRotationYVelocityAssisted:cameraRotationYVelocity)),verticalCameraLimit);
+        Vector2 cameraValue = playerController.GetCameraValue();
+        float assistMagnification = Mathf.Pow(assistUnder,cursorDistance);
+        cameraRotation += Mathf.Pow(cameraValue.x, 3f) * 0.005f * ((isFocusTarget) ? cameraRotationVelocityAssisted * assistMagnification : cameraRotationVelocity);
+        cameraRotationY = Mathf.Min(Mathf.Max(-verticalCameraLimit, cameraRotationY +
+        Mathf.Pow(cameraValue.y, 3f)
+        * 0.01f * ((isFocusTarget) ? cameraRotationYVelocityAssisted * assistMagnification : cameraRotationYVelocity)), verticalCameraLimit);
 
         //move
-        move = cameraVec2*Input.GetAxis(moveVerticalButton)*horizontal
-        +new Vector3(
+        Vector2 moveValue = playerController.GetMoveValue();
+        move = cameraVec2 * moveValue.y * horizontal
+        + new Vector3(
             -Mathf.Sin(cameraRotation),
             0,
             Mathf.Cos(cameraRotation)
-            )*Input.GetAxis(moveHorizontalButton)*vertical;
-        if(move.magnitude>1.0f)
-            move=move.normalized;
-        move = move*move.magnitude;
-        if (move != Vector3.zero && !isAttacking)
-        {
-            gameObject.transform.forward = move;
-        }
+            ) * moveValue.x * vertical;
+        if (move.magnitude > 1.0f)
+            move = move.normalized;
+        move = move * move.magnitude;
 
         //jump
-        if (Input.GetButtonDown(jumpButton) && groundedPlayer)
+        if (playerController.GetJumpValue() && groundedPlayer)
         {
-            playerVelocity.y += jumpForce;
+            JumpEvent e = new JumpEvent(this, this.jumpForce);
+            GameMaster.instance.OnJump(e);
+            if (e.isAvailable){
+                this.jumpCount++;
+                playerVelocity.y = e.JumpForce;
+            }
         }
-        
+
         //attack
-        if(Input.GetButtonDown(attackButton)&&IsAttackable){
-            animator.SetTrigger("attack");
-            gameObject.transform.forward = cameraVec2;
-            AttackEvent e=new AttackEvent(this);
+        if (playerController.GetAttack1Value() && IsAttackable)
+        {
+            AttackEvent e = new AttackEvent(this);
             GameMaster.instance.OnAttack(e);
-            if(e.isAvailable){
+            if (e.isAvailable)
+            {
+                this.attackCount++;
+                animator.SetTrigger("attack");
+                gameObject.transform.forward = cameraVec2;
                 Attack();
                 isAttacking = true;
-                lastAttackTime=GameMaster.instance.gameTime;
+                lastAttackTime = GameMaster.instance.gameTime;
             }
         }
 
         //use item
-        if(Input.GetButtonDown(useItemButton)){
-            if(item!=null){
-                item.Use(this);
-                item=null;
-                this.itemImage.sprite = Sprite.Create(this.noItemTexture, new Rect(0,0,this.noItemTexture.width,this.noItemTexture.height), Vector2.zero);
+        if (playerController.GetUseItemValue())
+        {
+            if (item != null)
+            {
+                UseItemEvent e = new UseItemEvent(this,item);
+                GameMaster.instance.OnUseItem(e);
+                if(e.isAvailable){
+                    this.useItemCount++;
+                    item.Use(this);
+                    item = null;
+                this.itemImage.sprite = this.noItemSprite;
+                }
             }
         }
 
         //update ui
-        hpSlider.value=(float)hp/(float)maxHp;
+        hpSlider.value = (float)hp / (float)maxHp;
     }
 
     //内部の処理はコンスタントに行いたいので、ほぼ確実に毎秒50回実行してくれるFixedUpdateで行う。
     private void FixedUpdate() {
+        if(!isAvailable)
+            return;
         if(IsAttackable)
             isAttacking = false;
 
@@ -169,12 +210,13 @@ abstract public class Player : MonoBehaviour
             effects.Remove(type);
         }
 
+        if(this.transform.position.y<=-1f){
+            this.Damage(new DamageSource(-(int)(this.transform.position.y/10f)));
+        }
+
         //死んだとき
         if(hp<=0){
-            transform.position=new Vector3(0,10,0);
-            playerVelocity=new Vector3(0,0,0);
-            effects.Clear();
-            hp=maxHp;
+            OnDeath();
             return;
         }
 
@@ -195,12 +237,18 @@ abstract public class Player : MonoBehaviour
         Player targetedPlayer = null;
         if(Physics.Raycast(cameraPos,cameraVec3,out hit,Mathf.Infinity,1<<3|1<<6)){
             targetedPlayer = hit.collider.GetComponent<Player>();
-            if(targetedPlayer!=this)
-                toTargetVec=(hit.point-transform.position).normalized;
-            else
+            if(targetedPlayer!=this){
+                Vector3 ptot=(hit.point-transform.position);
+                toTargetVec=ptot.normalized;
+                cursorDistance = ptot.magnitude;
+            }
+            else{
                 toTargetVec=cameraVec3.normalized;
+                cursorDistance = -1f;
+            }
         }else{
             toTargetVec=cameraVec3.normalized;
+            cursorDistance = -1f;
         }
         if(targetedPlayer!=null&&targetedPlayer!=this){
             isFocusTarget = true;
@@ -217,7 +265,18 @@ abstract public class Player : MonoBehaviour
         playerVelocity.y += gravityValue * Time.deltaTime;
 
         //移動の処理
-        controller.Move((move*playerSpeed+playerVelocity) * Time.deltaTime);
+        MoveEvent moveEvent = new MoveEvent(this,this.playerSpeed);
+        GameMaster.instance.OnMove(moveEvent);
+        if(moveEvent.isAvailable){
+            
+            if (move != Vector3.zero && !isAttacking)
+            {
+                gameObject.transform.forward = move;
+            }
+            controller.Move((move*moveEvent.Speed+playerVelocity) * Time.deltaTime);
+        }
+        
+        AdditionalFixed();
     }
 
     public int Hp{
@@ -247,5 +306,60 @@ abstract public class Player : MonoBehaviour
         return (Mathf.Abs(val)<th)?0:val;
     }
 
+    public Player SetInputs(
+        string jumpButton,
+        string attackButton,
+        string useItemButton,
+        string cameraHorizontalButton,
+        string cameraVerticalButton,
+        string moveHorizontalButton,
+        string moveVerticalButton
+    ){
+        this.jumpButton=jumpButton;
+        this.attackButton=attackButton;
+        this.useItemButton=useItemButton;
+        this.cameraHorizontalButton=cameraHorizontalButton;
+        this.cameraVerticalButton=cameraVerticalButton;
+        this.moveHorizontalButton=moveHorizontalButton;
+        this.moveVerticalButton=moveVerticalButton;
+        return this;
+    }
+
+    public void addHitCount(){
+        this.hitCount++;
+    }
+
+    public Player SetUI(Slider hpSlider,Image itemImage){
+        this.hpSlider=hpSlider;
+        this.itemImage=itemImage;
+        return this;
+    }
+
+    public Player SetTPSCamera(CameraMover cameraMover){
+        this.cameraMover=cameraMover;
+        return this;
+    }
+
+    public void MakeAvailable(){
+        this.isAvailable = true;
+        this.itemImage.sprite = this.noItemSprite;
+    }
+
+    public Player SetIsLeftPlayer(bool isLeftPlayer){
+        this.isLeftPlayer=isLeftPlayer;
+        return this;
+    }
     public bool IsAttackable{get{return GameMaster.instance.gameTime>=lastAttackTime+attackInterval;}}
+
+    virtual protected void AdditionalFixed(){
+
+    }
+
+    void OnDeath(){
+        GameMaster.instance.Finish();
+    }
+
+    public ResultData GetResultData(){
+        return new ResultData((hp>0),this.hp,this.attackCount,this.hitCount,this.useItemCount,this.jumpCount);
+    }
 }

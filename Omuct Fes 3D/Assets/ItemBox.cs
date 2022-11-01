@@ -63,11 +63,7 @@ public class ItemBox : MonoBehaviour{
 
         int randomIndex = ChooseItem();
         player.item = items[randomIndex];
-        player.itemImage.sprite = Sprite.Create(
-            items[randomIndex].itemImage,
-            new Rect(0, 0, items[randomIndex].itemImage.width, items[randomIndex].itemImage.height),
-            Vector2.zero
-            );
+        player.itemImage.sprite = items[randomIndex].itemSprite;
     }
 
     private void FixedUpdate(){
