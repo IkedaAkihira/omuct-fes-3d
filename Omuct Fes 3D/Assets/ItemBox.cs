@@ -64,6 +64,8 @@ public class ItemBox : MonoBehaviour{
         int randomIndex = ChooseItem();
         player.item = items[randomIndex];
         player.itemImage.sprite = items[randomIndex].itemSprite;
+
+        GameMaster.instance.sePlayer.Play("open item box");
     }
 
     private void FixedUpdate(){
