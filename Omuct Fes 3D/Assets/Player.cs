@@ -14,13 +14,6 @@ abstract public class Player : MonoBehaviour
 
     //コントローラ関係
     protected bool isPlayerAvailable = false;
-    private string jumpButton="Jump";
-    private string attackButton="Attack";
-    private string useItemButton="UseItem";
-    private string cameraHorizontalButton="CameraHorizontal";
-    private string cameraVerticalButton="CameraVertical";
-    private string moveVerticalButton="Vertical";
-    private string moveHorizontalButton="Horizontal";
 
     //UI
     private Slider hpSlider;
@@ -83,7 +76,12 @@ abstract public class Player : MonoBehaviour
     public float assistUnder = 1f;
 
     private bool isAvailable = false;
+
+    // 操作硬直フラグ
+    public bool doStopPlayerControl = true;
+
     private Sprite noItemSprite;
+
     protected bool isLeftPlayer;
     private void Awake()
     {
@@ -109,7 +107,6 @@ abstract public class Player : MonoBehaviour
         GameObject playerControllerObject = GameObject.Find("PlayerDispenser"); // suppose null
         PlayerDispenser playerDispenser = playerControllerObject.GetComponent<PlayerDispenser>();
         playerController = playerDispenser.GetController(playerIndex);
-        Debug.Log(playerController);
     }
 
     //操作関係はUpdateで処理してる
@@ -118,21 +115,21 @@ abstract public class Player : MonoBehaviour
         if(!isAvailable)
             return;
 
-        //Debug.Log("aaa");
-
         if(IsAttackable)
             animator.SetTrigger("return");
 
         //camera rotation
-        Vector2 cameraValue = playerController.GetCameraValue();
-        float assistMagnification = Mathf.Pow(assistUnder,cursorDistance);
+        Vector2 cameraValue = Vector2.zero;
+        if(doStopPlayerControl) cameraValue = playerController.GetCameraValue();
+        float assistMagnification = Mathf.Pow(assistUnder, cursorDistance);
         cameraRotation += Mathf.Pow(cameraValue.x, 3f) * 0.005f * ((isFocusTarget) ? cameraRotationVelocityAssisted * assistMagnification : cameraRotationVelocity);
         cameraRotationY = Mathf.Min(Mathf.Max(-verticalCameraLimit, cameraRotationY +
         Mathf.Pow(cameraValue.y, 3f)
         * 0.01f * ((isFocusTarget) ? cameraRotationYVelocityAssisted * assistMagnification : cameraRotationYVelocity)), verticalCameraLimit);
 
         //move
-        Vector2 moveValue = playerController.GetMoveValue();
+        Vector2 moveValue = Vector2.zero;
+        if (doStopPlayerControl) moveValue = playerController.GetMoveValue();
         move = cameraVec2 * moveValue.y * horizontal
         + new Vector3(
             -Mathf.Sin(cameraRotation),
@@ -146,7 +143,7 @@ abstract public class Player : MonoBehaviour
         move = move * move.magnitude;
 
         //jump
-        if (playerController.GetJumpValue() && groundedPlayer)
+        if (doStopPlayerControl && playerController.GetJumpValue() && groundedPlayer)
         {
             JumpEvent e = new JumpEvent(this, this.jumpForce);
             GameMaster.instance.OnJump(e);
@@ -158,7 +155,7 @@ abstract public class Player : MonoBehaviour
         }
 
         //attack
-        if (playerController.GetAttack1Value() && IsAttackable)
+        if (doStopPlayerControl && playerController.GetAttack1Value() && IsAttackable)
         {
             AttackEvent e = new AttackEvent(this);
             GameMaster.instance.OnAttack(e);
@@ -174,7 +171,7 @@ abstract public class Player : MonoBehaviour
         }
 
         //use item
-        if (playerController.GetUseItemValue())
+        if (doStopPlayerControl && playerController.GetUseItemValue())
         {
             if (item != null)
             {
@@ -307,29 +304,6 @@ abstract public class Player : MonoBehaviour
 
     private float Th(float val,float th){
         return (Mathf.Abs(val)<th)?0:val;
-    }
-
-    public Player SetInputs(
-        string jumpButton,
-        string attackButton,
-        string useItemButton,
-        string cameraHorizontalButton,
-        string cameraVerticalButton,
-        string moveHorizontalButton,
-        string moveVerticalButton
-    ){
-        this.jumpButton=jumpButton;
-        this.attackButton=attackButton;
-        this.useItemButton=useItemButton;
-        this.cameraHorizontalButton=cameraHorizontalButton;
-        this.cameraVerticalButton=cameraVerticalButton;
-        this.moveHorizontalButton=moveHorizontalButton;
-        this.moveVerticalButton=moveVerticalButton;
-        return this;
-    }
-
-    public void addHitCount(){
-        this.hitCount++;
     }
 
     public Player SetUI(Slider hpSlider,Image itemImage){

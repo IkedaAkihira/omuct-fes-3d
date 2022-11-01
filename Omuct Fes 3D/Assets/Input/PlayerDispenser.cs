@@ -6,9 +6,9 @@ using UnityEngine.InputSystem;
 public class PlayerDispenser : MonoBehaviour
 {
 
-    // 1P, 2P ��\���I�u�W�F�N�g���t�B�[���h�ɂ���
-    // ���\�b�h�ŋ󂢂Ă�̂��擾����
-    // 1P, 2P �̓��͂� Update �ōX�V
+    // 1P, 2P を表す PlayerController インスタンスをフィールドにもつ。
+    // PlayerDispenser.GetController で、指定した番号の PlayerController インスタンスを取得する。
+    // 1P, 2P の入力を Update で更新。
 
     public class PlayerControllerInternal
     {

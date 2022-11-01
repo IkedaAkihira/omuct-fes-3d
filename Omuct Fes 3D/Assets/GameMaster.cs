@@ -8,6 +8,7 @@ public class GameMaster : MonoBehaviour,EventListener
 {
     static public GameMaster instance=null;
     public long gameTime;
+    public long gameTimeOffset = -220;
     [SerializeField] private CameraMover player1Camera;
     [SerializeField] private Slider player1HPSlider;
     [SerializeField] private Image player1ItemImage;
@@ -23,10 +24,12 @@ public class GameMaster : MonoBehaviour,EventListener
     [SerializeField] private string[] characterPaths;
     List<EventListener>listeners=new List<EventListener>();
 
+    private BeginningCountdown beginningCountdown;
+
     public SEPlayer sePlayer;
 
-    [SerializeField] Vector3 spawnPlayer1;
-    [SerializeField] Vector3 spawnPlayer2;
+    [SerializeField] Vector3 spawnPlayer1 = new Vector3(-100.0f, 10.0f, 0.0f);
+    [SerializeField] Vector3 spawnPlayer2 = new Vector3(100.0f, 10.0f, 0.0f);
     private void Awake() {
         GameMaster.instance=this;
         this.playerL=Resources.Load<Player>(this.characterPaths[DataTransfer.player1CharacterNumber]);
@@ -54,19 +57,26 @@ public class GameMaster : MonoBehaviour,EventListener
         listeners.Add(new ChinanagoListener());
         listeners.Add(new DamageSEListener(this.sePlayer));
 
-        this.gameTime=0;
+        this.gameTime = gameTimeOffset;
+
+        beginningCountdown = new BeginningCountdown();
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        pl.doStopPlayerControl = 0 <= gameTime;
+        pr.doStopPlayerControl = 0 <= gameTime;
+
+        if (gameTime <= 100)
+        {
+            beginningCountdown.Update(gameTime);
+        }
     }
 
     private void FixedUpdate() {
