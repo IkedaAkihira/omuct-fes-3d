@@ -494,7 +494,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.36
+  m_Volume: 0.17
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -4117,8 +4117,8 @@ MonoBehaviour:
   - Prefabs/Characters/chinanago
   - Prefabs/Characters/ekipu
   sePlayer: {fileID: 289350700}
-  spawnPlayer1: {x: -100, y: 0, z: 0}
-  spawnPlayer2: {x: 100, y: 0, z: 0}
+  spawnPlayer1: {x: -100, y: 10, z: 0}
+  spawnPlayer2: {x: 100, y: 10, z: 0}
 --- !u!4 &1849553888
 Transform:
   m_ObjectHideFlags: 0
