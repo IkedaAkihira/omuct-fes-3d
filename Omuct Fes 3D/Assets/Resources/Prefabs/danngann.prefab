@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6604309006546685296}
   - component: {fileID: -9114152000965082332}
   - component: {fileID: -8816352095278301072}
-  - component: {fileID: -889042469048808380}
+  - component: {fileID: 7672730306790573891}
   m_Layer: 0
   m_Name: danngann
   m_TagString: Untagged
@@ -116,8 +116,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!64 &-889042469048808380
-MeshCollider:
+--- !u!65 &7672730306790573891
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -126,7 +126,6 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -2447776121362496397, guid: 8be1372118b866449af25828f1df4b8e, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 0.059999995, y: 0.019999996, z: 0.019999996}
+  m_Center: {x: -0.02, y: 0, z: 0}
