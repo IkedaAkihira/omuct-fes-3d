@@ -486,6 +486,8 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: bc92f2c95ae1abe4c9ca664c7a40c10e, type: 3}
   - name: bomb
     clip: {fileID: 8300000, guid: 260dca2b38a6d2b44b12cfffa252a88a, type: 3}
+  - name: tokeito
+    clip: {fileID: 8300000, guid: cc1b103d7eba47043bf21066c4a43d4c, type: 3}
 --- !u!82 &289350701
 AudioSource:
   m_ObjectHideFlags: 0
