@@ -77,8 +77,5 @@ public class BeginningCountdown
             drawerL.SetActive(false);
             drawerR.SetActive(false);
         }
-        Debug.Log("tick = " + (-tick));
-        //Debug.Log("gameTime = " + gameTime);
-        Debug.Log("textL.text = " + textL.text);
     }
 }
