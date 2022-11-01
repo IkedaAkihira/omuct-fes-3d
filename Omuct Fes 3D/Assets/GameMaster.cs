@@ -17,6 +17,8 @@ public class GameMaster : MonoBehaviour,EventListener
     [SerializeField] private CameraMover player2Camera;
     [SerializeField] private Image player2ItemImage;
     [SerializeField] private UIPoison player2PoisonUI;
+    [SerializeField] private float player1CameraRotation = Mathf.PI/2;
+    [SerializeField] private float player2CameraRotation = -Mathf.PI/2;
     private Player playerL;
     private Player playerR;
     private Player pl;
@@ -40,6 +42,7 @@ public class GameMaster : MonoBehaviour,EventListener
         .SetIsLeftPlayer(true)
         .MakeAvailable();
         this.pl.SetPlayerIndex(0);
+        this.pl.cameraRotation = this.player1CameraRotation;
 
         this.playerR=Resources.Load<Player>(this.characterPaths[DataTransfer.player2CharacterNumber]);
         this.pr = Instantiate(playerR.gameObject,spawnPlayer2,Quaternion.identity).GetComponent<Player>();
@@ -49,6 +52,7 @@ public class GameMaster : MonoBehaviour,EventListener
         .SetIsLeftPlayer(false)
         .MakeAvailable();
         this.pr.SetPlayerIndex(1);
+        this.pr.cameraRotation = this.player2CameraRotation;
 
         this.player1PoisonUI.player=pl;
         this.player2PoisonUI.player=pr;
