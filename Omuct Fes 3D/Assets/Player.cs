@@ -133,7 +133,7 @@ abstract public class Player : MonoBehaviour
             0,
             Mathf.Cos(cameraRotation)
             ) * moveValue.x * vertical;
-        if (move.magnitude > 1.0f){
+        if (move.magnitude > 0f){
             move = move.normalized;
             animator.SetTrigger("walk");
         }
