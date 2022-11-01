@@ -25,11 +25,9 @@ public class EffectPoison : Effect{
         {
             //player.Damage(damageSource)でプレイヤーにダメージを与えられる。
             //damageSourceはダメージの情報を保持してる。
-            player.Damage(new DamageSource(damage));
+            player.Damage(new SpecialDamageSource(SpecialDamageSource.TYPE_POISON,damage));
             ParticleSystem clone=GameObject.Instantiate(poisonParticle);
             clone.transform.position=player.transform.position;
-
-            GameMaster.instance.sePlayer.Play("poison");
         }
     }
 }

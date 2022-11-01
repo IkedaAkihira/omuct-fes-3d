@@ -4,6 +4,8 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class ExplosionGrenade : MonoBehaviour {
+    [SerializeField] long life = 25;
+    [SerializeField] int damage =7;
     long startTime;
     HashSet<Player>blackList = new HashSet<Player>();
     private void Start() {
@@ -11,7 +13,7 @@ public class ExplosionGrenade : MonoBehaviour {
     }
     private void FixedUpdate() {
         long currentTime=GameMaster.instance.gameTime;
-        if(currentTime-startTime>1000){
+        if(currentTime-startTime>life){
             Destroy(this.gameObject);
             return;
         }
@@ -23,6 +25,6 @@ public class ExplosionGrenade : MonoBehaviour {
         if(blackList.Contains(player))
             return;
         blackList.Add(player);
-        player.Damage(new DamageSource(2));
+        player.Damage(new DamageSource(damage));
     }
 }

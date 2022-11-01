@@ -6,6 +6,12 @@ using UnityEngine.InputSystem;
 
 abstract public class Player : MonoBehaviour
 {
+    //行動情報
+    private int attackCount = 0;
+    private int hitCount = 0;
+    private int useItemCount = 0;
+    private int jumpCount = 0;
+
     //コントローラ関係
     protected bool isPlayerAvailable = false;
 
@@ -70,15 +76,16 @@ abstract public class Player : MonoBehaviour
     public float assistUnder = 1f;
 
     private bool isAvailable = false;
-    private Texture2D noItemTexture;
 
     // 操作硬直フラグ
     public bool doStopPlayerControl = true;
 
+    private Sprite noItemSprite;
+
     protected bool isLeftPlayer;
     private void Awake()
     {
-        noItemTexture= Resources.Load<Texture2D>("Textures/null");
+        noItemSprite= Resources.Load<Sprite>("Textures/null");
         cameraRotation = 0f;
         cameraRotationY = 0f;
         hp=maxHp;
@@ -130,8 +137,10 @@ abstract public class Player : MonoBehaviour
             0,
             Mathf.Cos(cameraRotation)
             ) * moveValue.x * vertical;
-        if (move.magnitude > 1.0f)
+        if (move.magnitude > 0f){
             move = move.normalized;
+            animator.SetTrigger("walk");
+        }
         move = move * move.magnitude;
 
         //jump
@@ -139,8 +148,11 @@ abstract public class Player : MonoBehaviour
         {
             JumpEvent e = new JumpEvent(this, this.jumpForce);
             GameMaster.instance.OnJump(e);
-            if (e.isAvailable)
+            if (e.isAvailable){
+                animator.SetTrigger("jump");
+                this.jumpCount++;
                 playerVelocity.y = e.JumpForce;
+            }
         }
 
         //attack
@@ -150,6 +162,7 @@ abstract public class Player : MonoBehaviour
             GameMaster.instance.OnAttack(e);
             if (e.isAvailable)
             {
+                this.attackCount++;
                 animator.SetTrigger("attack");
                 gameObject.transform.forward = cameraVec2;
                 Attack();
@@ -166,9 +179,10 @@ abstract public class Player : MonoBehaviour
                 UseItemEvent e = new UseItemEvent(this,item);
                 GameMaster.instance.OnUseItem(e);
                 if(e.isAvailable){
+                    this.useItemCount++;
                     item.Use(this);
                     item = null;
-                    this.itemImage.sprite = Sprite.Create(this.noItemTexture, new Rect(0, 0, this.noItemTexture.width, this.noItemTexture.height), Vector2.zero);
+                this.itemImage.sprite = this.noItemSprite;
                 }
             }
         }
@@ -203,10 +217,7 @@ abstract public class Player : MonoBehaviour
 
         //死んだとき
         if(hp<=0){
-            transform.position=new Vector3(0,10,0);
-            playerVelocity=new Vector3(0,0,0);
-            effects.Clear();
-            hp=maxHp;
+            OnDeath();
             return;
         }
 
@@ -309,7 +320,7 @@ abstract public class Player : MonoBehaviour
 
     public void MakeAvailable(){
         this.isAvailable = true;
-        this.itemImage.sprite = Sprite.Create(this.noItemTexture, new Rect(0,0,this.noItemTexture.width,this.noItemTexture.height), Vector2.zero);
+        this.itemImage.sprite = this.noItemSprite;
     }
 
     public Player SetIsLeftPlayer(bool isLeftPlayer){
@@ -320,5 +331,13 @@ abstract public class Player : MonoBehaviour
 
     virtual protected void AdditionalFixed(){
 
+    }
+
+    void OnDeath(){
+        GameMaster.instance.Finish();
+    }
+
+    public ResultData GetResultData(){
+        return new ResultData((hp>0),this.hp,this.attackCount,this.hitCount,this.useItemCount,this.jumpCount);
     }
 }

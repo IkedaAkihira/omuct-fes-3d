@@ -536,29 +536,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemImage: {fileID: 0}
-  maxHp: 20
-  playerSpeed: 10
+  maxHp: 30
+  playerSpeed: 20
   gravityValue: -20
   jumpForce: 15
-  cameraRotationVelocity: -4
-  cameraRotationVelocityAssisted: -4
-  cameraRotationYVelocity: -4
-  cameraRotationYVelocityAssisted: -4
+  cameraRotationVelocity: -10
+  cameraRotationVelocityAssisted: -1
+  cameraRotationYVelocity: -3
+  cameraRotationYVelocityAssisted: -3
   horizontal: 1
   vertical: 1
   th: 0.2
-  verticalCameraLimit: 0.7
+  verticalCameraLimit: 0.9
   cameraDistance: 8
   animator: {fileID: 0}
-  attackInterval: 50
+  attackInterval: 40
   assistUnder: 1
   playerIndex: 0
   diveTime: 0
   surfaceTime: 0
-  attackForce: 500
-  bubbleDuration: 8
-  maxBubbleCount: 6
-  attackObject: {fileID: 4481297703299403087, guid: f1f1c6e63eb4a4849a4bf25ff90af889, type: 3}
+  attackForce: 1000
+  bubbleDuration: 4
+  maxBubbleCount: 8
+  bubbleVerticalForce: 0.2
+  attackObject: {fileID: 8547489572854566174, guid: 1116b21a652b40940adbce6797fb3fc8, type: 3}
 --- !u!95 &-8355163244115065052
 Animator:
   serializedVersion: 4
