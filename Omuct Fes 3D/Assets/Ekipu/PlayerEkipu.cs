@@ -8,7 +8,6 @@ public class PlayerEkipu : Player{
     public float attackWidthAngle = 8.0f;
     public Vector2 attackVibration = new Vector2(1.5f, 1.5f);
 
-
     override protected void Attack()
     {
         Quaternion targetRot = Quaternion.Euler(0.0f, -Mathf.Rad2Deg * cameraRotation, Mathf.Rad2Deg * cameraRotationY);

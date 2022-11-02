@@ -535,6 +535,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b59b46647cf4794fa68ab260d80efea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 2
   itemImage: {fileID: 0}
   maxHp: 30
   playerSpeed: 20
@@ -552,6 +553,7 @@ MonoBehaviour:
   animator: {fileID: 0}
   attackInterval: 40
   assistUnder: 1
+  doStopPlayerControl: 1
   playerIndex: 0
   diveTime: 0
   surfaceTime: 0

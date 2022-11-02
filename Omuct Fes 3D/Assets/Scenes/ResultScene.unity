@@ -275,7 +275,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: e29c64375ae9ca04d8338ff2310fd49a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -632,7 +632,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: d7ea8ed19e1ea4c49a7889d9e61b79c2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -681,8 +681,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player1ResultImage: {fileID: 1824483006}
   player2ResultImage: {fileID: 2003336474}
+  player1BackgroundImage: {fileID: 867705836}
+  player2BackgroundImage: {fileID: 1517117212}
   winSprite: {fileID: 21300000, guid: 3bd1dfef17c5eea44bbe9659ff5ecec1, type: 3}
   loseSprite: {fileID: 21300000, guid: 235ff34104c66d040a3b338779025421, type: 3}
+  backgrounds:
+  - id: 0
+    winSprite: {fileID: 21300000, guid: 04a6b11006eb6a84e8906e14374a9e83, type: 3}
+    loseSprite: {fileID: 21300000, guid: 7d307306ba45dde4b8c06f102d8f50d3, type: 3}
+  - id: 1
+    winSprite: {fileID: 21300000, guid: e29c64375ae9ca04d8338ff2310fd49a, type: 3}
+    loseSprite: {fileID: 21300000, guid: ced9471f50103da40aacb7ebb882d3c7, type: 3}
+  - id: 2
+    winSprite: {fileID: 21300000, guid: 0a02f8a6fbacb684ebc4d3256b7f1246, type: 3}
+    loseSprite: {fileID: 21300000, guid: d7ea8ed19e1ea4c49a7889d9e61b79c2, type: 3}
   resultSec: 5
 --- !u!4 &1520189792
 Transform:

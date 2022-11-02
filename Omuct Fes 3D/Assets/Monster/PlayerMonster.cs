@@ -4,8 +4,6 @@ using UnityEngine;
 public class PlayerMonster : Player{
     public GameObject attackObject;
     public float attackForce=1000f;
-
-    
     override protected void Attack(){
         int nutsCount=3;
         float randomSize= 0.1f;

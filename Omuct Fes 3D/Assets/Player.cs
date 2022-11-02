@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 
 abstract public class Player : MonoBehaviour
 {
+    [SerializeField] protected int id;
     //行動情報
     private int attackCount = 0;
     private int hitCount = 0;
@@ -337,6 +338,6 @@ abstract public class Player : MonoBehaviour
     }
 
     public ResultData GetResultData(){
-        return new ResultData((hp>0),this.hp,this.attackCount,this.hitCount,this.useItemCount,this.jumpCount);
+        return new ResultData((hp>0),this.id,this.hp,this.attackCount,this.hitCount,this.useItemCount,this.jumpCount);
     }
 }
