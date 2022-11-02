@@ -26,7 +26,8 @@ public class ItemPoison : Item
         //Rigidbodyコンポーネントを取得する。
         Rigidbody rb = poisonClone.GetComponent<Rigidbody>();
 
+        Vector3 attackTarget = CameraRotationAsQuaternion * rotOffset * new Vector3(-1f, 0f, 0f);
         //poisonCloneにプレイヤーのカメラが向いている方向に力をかける。これで具現化した弾が飛んでいく。
-        rb.AddForce(user.toTargetVec*1000f);
+        rb.AddForce(attackTarget*1000f);
     }
 }

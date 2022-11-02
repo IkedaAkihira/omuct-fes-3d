@@ -21,7 +21,9 @@ public class ItemGrenade : Item
         
         //Rigidbodyコンポーネントを取得する。
         Rigidbody rb = grenadeClone.GetComponent<Rigidbody>();
+        
+        Vector3 attackTarget = CameraRotationAsQuaternion * rotOffset * new Vector3(-1f, 0f, 0f);
 
-        rb.AddForce(user.toTargetVec*1000f);
+        rb.AddForce(attackTarget*1000f);
     }
 }

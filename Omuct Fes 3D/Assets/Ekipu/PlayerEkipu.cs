@@ -11,9 +11,7 @@ public class PlayerEkipu : Player{
 
     override protected void Attack()
     {
-        Quaternion targetRot = Quaternion.Euler(0.0f, -Mathf.Rad2Deg * cameraRotation, Mathf.Rad2Deg * cameraRotationY);
-        Quaternion targetRotInv = Quaternion.Inverse(targetRot);
-
+        
         Quaternion[] rotations = new Quaternion[1];
         rotations[0] = Quaternion.identity;
         //rotations[1] = Quaternion.Euler(0.0f, attackWidthAngle + attackVibration.x * (Random.value * 2.0f - 1.0f), attackVibration.y * (Random.value * 2.0f - 1.0f));
@@ -24,10 +22,10 @@ public class PlayerEkipu : Player{
             // 1. revert camera rotation
             // 2. apply main rotation (rawrot)
             // 3. re-apply camera rotation
-            Quaternion rot = targetRot * rawrot * targetRotInv;
+            Quaternion rot = CameraRotationAsQuaternion * rawrot;
 
             // launch way
-            Vector3 way = rot * toTargetVec;
+            Vector3 way = rot * new Vector3(-1f, 0f, 0f);
 
             GameObject cloneObject = Instantiate(attackObject, transform.position + new Vector3(0f, 0f, 0f), Quaternion.identity);
             Rigidbody rb = cloneObject.GetComponent<Rigidbody>();
