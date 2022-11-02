@@ -19,6 +19,7 @@ public class GameMaster : MonoBehaviour,EventListener
     [SerializeField] private UIPoison player2PoisonUI;
     [SerializeField] private float player1CameraRotation = Mathf.PI/2;
     [SerializeField] private float player2CameraRotation = -Mathf.PI/2;
+    [SerializeField] private float resultDelay = 2f;
     private Player playerL;
     private Player playerR;
     private Player pl;
@@ -124,6 +125,10 @@ public class GameMaster : MonoBehaviour,EventListener
     public void Finish(){
         DataTransfer.player1ResultData=pl.GetResultData();
         DataTransfer.player2ResultData=pr.GetResultData();
+        Invoke("Result",resultDelay);
+    }
+    
+    void Result(){
         SceneManager.LoadScene("ResultScene");
     }
 }
