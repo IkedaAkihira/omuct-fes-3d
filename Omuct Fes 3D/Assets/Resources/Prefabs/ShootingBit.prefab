@@ -100,7 +100,7 @@ MonoBehaviour:
   duration: 10
   parent: {fileID: 0}
   attackObject: {fileID: 4658908379959225509, guid: d335562ce3db613499e97233c9d48cbc, type: 3}
-  attackForce: 1000
+  attackForce: 2000
   range: 1.2
   moveAsympotic: 1
   rotationAsympotic: 1
