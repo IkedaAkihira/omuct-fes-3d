@@ -5,18 +5,19 @@ public class PlayerEkipu : Player{
     public GameObject attackObject;
     public float attackForce=1000f;
 
-    public float attackWidthAngle = 8.0f;
+    public float attackWidthAngle = 12.0f;
     public Vector2 attackVibration = new Vector2(1.5f, 1.5f);
+    public int splitInterval = 30;
 
     override protected void Attack()
     {
         Quaternion targetRot = Quaternion.Euler(0.0f, -Mathf.Rad2Deg * cameraRotation, Mathf.Rad2Deg * cameraRotationY);
         Quaternion targetRotInv = Quaternion.Inverse(targetRot);
 
-        Quaternion[] rotations = new Quaternion[3];
-        rotations[0] = Quaternion.Euler(0.0f, attackWidthAngle + attackVibration.x * (Random.value * 2.0f - 1.0f), attackVibration.y * (Random.value * 2.0f - 1.0f));
-        rotations[1] = Quaternion.identity;
-        rotations[2] = Quaternion.Inverse(rotations[0]);
+        Quaternion[] rotations = new Quaternion[1];
+        rotations[0] = Quaternion.identity;
+        //rotations[1] = Quaternion.Euler(0.0f, attackWidthAngle + attackVibration.x * (Random.value * 2.0f - 1.0f), attackVibration.y * (Random.value * 2.0f - 1.0f));
+        //rotations[2] = Quaternion.Inverse(rotations[0]);
 
         foreach (Quaternion rawrot in rotations)
         {
@@ -33,6 +34,8 @@ public class PlayerEkipu : Player{
             rb.AddForce(way * attackForce);
             BulletEkipu bullet = cloneObject.GetComponent<BulletEkipu>();
             bullet.parent = this;
+            bullet.parentEkipu = this;
+            bullet.targetRotation = targetRot * rawrot;
         }
     }
 }
