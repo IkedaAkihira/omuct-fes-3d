@@ -19,16 +19,20 @@ public class GameMaster : MonoBehaviour,EventListener
     [SerializeField] private UIPoison player2PoisonUI;
     [SerializeField] private float player1CameraRotation = Mathf.PI/2;
     [SerializeField] private float player2CameraRotation = -Mathf.PI/2;
+    [SerializeField] private float resultDelay = 2f;
     private Player playerL;
     private Player playerR;
     private Player pl;
     private Player pr;
     [SerializeField] private string[] characterPaths;
     List<EventListener>listeners=new List<EventListener>();
+    
 
     private BeginningCountdown beginningCountdown;
 
     public SEPlayer sePlayer;
+    
+    private bool isFinished;
 
     [SerializeField] Vector3 spawnPlayer1 = new Vector3(-100.0f, 10.0f, 0.0f);
     [SerializeField] Vector3 spawnPlayer2 = new Vector3(100.0f, 10.0f, 0.0f);
@@ -65,6 +69,8 @@ public class GameMaster : MonoBehaviour,EventListener
         this.gameTime = gameTimeOffset;
 
         beginningCountdown = new BeginningCountdown();
+        
+        this.isFinished = false;
     }
 
     // Start is called before the first frame update
@@ -123,8 +129,15 @@ public class GameMaster : MonoBehaviour,EventListener
     }
 
     public void Finish(){
+        if(this.isFinished)
+            return;
+        this.isFinished = true;
         DataTransfer.player1ResultData=pl.GetResultData();
         DataTransfer.player2ResultData=pr.GetResultData();
+        Invoke("Result",resultDelay);
+    }
+    
+    void Result(){
         SceneManager.LoadScene("ResultScene");
     }
 }
