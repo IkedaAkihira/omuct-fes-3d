@@ -60,6 +60,7 @@ public class GameMaster : MonoBehaviour,EventListener
         listeners.Add(new PoisonListener());
         listeners.Add(new ChinanagoListener());
         listeners.Add(new DamageSEListener(this.sePlayer));
+        listeners.Add(new RiverListener());
 
         this.gameTime = gameTimeOffset;
 
