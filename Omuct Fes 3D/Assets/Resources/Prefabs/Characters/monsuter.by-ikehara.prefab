@@ -1278,3 +1278,4 @@ MonoBehaviour:
   playerIndex: 0
   attackObject: {fileID: 4385019632303509958, guid: 5f886973b296d42498f9ce2a9b83293a, type: 3}
   attackForce: 1000
+  attackRotY: -20

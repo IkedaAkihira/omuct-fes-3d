@@ -753,7 +753,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   centerPos: {x: 0, y: 0, z: 0}
-  TOKEITO_HEIGHT: 27
+  TOKEITO_HEIGHT: 35
   GROW_DELAY: 3
   GROW_TIME: 12
   STAY_INTERVAL: 15

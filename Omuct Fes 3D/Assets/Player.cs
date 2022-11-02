@@ -283,6 +283,10 @@ abstract public class Player : MonoBehaviour
     public int Hp{
         get {return hp;}
     }
+
+    public Quaternion CameraRotationAsQuaternion{
+        get { return Quaternion.Euler(0.0f, -Mathf.Rad2Deg * cameraRotation, Mathf.Rad2Deg * cameraRotationY); }
+    }
     
     abstract protected void Attack();
     public void Damage(DamageSource damageSource){

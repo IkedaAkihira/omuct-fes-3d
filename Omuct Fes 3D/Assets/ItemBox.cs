@@ -20,13 +20,13 @@ public class ItemBox : MonoBehaviour{
         //ここに作成したItemクラスを追加していく。
         //テスト時は不要なものをコメントアウトすると良い。
         items.Add(new ItemPoison());
-        itemsOccurence.Add(1.0);
+        itemsOccurence.Add(1000.0);
         items.Add(new ItemShootingBit());
         itemsOccurence.Add(1.0);
         items.Add(new ItemGrenade());
         itemsOccurence.Add(1.0);
         items.Add(new ItemTokeito());
-        itemsOccurence.Add(10000000000000.0);
+        itemsOccurence.Add(1.0);
     }
 
     private int ChooseItem()

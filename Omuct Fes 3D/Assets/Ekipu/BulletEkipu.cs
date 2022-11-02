@@ -36,8 +36,8 @@ public class BulletEkipu : MonoBehaviour {
             Quaternion[] rotations = new Quaternion[3];
             rotations[0] = Quaternion.Euler(
                 0.0f,
-                parentEkipu.attackWidthAngle + parentEkipu.attackVibration.x * (Random.value * 2.0f - 1.0f),
-                parentEkipu.attackVibration.y * (Random.value * 2.0f - 1.0f)
+                parentEkipu.attackWidthAngle + parentEkipu.attackVibration.x * (Random.value * 2.0f - 1.0f), // horizontal
+                parentEkipu.attackVibration.y * (Random.value * 2.0f - 1.0f) // vertical
             );
             rotations[1] = Quaternion.identity;
             rotations[2] = Quaternion.Inverse(rotations[0]);
