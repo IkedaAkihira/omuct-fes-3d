@@ -488,6 +488,10 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 260dca2b38a6d2b44b12cfffa252a88a, type: 3}
   - name: tokeito
     clip: {fileID: 8300000, guid: cc1b103d7eba47043bf21066c4a43d4c, type: 3}
+  - name: start
+    clip: {fileID: 8300000, guid: 70da17683a38cdf4ab79e4d0839d6ceb, type: 3}
+  - name: finish
+    clip: {fileID: 8300000, guid: f3ced362e885f274ba789bb80c82af67, type: 3}
 --- !u!82 &289350701
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4376,6 +4380,7 @@ MonoBehaviour:
   player2PoisonUI: {fileID: 1541891028}
   player1CameraRotation: -1.570796
   player2CameraRotation: 1.570796
+  resultDelay: 2
   characterPaths:
   - Prefabs/Characters/monsuter.by-ikehara
   - Prefabs/Characters/chinanago

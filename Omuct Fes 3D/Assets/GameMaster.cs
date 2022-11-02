@@ -33,6 +33,7 @@ public class GameMaster : MonoBehaviour,EventListener
     public SEPlayer sePlayer;
     
     private bool isFinished;
+    private bool isStarted;
 
     [SerializeField] Vector3 spawnPlayer1 = new Vector3(-100.0f, 10.0f, 0.0f);
     [SerializeField] Vector3 spawnPlayer2 = new Vector3(100.0f, 10.0f, 0.0f);
@@ -71,6 +72,7 @@ public class GameMaster : MonoBehaviour,EventListener
         beginningCountdown = new BeginningCountdown();
         
         this.isFinished = false;
+        this.isFinished = false;
     }
 
     // Start is called before the first frame update
@@ -87,6 +89,12 @@ public class GameMaster : MonoBehaviour,EventListener
         if (gameTime <= 100)
         {
             beginningCountdown.Update(gameTime);
+        }
+
+        if(!isStarted && gameTime>=0)
+        {
+            this.sePlayer.Play("start");
+            this.isStarted = true;
         }
     }
 
@@ -135,6 +143,7 @@ public class GameMaster : MonoBehaviour,EventListener
         DataTransfer.player1ResultData=pl.GetResultData();
         DataTransfer.player2ResultData=pr.GetResultData();
         Invoke("Result",resultDelay);
+        GameMaster.instance.sePlayer.Play("finish");
     }
     
     void Result(){
