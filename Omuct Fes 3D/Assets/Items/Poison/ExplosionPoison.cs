@@ -4,6 +4,7 @@ using System;
 public class ExplosionPoison : MonoBehaviour {
     long startTime;
     public Player parent;
+    [SerializeField] int poisonTime = 250;
 
     private void Start() {
         startTime=GameMaster.instance.gameTime;
@@ -21,6 +22,6 @@ public class ExplosionPoison : MonoBehaviour {
             return;
         if(player==parent)
             return;
-        player.AddEffect(new EffectPoison(50));
+        player.AddEffect(new EffectPoison(poisonTime));
     }
 }
