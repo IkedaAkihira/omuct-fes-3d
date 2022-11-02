@@ -27,6 +27,8 @@ public class ItemBox : MonoBehaviour{
         itemsOccurence.Add(1.0);
         items.Add(new ItemTokeito());
         itemsOccurence.Add(1.0);
+        items.Add(new ItemRiver());
+        itemsOccurence.Add(0.5);
     }
 
     private int ChooseItem()
