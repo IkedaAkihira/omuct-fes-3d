@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 892538776172143854}
   - component: {fileID: -5223184415788362956}
   - component: {fileID: -5745576130306858116}
-  - component: {fileID: 2372271952458694222}
+  - component: {fileID: 8572952390592226465}
   m_Layer: 0
   m_Name: PoisonObject
   m_TagString: Untagged
@@ -66,20 +66,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!64 &2372271952458694222
-MeshCollider:
+--- !u!136 &8572952390592226465
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 516013885706272340}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -1974612598188881842, guid: 1325e8118e4f7f949a9dafc3cfe62af3, type: 3}
+  m_Radius: 1
+  m_Height: 12
+  m_Direction: 1
+  m_Center: {x: 0, y: 5, z: 0}
 --- !u!1 &624687523474872295
 GameObject:
   m_ObjectHideFlags: 0
