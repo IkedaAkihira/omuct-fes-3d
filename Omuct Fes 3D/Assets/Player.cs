@@ -78,8 +78,9 @@ abstract public class Player : MonoBehaviour
 
     private bool isAvailable = false;
 
-    // 操作硬直フラグ
+    // 操作硬直フラグ と クールダウン
     public bool doStopPlayerControl = true;
+    private int jumpCooldown = 0;
 
     private Sprite noItemSprite;
 
@@ -144,7 +145,7 @@ abstract public class Player : MonoBehaviour
         move = move * move.magnitude;
 
         //jump
-        if (doStopPlayerControl && playerController.GetJumpValue() && groundedPlayer)
+        if (doStopPlayerControl && jumpCooldown == 0 && playerController.GetJumpValue() && groundedPlayer)
         {
             JumpEvent e = new JumpEvent(this, this.jumpForce);
             GameMaster.instance.OnJump(e);
@@ -152,6 +153,7 @@ abstract public class Player : MonoBehaviour
                 animator.SetTrigger("jump");
                 this.jumpCount++;
                 playerVelocity.y = e.JumpForce;
+                jumpCooldown = 7;
             }
         }
 
@@ -182,7 +184,7 @@ abstract public class Player : MonoBehaviour
                     this.useItemCount++;
                     item.Use(this);
                     item = null;
-                this.itemImage.sprite = this.noItemSprite;
+                    this.itemImage.sprite = this.noItemSprite;
                 }
             }
         }
@@ -276,7 +278,11 @@ abstract public class Player : MonoBehaviour
             }
             controller.Move((move*moveEvent.Speed+playerVelocity) * Time.deltaTime);
         }
-        
+
+        // クールダウン消化
+        jumpCooldown -= 1; if (jumpCooldown <= 0) { jumpCooldown = 0; }
+
+
         AdditionalFixed();
     }
 
