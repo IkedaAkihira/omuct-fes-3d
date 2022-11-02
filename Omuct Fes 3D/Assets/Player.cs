@@ -301,6 +301,7 @@ abstract public class Player : MonoBehaviour
         GameMaster.instance.OnDamaged(e);
         if(e.isAvailable)
             this.hp-=damageSource.amount;
+        this.hp = Mathf.Min(this.maxHp,this.hp);
     }
 
     public void AddEffect(Effect e){
