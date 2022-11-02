@@ -23,12 +23,14 @@ public class ResultManager : MonoBehaviour {
 
     private void Awake() {
         resultTime = resultSec * 50;
-        this.player1ResultImage.sprite = DataTransfer.player1ResultData.isWin?this.winSprite:this.loseSprite;
-        this.player2ResultImage.sprite = DataTransfer.player2ResultData.isWin?this.winSprite:this.loseSprite;
+        bool isPlayer1Win = (DataTransfer.player1ResultData.hp>DataTransfer.player2ResultData.hp);
+        bool isPlayer2Win = (DataTransfer.player1ResultData.hp<DataTransfer.player2ResultData.hp);
+        this.player1ResultImage.sprite = isPlayer1Win?this.winSprite:this.loseSprite;
+        this.player2ResultImage.sprite = isPlayer2Win?this.winSprite:this.loseSprite;
         Background bg1 = this.backgrounds[DataTransfer.player1ResultData.id];
         Background bg2 = this.backgrounds[DataTransfer.player2ResultData.id];
-        this.player1BackgroundImage.sprite = DataTransfer.player1ResultData.isWin?bg1.winSprite:bg1.loseSprite;
-        this.player2BackgroundImage.sprite = DataTransfer.player2ResultData.isWin?bg2.winSprite:bg2.loseSprite;
+        this.player1BackgroundImage.sprite = isPlayer1Win?bg1.winSprite:bg1.loseSprite;
+        this.player2BackgroundImage.sprite = isPlayer2Win?bg2.winSprite:bg2.loseSprite;
     }
 
     private void FixedUpdate() {

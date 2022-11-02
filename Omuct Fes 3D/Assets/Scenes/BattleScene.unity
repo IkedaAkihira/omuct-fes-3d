@@ -4600,7 +4600,7 @@ MonoBehaviour:
   - Prefabs/Characters/chinanago
   - Prefabs/Characters/ekipu
   sePlayer: {fileID: 289350700}
-  spawnPlayer1: {x: 0, y: 10, z: -100}
+  spawnPlayer1: {x: 0, y: 1000, z: -1000}
   spawnPlayer2: {x: 0, y: 10, z: 100}
 --- !u!4 &1849553888
 Transform:
