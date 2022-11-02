@@ -33,7 +33,7 @@ public class PlayerEkipu : Player{
             BulletEkipu bullet = cloneObject.GetComponent<BulletEkipu>();
             bullet.parent = this;
             bullet.parentEkipu = this;
-            bullet.targetRotation = targetRot * rawrot;
+            bullet.targetRotation = rot;
         }
     }
 }
