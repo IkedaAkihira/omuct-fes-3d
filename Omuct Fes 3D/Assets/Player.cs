@@ -124,10 +124,10 @@ abstract public class Player : MonoBehaviour
         Vector2 cameraValue = Vector2.zero;
         if(doStopPlayerControl) cameraValue = playerController.GetCameraValue();
         float assistMagnification = Mathf.Pow(assistUnder, cursorDistance);
-        cameraRotation += Mathf.Pow(cameraValue.x, 3f) * 0.005f * ((isFocusTarget) ? cameraRotationVelocityAssisted * assistMagnification : cameraRotationVelocity);
+        cameraRotation += Mathf.Pow(cameraValue.x, 1f) * 0.004f * ((isFocusTarget) ? cameraRotationVelocityAssisted * assistMagnification : cameraRotationVelocity);
         cameraRotationY = Mathf.Min(Mathf.Max(-verticalCameraLimit, cameraRotationY +
-        Mathf.Pow(cameraValue.y, 3f)
-        * 0.01f * ((isFocusTarget) ? cameraRotationYVelocityAssisted * assistMagnification : cameraRotationYVelocity)), verticalCameraLimit);
+        Mathf.Pow(cameraValue.y, 1f)
+        * 0.003f * ((isFocusTarget) ? cameraRotationYVelocityAssisted * assistMagnification : cameraRotationYVelocity)), verticalCameraLimit);
 
         //move
         Vector2 moveValue = Vector2.zero;
