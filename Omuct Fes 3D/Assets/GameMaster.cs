@@ -12,11 +12,11 @@ public class GameMaster : MonoBehaviour,EventListener
     [SerializeField] private CameraMover player1Camera;
     [SerializeField] private Slider player1HPSlider;
     [SerializeField] private Image player1ItemImage;
-    [SerializeField] private UIPoison player1PoisonUI;
+    [SerializeField] private UIEffect[] player1UIEffects;
     [SerializeField] private Slider player2HPSlider;
     [SerializeField] private CameraMover player2Camera;
     [SerializeField] private Image player2ItemImage;
-    [SerializeField] private UIPoison player2PoisonUI;
+    [SerializeField] private UIEffect[] player2UIEffects;
     [SerializeField] private float player1CameraRotation = Mathf.PI/2;
     [SerializeField] private float player2CameraRotation = -Mathf.PI/2;
     [SerializeField] private float resultDelay = 2f;
@@ -59,8 +59,13 @@ public class GameMaster : MonoBehaviour,EventListener
         this.pr.SetPlayerIndex(1);
         this.pr.cameraRotation = this.player2CameraRotation;
 
-        this.player1PoisonUI.player=pl;
-        this.player2PoisonUI.player=pr;
+        foreach(UIEffect uiEffect in player1UIEffects){
+            uiEffect.player = this.pl;
+        }
+
+        foreach(UIEffect uiEffect in player2UIEffects){
+            uiEffect.player = this.pr;
+        }
 
         listeners.Add(new PoisonListener());
         listeners.Add(new ChinanagoListener());
