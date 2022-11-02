@@ -34,6 +34,9 @@ abstract public class Player : MonoBehaviour
     public Vector3 cameraVec3{get;set;}
     public Vector3 toTargetVec{get;set;}
     public Vector3 cameraPos{get;set;}
+    private Viberation cameraVibe = new Viberation(0,0);
+    private Vector2 cameraVibeVec = Vector2.zero;
+    [SerializeField] int vibeInterval = 5;
 
     //操作関係
     public float cameraRotationVelocity=1f;
@@ -221,6 +224,9 @@ abstract public class Player : MonoBehaviour
         }
 
         //カメラの位置更新
+        if(GameMaster.instance.gameTime%this.vibeInterval == 0){
+            this.cameraVibeVec = this.cameraVibe.GetVec2();
+        }
         cameraVec2=new Vector3(
             -Mathf.Cos(cameraRotation),
             0,
@@ -228,8 +234,8 @@ abstract public class Player : MonoBehaviour
             );
         cameraVec3=-(new Vector3(0,Mathf.Sin(cameraRotationY),0))+cameraVec2*Mathf.Cos(cameraRotationY);
         cameraPos=this.transform.position
-        +(-new Vector3(0,Mathf.Sin(cameraRotationY-Mathf.PI/2),0)+cameraVec2*Mathf.Cos(cameraRotationY-Mathf.PI/2))*2;
-        //+new Vector3(Mathf.Cos(cameraRotation+Mathf.PI/2),0,Mathf.Sin(cameraRotation+Mathf.PI/2));
+        +(-new Vector3(0,Mathf.Sin(cameraRotationY-Mathf.PI/2),0)+cameraVec2*Mathf.Cos(cameraRotationY-Mathf.PI/2))*(2+cameraVibeVec.y)+
+        +new Vector3(Mathf.Cos(cameraRotation+Mathf.PI/2),0,Mathf.Sin(cameraRotation+Mathf.PI/2))*(cameraVibeVec.x);
         cameraMover.MoveCamera(cameraPos,cameraVec3,cameraDistance);
 
         //プレイヤーからターゲットに向かう正規化されたベクトルを更新
@@ -338,5 +344,11 @@ abstract public class Player : MonoBehaviour
 
     public ResultData GetResultData(){
         return new ResultData((hp>0),this.hp,this.attackCount,this.hitCount,this.useItemCount,this.jumpCount);
+    }
+    
+    public void AddViberation(Viberation vibe){
+        if(this.cameraVibe.magnitude <= vibe.magnitude){
+            this.cameraVibe = vibe;
+        }
     }
 }
