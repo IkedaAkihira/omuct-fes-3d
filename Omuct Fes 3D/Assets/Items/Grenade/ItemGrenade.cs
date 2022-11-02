@@ -13,6 +13,11 @@ public class ItemGrenade : Item
     //この関数の中にアイテムを使った時の処理を書きます。
     public override void Use(Player user)
     {
+        Quaternion rotOffset = Quaternion.Euler(
+            0.0f,
+            0.0f, // horizontal
+            -20f // vertical
+        );
         GameObject grenadeClone = GameObject.Instantiate(grenadeObject,user.transform.position,Quaternion.identity);
         
         BulletGrenade bulletGrenade = grenadeClone.GetComponent<BulletGrenade>();
@@ -22,7 +27,7 @@ public class ItemGrenade : Item
         //Rigidbodyコンポーネントを取得する。
         Rigidbody rb = grenadeClone.GetComponent<Rigidbody>();
         
-        Vector3 attackTarget = CameraRotationAsQuaternion * rotOffset * new Vector3(-1f, 0f, 0f);
+        Vector3 attackTarget = user.CameraRotationAsQuaternion * rotOffset * new Vector3(-1f, 0f, 0f);
 
         rb.AddForce(attackTarget*1000f);
     }
