@@ -9,7 +9,6 @@ public class Viberation{
     }
     
     public Vector2 GetVibeVec(){
-        Unity Random rand = new Unity.Random();
-        return new Vector2(rand.NextFloat()*this.magnitude,rand.NextFloat()*this.magnitude);
+        return new Vector2(Random.Range(0f,1f)*this.magnitude,Random.Range(0f,1f)*this.magnitude);
     }
 }
