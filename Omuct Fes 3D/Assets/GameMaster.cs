@@ -28,7 +28,7 @@ public class GameMaster : MonoBehaviour,EventListener
     List<EventListener>listeners=new List<EventListener>();
     
 
-    private BeginningCountdown beginningCountdown;
+    private BattleTimer battleTimer;
 
     public SEPlayer sePlayer;
     
@@ -74,7 +74,7 @@ public class GameMaster : MonoBehaviour,EventListener
 
         this.gameTime = gameTimeOffset;
 
-        beginningCountdown = new BeginningCountdown();
+        battleTimer = new BattleTimer();
         
         this.isFinished = false;
         this.isFinished = false;
@@ -91,10 +91,7 @@ public class GameMaster : MonoBehaviour,EventListener
         pl.doStopPlayerControl = 0 <= gameTime;
         pr.doStopPlayerControl = 0 <= gameTime;
 
-        if (gameTime <= 100)
-        {
-            beginningCountdown.Update(gameTime);
-        }
+        battleTimer.Update(gameTime);
 
         if(!isStarted && gameTime>=0)
         {
