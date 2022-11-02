@@ -32,8 +32,10 @@ public class BulletChinanago : MonoBehaviour {
             return;
         
 
-        if(p!=null)
+        if(p!=null){
             p.Damage(new DamageSource(damage));
+            parent.AddHitCount();
+        }
         
         Destroy(this.gameObject);
 

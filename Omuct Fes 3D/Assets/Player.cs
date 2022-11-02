@@ -344,4 +344,8 @@ abstract public class Player : MonoBehaviour
     public ResultData GetResultData(){
         return new ResultData((hp>0),this.id,this.hp,this.attackCount,this.hitCount,this.useItemCount,this.jumpCount);
     }
+
+    public void AddHitCount(){
+        this.hitCount++;
+    }
 }
