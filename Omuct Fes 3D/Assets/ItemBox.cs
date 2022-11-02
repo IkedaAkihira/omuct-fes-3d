@@ -26,7 +26,7 @@ public class ItemBox : MonoBehaviour{
         items.Add(new ItemGrenade());
         itemsOccurence.Add(1.0);
         items.Add(new ItemTokeito());
-        itemsOccurence.Add(1.0);
+        itemsOccurence.Add(10000000000000.0);
     }
 
     private int ChooseItem()
@@ -64,6 +64,8 @@ public class ItemBox : MonoBehaviour{
         int randomIndex = ChooseItem();
         player.item = items[randomIndex];
         player.itemImage.sprite = items[randomIndex].itemSprite;
+
+        GameMaster.instance.sePlayer.Play("open item box");
     }
 
     private void FixedUpdate(){

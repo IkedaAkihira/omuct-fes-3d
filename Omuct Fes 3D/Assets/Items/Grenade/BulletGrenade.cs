@@ -29,6 +29,7 @@ public class BulletGrenade : MonoBehaviour
         
         //弾丸自身を消す。
         Instantiate(this.explosion,this.transform.position,Quaternion.identity);
+        GameMaster.instance.sePlayer.Play("bomb");
         Destroy(this.gameObject);
     }
 }
