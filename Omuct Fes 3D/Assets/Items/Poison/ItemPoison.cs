@@ -11,6 +11,11 @@ public class ItemPoison : Item
     //この関数の中にアイテムを使った時の処理を書きます。
     public override void Use(Player user)
     {
+        Quaternion rotOffset = Quaternion.Euler(
+            0.0f,
+            0.0f, // horizontal
+            -20f // vertical
+        );
         //PoisonObjectファイルを読み込みます。しかし今はそんなファイル存在しないのであとで作ります。
         GameObject poisonObject = Resources.Load("Prefabs/PoisonObject") as GameObject;
 
@@ -26,7 +31,8 @@ public class ItemPoison : Item
         //Rigidbodyコンポーネントを取得する。
         Rigidbody rb = poisonClone.GetComponent<Rigidbody>();
 
+        Vector3 attackTarget = user.CameraRotationAsQuaternion * rotOffset * new Vector3(-1f, 0f, 0f);
         //poisonCloneにプレイヤーのカメラが向いている方向に力をかける。これで具現化した弾が飛んでいく。
-        rb.AddForce(user.toTargetVec*1000f);
+        rb.AddForce(attackTarget*1000f);
     }
 }

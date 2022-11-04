@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 
 abstract public class Player : MonoBehaviour
 {
+    [SerializeField] protected int id;
     //行動情報
     private int attackCount = 0;
     private int hitCount = 0;
@@ -65,7 +66,7 @@ abstract public class Player : MonoBehaviour
 
     
     public int attackInterval=200;
-    protected long lastAttackTime=0;
+    protected long lastAttackTime=-1001001001;
 
     protected bool isAttacking = false;
 
@@ -77,8 +78,9 @@ abstract public class Player : MonoBehaviour
 
     private bool isAvailable = false;
 
-    // 操作硬直フラグ
+    // 操作硬直フラグ と クールダウン
     public bool doStopPlayerControl = true;
+    private int jumpCooldown = 0;
 
     private Sprite noItemSprite;
 
@@ -122,10 +124,10 @@ abstract public class Player : MonoBehaviour
         Vector2 cameraValue = Vector2.zero;
         if(doStopPlayerControl) cameraValue = playerController.GetCameraValue();
         float assistMagnification = Mathf.Pow(assistUnder, cursorDistance);
-        cameraRotation += Mathf.Pow(cameraValue.x, 3f) * 0.005f * ((isFocusTarget) ? cameraRotationVelocityAssisted * assistMagnification : cameraRotationVelocity);
+        cameraRotation += Mathf.Pow(cameraValue.x, 1f) * 0.004f * ((isFocusTarget) ? cameraRotationVelocityAssisted * assistMagnification : cameraRotationVelocity);
         cameraRotationY = Mathf.Min(Mathf.Max(-verticalCameraLimit, cameraRotationY +
-        Mathf.Pow(cameraValue.y, 3f)
-        * 0.01f * ((isFocusTarget) ? cameraRotationYVelocityAssisted * assistMagnification : cameraRotationYVelocity)), verticalCameraLimit);
+        Mathf.Pow(cameraValue.y, 1f)
+        * 0.003f * ((isFocusTarget) ? cameraRotationYVelocityAssisted * assistMagnification : cameraRotationYVelocity)), verticalCameraLimit);
 
         //move
         Vector2 moveValue = Vector2.zero;
@@ -143,7 +145,7 @@ abstract public class Player : MonoBehaviour
         move = move * move.magnitude;
 
         //jump
-        if (doStopPlayerControl && playerController.GetJumpValue() && groundedPlayer)
+        if (doStopPlayerControl && jumpCooldown == 0 && playerController.GetJumpValue() && groundedPlayer)
         {
             JumpEvent e = new JumpEvent(this, this.jumpForce);
             GameMaster.instance.OnJump(e);
@@ -151,6 +153,7 @@ abstract public class Player : MonoBehaviour
                 animator.SetTrigger("jump");
                 this.jumpCount++;
                 playerVelocity.y = e.JumpForce;
+                jumpCooldown = 7;
             }
         }
 
@@ -181,7 +184,7 @@ abstract public class Player : MonoBehaviour
                     this.useItemCount++;
                     item.Use(this);
                     item = null;
-                this.itemImage.sprite = this.noItemSprite;
+                    this.itemImage.sprite = this.noItemSprite;
                 }
             }
         }
@@ -275,12 +278,20 @@ abstract public class Player : MonoBehaviour
             }
             controller.Move((move*moveEvent.Speed+playerVelocity) * Time.deltaTime);
         }
-        
+
+        // クールダウン消化
+        jumpCooldown -= 1; if (jumpCooldown <= 0) { jumpCooldown = 0; }
+
+
         AdditionalFixed();
     }
 
     public int Hp{
         get {return hp;}
+    }
+
+    public Quaternion CameraRotationAsQuaternion{
+        get { return Quaternion.Euler(0.0f, -Mathf.Rad2Deg * cameraRotation, Mathf.Rad2Deg * cameraRotationY); }
     }
     
     abstract protected void Attack();
@@ -290,6 +301,7 @@ abstract public class Player : MonoBehaviour
         GameMaster.instance.OnDamaged(e);
         if(e.isAvailable)
             this.hp-=damageSource.amount;
+        this.hp = Mathf.Min(this.maxHp,this.hp);
     }
 
     public void AddEffect(Effect e){
@@ -337,6 +349,10 @@ abstract public class Player : MonoBehaviour
     }
 
     public ResultData GetResultData(){
-        return new ResultData((hp>0),this.hp,this.attackCount,this.hitCount,this.useItemCount,this.jumpCount);
+        return new ResultData(this.id,this.hp,this.attackCount,this.hitCount,this.useItemCount,this.jumpCount);
+    }
+
+    public void AddHitCount(){
+        this.hitCount++;
     }
 }

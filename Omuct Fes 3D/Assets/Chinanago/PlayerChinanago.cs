@@ -11,6 +11,7 @@ public class PlayerChinanago : Player {
     [SerializeField] float bubbleVerticalForce = 0.5f;
 
     public GameObject attackObject;
+
     override protected void Attack(){
         
     }

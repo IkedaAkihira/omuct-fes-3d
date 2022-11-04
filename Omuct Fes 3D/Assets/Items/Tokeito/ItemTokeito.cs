@@ -11,6 +11,11 @@ public class ItemTokeito : Item
     //この関数の中にアイテムを使った時の処理を書きます。
     public override void Use(Player user)
     {
+        Quaternion rotOffset = Quaternion.Euler(
+            0.0f,
+            0.0f, // horizontal
+            -20f // vertical
+        );
         //TokeitoObjectファイルを読み込みます。作ったつもり。
         GameObject tokeitoObject = Resources.Load("Prefabs/TokeitoObject") as GameObject;
 
@@ -26,7 +31,8 @@ public class ItemTokeito : Item
         //Rigidbodyコンポーネントを取得する。
         Rigidbody rb = tokeitoClone.GetComponent<Rigidbody>();
 
+        Vector3 attackTarget = user.CameraRotationAsQuaternion * rotOffset * new Vector3(-1f, 0f, 0f);
         //poisonCloneにプレイヤーのカメラが向いている方向に力をかける。これで具現化した弾が飛んでいく。
-        rb.AddForce(user.toTargetVec * 1000f);
+        rb.AddForce(attackTarget * 1000f);
     }
 }

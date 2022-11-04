@@ -36,12 +36,12 @@ public class CharacterSelector : MonoBehaviour {
     private void Update() {
         if(!_isDone && pc.GetSubmitValue()){
             _isDone = true;
-            cursors[cursorIndex].sprite = unselectedCursorSprite;
+            cursors[cursorIndex].color = new Color(1f,1f,0f);
         }
 
         if(_isDone && pc.GetCancelValue()){
             _isDone = false;
-            cursors[cursorIndex].sprite = selectedCursorSprite;
+            cursors[cursorIndex].color = new Color(1f,1f,1f);
         }
         if(interval>0)
             return;
