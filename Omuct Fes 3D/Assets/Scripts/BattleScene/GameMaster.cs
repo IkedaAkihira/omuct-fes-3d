@@ -110,9 +110,15 @@ public class GameMaster : MonoBehaviour,EventListener
         }
     }
 
-    public void OnDamaged(DamageEvent e){
+    public void OnDamaged(DamagedEvent e){
         for(int i=0;i<listeners.Count;i++){
             listeners[i].OnDamaged(e);
+        }
+    }
+
+    public void OnPreDamaged(PreDamagedEvent e){
+        for(int i=0;i<listeners.Count;i++){
+            listeners[i].OnPreDamaged(e);
         }
     }
 

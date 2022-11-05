@@ -296,11 +296,12 @@ abstract public class Player : MonoBehaviour
     
     abstract protected void Attack();
     public void Damage(DamageSource damageSource){
-        Debug.Log("Damaged");
-        DamageEvent e=new DamageEvent(this,damageSource);
-        GameMaster.instance.OnDamaged(e);
-        if(e.isAvailable)
+        PreDamagedEvent pde=new PreDamagedEvent(this,damageSource);
+        GameMaster.instance.OnPreDamaged(e);
+        if(e.isAvailable){
             this.hp-=damageSource.amount;
+            GameMaster.instance.OnDamaged(new DamagedEvent(this,damageSource));
+        }
         this.hp = Mathf.Min(this.maxHp,this.hp);
     }
 

@@ -1,18 +1,22 @@
 public class PoisonListener: EventListener{
-    public void OnMove(MoveEvent e){
+    override public void OnMove(MoveEvent e){
         if(e.player.effects.ContainsKey(EffectPoison.TYPE))
             e.Multiply(0.6f);
     }
-    public void OnAttack(AttackEvent e){
+    override public void OnAttack(AttackEvent e){
 
     }
-    public void OnDamaged(DamageEvent e){
+    override public void OnDamaged(DamagedEvent e){
 
     }
-    public void OnUseItem(UseItemEvent e){
+
+    override public void OnPreDamaged(PreDamagedEvent e){
 
     }
-    public void OnJump(JumpEvent e){
+    override public void OnUseItem(UseItemEvent e){
+
+    }
+    override public void OnJump(JumpEvent e){
         if(e.player.effects.ContainsKey(EffectPoison.TYPE))
             e.Multiply(0.7f);
     }

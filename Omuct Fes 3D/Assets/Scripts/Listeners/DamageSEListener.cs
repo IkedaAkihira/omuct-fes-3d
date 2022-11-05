@@ -3,13 +3,7 @@ public class DamageSEListener: EventListener{
     public DamageSEListener(SEPlayer player){
         this.player = player;
     }
-    public void OnMove(MoveEvent e){
-        
-    }
-    public void OnAttack(AttackEvent e){
-
-    }
-    public void OnDamaged(DamageEvent e){
+    override public void OnDamaged(DamagedEvent e){
         //Debug.Log("damage");
         if(e.damageSource is SpecialDamageSource){
             switch(((SpecialDamageSource)e.damageSource).type){
@@ -27,11 +21,5 @@ public class DamageSEListener: EventListener{
                 soundName = "damaged chinanago";
             player.Play(soundName);
         }
-    }
-    public void OnUseItem(UseItemEvent e){
-
-    }
-    public void OnJump(JumpEvent e){
-        
     }
 }
