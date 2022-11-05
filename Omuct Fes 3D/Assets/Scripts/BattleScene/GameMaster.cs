@@ -26,7 +26,7 @@ public class GameMaster : MonoBehaviour
     private Player pr;
     [SerializeField] private string[] characterPaths;
 
-    List<EventListener>listeners;
+    public List<EventListener>listeners;
     public MasterListener listener;
     
 
@@ -106,6 +106,7 @@ public class GameMaster : MonoBehaviour
 
     private void FixedUpdate() {
         this.gameTime++;
+        listener.OnFixedUpdate();
     }
 
 

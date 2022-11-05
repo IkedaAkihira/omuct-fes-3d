@@ -3,7 +3,7 @@ public class EventListener{
     ///プレイヤーの攻撃前に呼ばれるイベント
     ///</Summary>
     virtual public void OnAttack(AttackEvent e){
-        
+
     }
 
     ///<Summary>
@@ -39,5 +39,9 @@ public class EventListener{
     ///</Summary>
     virtual public void OnJump(JumpEvent e){
 
+    }
+
+    virtual public void OnFixedUpdate(){
+        
     }
 }

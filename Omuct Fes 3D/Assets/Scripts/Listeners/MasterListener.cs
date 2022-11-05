@@ -41,4 +41,11 @@ public class MasterListener : EventListener{
             listeners[i].OnJump(e);
         }
     }
+
+    public override void OnFixedUpdate()
+    {
+        for(int i=0;i<listeners.Count;i++){
+            listeners[i].OnFixedUpdate();
+        }
+    }
 }
