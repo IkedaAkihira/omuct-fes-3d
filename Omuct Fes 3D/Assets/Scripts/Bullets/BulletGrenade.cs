@@ -3,7 +3,7 @@ using UnityEngine;
 using System;
 
 
-public class BulletGrenade : MonoBehaviour
+public class BulletGrenade : Bullet
 {
     //外部からparentを設定したいので、publicにする。
 

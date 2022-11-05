@@ -297,8 +297,8 @@ abstract public class Player : MonoBehaviour
     abstract protected void Attack();
     public void Damage(DamageSource damageSource){
         PreDamagedEvent pde=new PreDamagedEvent(this,damageSource);
-        GameMaster.instance.OnPreDamaged(e);
-        if(e.isAvailable){
+        GameMaster.instance.OnPreDamaged(pde);
+        if(pde.isAvailable){
             this.hp-=damageSource.amount;
             GameMaster.instance.OnDamaged(new DamagedEvent(this,damageSource));
         }

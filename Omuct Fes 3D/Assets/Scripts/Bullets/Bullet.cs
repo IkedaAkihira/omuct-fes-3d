@@ -24,9 +24,11 @@ public class Bullet : MonoBehaviour {
         if(p==this.parent)
             return;
         
+        HitObject();
+        
 
         if(p!=null){
-            Hit(p);
+            HitPlayer(p);
             parent.AddHitCount();
         }
         
@@ -34,11 +36,11 @@ public class Bullet : MonoBehaviour {
 
     }
 
-    virtual protected void HitPlayer(Player hittedPlayer){
+    virtual protected void HitPlayer(Player p){
 
     }
 
     virtual protected void HitObject(){
-        
+
     }
 }

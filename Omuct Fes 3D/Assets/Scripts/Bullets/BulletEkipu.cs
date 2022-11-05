@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BulletEkipu : MonoBehaviour {
+public class BulletEkipu : Bullet {
     [SerializeField] int damage = 2;
     public float magnification = 0.1f;
 
@@ -11,7 +11,7 @@ public class BulletEkipu : MonoBehaviour {
     public int splitRemain = 1;
 
     private void Update() {
-        transform.localScale = new Vector3(1f,1f,1f)*(defaultSize+(float)life*magnification);
+        transform.localScale = new Vector3(1f,1f,1f)*(defaultSize+(float)(GameMaster.instance.gameTime-startTime)*magnification);
 
         this.transform.Rotate( 0f, 720.0f * Time.deltaTime ,0f );
         if(

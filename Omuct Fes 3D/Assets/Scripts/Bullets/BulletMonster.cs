@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BulletMonster : MonoBehaviour {
+public class BulletMonster : Bullet {
     [SerializeField] int damage = 1;
 
 

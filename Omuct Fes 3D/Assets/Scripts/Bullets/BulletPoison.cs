@@ -3,7 +3,7 @@ using UnityEngine;
 using System;
 
 
-public class BulletPoison : MonoBehaviour
+public class BulletPoison : Bullet
 {
     [SerializeField] private GameObject explosion;
 

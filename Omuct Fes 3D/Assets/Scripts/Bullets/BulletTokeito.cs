@@ -4,7 +4,7 @@ using System;
 
 // BulletPoison のコピー
 
-public class BulletTokeito : MonoBehaviour
+public class BulletTokeito : Bullet
 {
     private void Update()
     {
