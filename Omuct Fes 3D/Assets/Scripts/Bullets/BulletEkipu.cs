@@ -1,33 +1,18 @@
 using UnityEngine;
 
 public class BulletEkipu : MonoBehaviour {
-    public Player parent;
-    public int damage = 2;
-    public int lifeTime = 100;
+    [SerializeField] int damage = 2;
     public float magnification = 0.1f;
 
     public float defaultSize = 1f;
 
-    long startTime;
     public Quaternion targetRotation;
     public PlayerEkipu parentEkipu;
     public int splitRemain = 1;
 
-    Rigidbody rb;
-
-    private void Start() {
-        this.rb=this.GetComponent<Rigidbody>();
-        this.startTime=GameMaster.instance.gameTime;
-    }
-
-    private void FixedUpdate() {
-        long life = GameMaster.instance.gameTime-startTime;
-        if(life>lifeTime)
-            Destroy(this.gameObject);
-        transform.localScale = new Vector3(1f,1f,1f)*(defaultSize+(float)life*magnification);
-    }
-
     private void Update() {
+        transform.localScale = new Vector3(1f,1f,1f)*(defaultSize+(float)life*magnification);
+
         this.transform.Rotate( 0f, 720.0f * Time.deltaTime ,0f );
         if(
             splitRemain > 0 &&
@@ -64,20 +49,8 @@ public class BulletEkipu : MonoBehaviour {
             return;
         }
     }
-    private void OnTriggerEnter(Collider other) {
-        if(other.isTrigger)
-            return;
-        Player p=other.GetComponent<Player>();
-        if(p==this.parent)
-            return;
-        
 
-        if(p!=null){
-            p.Damage(new DamageSource(damage));
-            parent.AddHitCount();
-        }
-        
-        Destroy(this.gameObject);
-
+    override protected void HitPlayer(Player p){
+        p.Damage(new DamageSource(damage));
     }
 }
