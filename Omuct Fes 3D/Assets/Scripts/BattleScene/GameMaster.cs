@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class GameMaster : MonoBehaviour,EventListener
+public class GameMaster : MonoBehaviour
 {
     static public GameMaster instance=null;
     public long gameTime;
@@ -25,7 +25,9 @@ public class GameMaster : MonoBehaviour,EventListener
     private Player pl;
     private Player pr;
     [SerializeField] private string[] characterPaths;
-    List<EventListener>listeners=new List<EventListener>();
+
+    List<EventListener>listeners;
+    public MasterListener listener;
     
 
     private BattleTimer battleTimer;
@@ -78,6 +80,8 @@ public class GameMaster : MonoBehaviour,EventListener
         
         this.isFinished = false;
         this.isFinished = false;
+
+        this.listener = new MasterListener(ref listeners);
     }
 
     // Start is called before the first frame update
@@ -104,41 +108,6 @@ public class GameMaster : MonoBehaviour,EventListener
         this.gameTime++;
     }
 
-    public void OnAttack(AttackEvent e){
-        for(int i=0;i<listeners.Count;i++){
-            listeners[i].OnAttack(e);
-        }
-    }
-
-    public void OnDamaged(DamagedEvent e){
-        for(int i=0;i<listeners.Count;i++){
-            listeners[i].OnDamaged(e);
-        }
-    }
-
-    public void OnPreDamaged(PreDamagedEvent e){
-        for(int i=0;i<listeners.Count;i++){
-            listeners[i].OnPreDamaged(e);
-        }
-    }
-
-    public void OnUseItem(UseItemEvent e){
-        for(int i=0;i<listeners.Count;i++){
-            listeners[i].OnUseItem(e);
-        }
-    }
-
-    public void OnMove(MoveEvent e){
-        for(int i=0;i<listeners.Count;i++){
-            listeners[i].OnMove(e);
-        }
-    }
-
-    public void OnJump(JumpEvent e){
-        for(int i=0;i<listeners.Count;i++){
-            listeners[i].OnJump(e);
-        }
-    }
 
     public Player GetPlayer(bool isLeftPlayer){
         return isLeftPlayer?pl:pr;

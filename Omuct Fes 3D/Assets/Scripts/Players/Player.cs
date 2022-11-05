@@ -148,7 +148,7 @@ abstract public class Player : MonoBehaviour
         if (doStopPlayerControl && jumpCooldown == 0 && playerController.GetJumpValue() && groundedPlayer)
         {
             JumpEvent e = new JumpEvent(this, this.jumpForce);
-            GameMaster.instance.OnJump(e);
+            GameMaster.instance.listener.OnJump(e);
             if (e.isAvailable){
                 animator.SetTrigger("jump");
                 this.jumpCount++;
@@ -161,7 +161,7 @@ abstract public class Player : MonoBehaviour
         if (doStopPlayerControl && playerController.GetAttack1Value() && IsAttackable)
         {
             AttackEvent e = new AttackEvent(this);
-            GameMaster.instance.OnAttack(e);
+            GameMaster.instance.listener.OnAttack(e);
             if (e.isAvailable)
             {
                 this.attackCount++;
@@ -179,7 +179,7 @@ abstract public class Player : MonoBehaviour
             if (item != null)
             {
                 UseItemEvent e = new UseItemEvent(this,item);
-                GameMaster.instance.OnUseItem(e);
+                GameMaster.instance.listener.OnUseItem(e);
                 if(e.isAvailable){
                     this.useItemCount++;
                     item.Use(this);
@@ -269,7 +269,7 @@ abstract public class Player : MonoBehaviour
 
         //移動の処理
         MoveEvent moveEvent = new MoveEvent(this,this.playerSpeed);
-        GameMaster.instance.OnMove(moveEvent);
+        GameMaster.instance.listener.OnMove(moveEvent);
         if(moveEvent.isAvailable){
             
             if (move != Vector3.zero && !isAttacking)
@@ -297,10 +297,10 @@ abstract public class Player : MonoBehaviour
     abstract protected void Attack();
     public void Damage(DamageSource damageSource){
         PreDamagedEvent pde=new PreDamagedEvent(this,damageSource);
-        GameMaster.instance.OnPreDamaged(pde);
+        GameMaster.instance.listener.OnPreDamaged(pde);
         if(pde.isAvailable){
             this.hp-=damageSource.amount;
-            GameMaster.instance.OnDamaged(new DamagedEvent(this,damageSource));
+            GameMaster.instance.listener.OnDamaged(new DamagedEvent(this,damageSource));
         }
         this.hp = Mathf.Min(this.maxHp,this.hp);
     }
