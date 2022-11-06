@@ -1,7 +1,9 @@
 using UnityEngine;
 
+[AddComponentMenu("Skills/Skill Protection")]
 public class SkillProtection : Skill{
-    [SerializeField] float magnification;
+    [SerializeField,TooltipAttribute("受けるダメージを何倍にするか。\n別に普段より多くダメージ受けるようにしてもいい。")]
+    float magnification = 1f;
 
 
     override protected EventListener CreateListener(){

@@ -1,5 +1,5 @@
 using UnityEngine;
-
+[RequireComponent(typeof(Player))]
 public class Skill : MonoBehaviour {
     protected Player player;
 
