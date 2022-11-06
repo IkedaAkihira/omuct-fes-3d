@@ -41,6 +41,8 @@ public class GameMaster : MonoBehaviour
     [SerializeField] Vector3 spawnPlayer2 = new Vector3(100.0f, 10.0f, 0.0f);
     private void Awake() {
         GameMaster.instance=this;
+        listeners = new List<EventListener>();
+        this.listener = new MasterListener(ref listeners);
         this.playerL=Resources.Load<Player>(this.characterPaths[DataTransfer.player1CharacterNumber]);
         this.pl = Instantiate(playerL.gameObject,spawnPlayer1,Quaternion.identity).GetComponent<Player>();
         this.pl
@@ -81,7 +83,9 @@ public class GameMaster : MonoBehaviour
         this.isFinished = false;
         this.isFinished = false;
 
-        this.listener = new MasterListener(ref listeners);
+
+        pl.AddEffect(new EffectPoison(1000));
+        pr.AddEffect(new EffectPoison(1000));
     }
 
     // Start is called before the first frame update

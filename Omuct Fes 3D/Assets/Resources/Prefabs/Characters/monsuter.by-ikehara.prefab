@@ -1182,7 +1182,6 @@ GameObject:
   - component: {fileID: 3364112171634888103}
   - component: {fileID: 1299237929458040051}
   - component: {fileID: 3684548036362512284}
-  - component: {fileID: 38751122810889969}
   - component: {fileID: 3318254701270703301}
   m_Layer: 6
   m_Name: monsuter.by-ikehara
@@ -1281,19 +1280,6 @@ MonoBehaviour:
   attackObject: {fileID: 4385019632303509958, guid: 5f886973b296d42498f9ce2a9b83293a, type: 3}
   attackForce: 1000
   attackRotY: -20
---- !u!114 &38751122810889969
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9126827254007321967}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a68d393a25a120043b209f3e22cba221, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  magnification: 0.9
 --- !u!114 &3318254701270703301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1306,5 +1292,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7b00e7c8b9bc0c41be158ebef3a6c85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interval: 200
+  interval: 120
   amount: 1

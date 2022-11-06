@@ -12,6 +12,7 @@ public class RegenerationListener: EventListener{
     override public void OnFixedUpdate(){
         if(GameMaster.instance.gameTime%interval == 0){
             player.Damage(new DamageSource(-amount));
+            
         }
     }
 }

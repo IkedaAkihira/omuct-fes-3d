@@ -61,6 +61,7 @@ sysinfo.txt
 *.aab
 *.unitypackage
 *.app
+default-2021.dwlt
 
 # Crashlytics generated file
 crashlytics-build.properties
@@ -72,5 +73,3 @@ crashlytics-build.properties
 [Aa]ssets/[Ss]treamingAssets/aa.meta
 [Aa]ssets/[Ss]treamingAssets/aa/*
 
-
-*.dwlt
