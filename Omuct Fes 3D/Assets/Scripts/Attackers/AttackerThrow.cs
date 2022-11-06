@@ -1,0 +1,30 @@
+public class AttackerThrow : Attacker{
+    [SerializeField] Bullet bullet;
+    [SerializeField,TooltipAttribute("一回の射撃で何発の弾丸を発射するか(散弾の話)")] int bulletCount = 1;
+    [SerializeField,TooltipAttribute("一回の攻撃で何回射撃するか(連射の話)")] int fireCount = 1;
+    [SerializeField,TooltipAttribute("連射の間隔")] int fireInterval = 10;
+    [SerializeField,TooltipAttribute("弾丸に加える力")] float bulletForce = 1000f;
+
+    void FixedUpdate()
+    {
+        if(GameMaster.instance.gameTime<lastAttackTime+fireInterval*fireCount){
+            if(GameMaster.instance.gameTime%fireInterval == 0){
+                Shoot();
+            }
+        }
+    }
+
+    void Shoot(Player p){
+        for(int i=0;i<bulletCount;i++){
+            GameObject cloneObject=Instantiate(bullet,transform.position,Quaternion.identity);
+            Rigidbody rb=cloneObject.GetComponent<Rigidbody>();
+            rb.AddForce(GetBulletVector3().normalized*bulletForce);
+            Bullet bullet=cloneObject.GetComponent<Bullet>();
+            bullet.parent=p;
+        }
+    }
+
+    virtual protected Vector3 GetBulletVector3(Player p){
+        return p.toTargetVec;
+    }
+}
