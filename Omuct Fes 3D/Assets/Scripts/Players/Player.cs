@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(CharacterController)),RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(CharacterController)),RequireComponent(typeof(Animator)),RequireComponent(typeof(Attacker))]
 abstract public class Player : MonoBehaviour
 {
     [SerializeField] protected int id;
@@ -66,10 +66,7 @@ abstract public class Player : MonoBehaviour
     public Animator animator;
 
     
-    public int attackInterval=200;
-    protected long lastAttackTime=-1001001001;
-
-    protected bool isAttacking = false;
+    
 
     protected bool isFocusTarget = false;
 
@@ -86,6 +83,9 @@ abstract public class Player : MonoBehaviour
     private Sprite noItemSprite;
 
     protected bool isLeftPlayer;
+
+    //攻撃周り
+    Attacker attacker;
     private void Awake()
     {
         noItemSprite= Resources.Load<Sprite>("Textures/null");
@@ -94,6 +94,7 @@ abstract public class Player : MonoBehaviour
         hp=maxHp;
         item=null;
         controller = this.GetComponent<CharacterController>();
+        attacker = this.GetComponent<Attacker>();
         animator=GetComponent<Animator>();
         move=new Vector3(0,0,0);
         cameraVec2=new Vector3(0,0,0);
@@ -118,7 +119,7 @@ abstract public class Player : MonoBehaviour
         if(!isAvailable)
             return;
 
-        if(IsAttackable)
+        if(attacker.IsAttackable)
             animator.SetTrigger("return");
 
         //camera rotation
@@ -159,7 +160,7 @@ abstract public class Player : MonoBehaviour
         }
 
         //attack
-        if (doStopPlayerControl && playerController.GetAttack1Value() && IsAttackable)
+        if (doStopPlayerControl && playerController.GetAttack1Value() && attacker.IsAttackable)
         {
             AttackEvent e = new AttackEvent(this);
             GameMaster.instance.listener.OnAttack(e);
@@ -168,9 +169,7 @@ abstract public class Player : MonoBehaviour
                 this.attackCount++;
                 animator.SetTrigger("attack");
                 gameObject.transform.forward = cameraVec2;
-                Attack();
-                isAttacking = true;
-                lastAttackTime = GameMaster.instance.gameTime;
+                attacker.DoAttack(this);
             }
         }
 
@@ -198,8 +197,6 @@ abstract public class Player : MonoBehaviour
     private void FixedUpdate() {
         if(!isAvailable)
             return;
-        if(IsAttackable)
-            isAttacking = false;
 
         //プレイヤーにかかったエフェクトの処理
         List<int>removeEffectTypes=new List<int>();
@@ -273,7 +270,7 @@ abstract public class Player : MonoBehaviour
         GameMaster.instance.listener.OnMove(moveEvent);
         if(moveEvent.isAvailable){
             
-            if (move != Vector3.zero && !isAttacking)
+            if (move != Vector3.zero && !attacker.IsAttacking)
             {
                 gameObject.transform.forward = move;
             }
@@ -295,7 +292,6 @@ abstract public class Player : MonoBehaviour
         get { return Quaternion.Euler(0.0f, -Mathf.Rad2Deg * cameraRotation, Mathf.Rad2Deg * cameraRotationY); }
     }
     
-    abstract protected void Attack();
     public void Damage(DamageSource damageSource){
         PreDamagedEvent pde=new PreDamagedEvent(this,damageSource);
         GameMaster.instance.listener.OnPreDamaged(pde);
@@ -340,7 +336,6 @@ abstract public class Player : MonoBehaviour
         this.isLeftPlayer=isLeftPlayer;
         return this;
     }
-    public bool IsAttackable{get{return GameMaster.instance.gameTime>=lastAttackTime+attackInterval;}}
 
     virtual protected void AdditionalFixed(){
 
