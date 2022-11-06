@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(CharacterController)),RequireComponent(typeof(Animator))]
 abstract public class Player : MonoBehaviour
 {
     [SerializeField] protected int id;
