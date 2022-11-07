@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Regidbody))]
+[RequireComponent(typeof(Rigidbody))]
 public class Bullet : MonoBehaviour {
     public Player parent;
     [SerializeField] protected int lifeTime = 100;
