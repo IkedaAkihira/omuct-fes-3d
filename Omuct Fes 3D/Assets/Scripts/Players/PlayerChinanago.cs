@@ -12,7 +12,7 @@ public class PlayerChinanago : Player {
 
     public GameObject attackObject;
 
-    override protected void Attack(){
+    /*override protected void Attack(){
         
     }
         
@@ -36,7 +36,7 @@ public class PlayerChinanago : Player {
         }
 
 
-    }
+    }*/
 
     void Bubble(){
         GameObject cloneObject=Instantiate(attackObject,transform.position+new Vector3(0f,0f,0f),Quaternion.identity);

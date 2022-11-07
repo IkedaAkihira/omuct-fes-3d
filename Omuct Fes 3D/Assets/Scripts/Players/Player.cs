@@ -169,7 +169,7 @@ abstract public class Player : MonoBehaviour
                 this.attackCount++;
                 animator.SetTrigger("attack");
                 gameObject.transform.forward = cameraVec2;
-                attacker.DoAttack(this);
+                attacker.DoAttack();
             }
         }
 

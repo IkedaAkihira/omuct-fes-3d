@@ -5,7 +5,7 @@ public class PlayerMonster : Player{
     public GameObject attackObject;
     public float attackForce=1000f;
     public float attackRotY = 20.0f;
-    override protected void Attack(){
+    /*override protected void Attack(){
         int nutsCount=3;
         float randomSize= 0.1f;
 
@@ -28,5 +28,5 @@ public class PlayerMonster : Player{
             BulletMonster bullet=cloneObject.GetComponent<BulletMonster>();
             bullet.parent=this;
         }
-    }
+    }*/
 }

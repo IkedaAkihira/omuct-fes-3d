@@ -1182,6 +1182,7 @@ GameObject:
   - component: {fileID: 3364112171634888103}
   - component: {fileID: 1299237929458040051}
   - component: {fileID: 3684548036362512284}
+  - component: {fileID: -2902477734810865105}
   m_Layer: 6
   m_Name: monsuter.by-ikehara
   m_TagString: Untagged
@@ -1272,10 +1273,30 @@ MonoBehaviour:
   verticalCameraLimit: 0.9
   cameraDistance: 8
   animator: {fileID: 0}
-  attackInterval: 10
   assistUnder: 1
   doStopPlayerControl: 1
   playerIndex: 0
   attackObject: {fileID: 4385019632303509958, guid: 5f886973b296d42498f9ce2a9b83293a, type: 3}
   attackForce: 1000
   attackRotY: -20
+--- !u!114 &-2902477734810865105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9126827254007321967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2e79bd6b19796e47b55c8762c4edf6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackInterval: 10
+  attackingTime: 1
+  bulletPrefab: {fileID: 516013885706272340, guid: 3a4627838811f4145a6fd7a060e4ec0b, type: 3}
+  useRaycastTargetting: 0
+  randomSize: 0.2
+  bulletCount: 3
+  fireCount: 1
+  fireInterval: 5
+  bulletForce: 3000

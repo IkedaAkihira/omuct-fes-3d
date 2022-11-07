@@ -162,8 +162,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 0}
+  lifeTime: 400
   damage: 1
-  lifeTime: 100
 --- !u!1 &7345841164790489011
 GameObject:
   m_ObjectHideFlags: 0

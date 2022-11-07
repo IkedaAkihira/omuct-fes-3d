@@ -69,6 +69,8 @@ public class GameMaster : MonoBehaviour
             uiEffect.player = this.pr;
         }
 
+        listeners = new List<EventListener>();
+
         listeners.Add(new PoisonListener());
         listeners.Add(new ChinanagoListener());
         listeners.Add(new DamageSEListener(this.sePlayer));

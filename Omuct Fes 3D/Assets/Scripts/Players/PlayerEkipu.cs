@@ -9,7 +9,7 @@ public class PlayerEkipu : Player{
     public Vector2 attackVibration = new Vector2(1.5f, 1.5f);
     public int splitInterval = 30;
 
-    override protected void Attack()
+    /*override protected void Attack()
     {
         
         Quaternion[] rotations = new Quaternion[1];
@@ -35,5 +35,5 @@ public class PlayerEkipu : Player{
             bullet.parentEkipu = this;
             bullet.targetRotation = rot;
         }
-    }
+    }*/
 }
