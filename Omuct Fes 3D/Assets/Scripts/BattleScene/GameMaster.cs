@@ -24,7 +24,7 @@ public class GameMaster : MonoBehaviour
     private Player playerR;
     private Player pl;
     private Player pr;
-    [SerializeField] private string[] characterPaths;
+    [SerializeField] private Player[] characters;
 
     List<EventListener>listeners;
     public MasterListener listener;
@@ -41,7 +41,7 @@ public class GameMaster : MonoBehaviour
     [SerializeField] Vector3 spawnPlayer2 = new Vector3(100.0f, 10.0f, 0.0f);
     private void Awake() {
         GameMaster.instance=this;
-        this.playerL=Resources.Load<Player>(this.characterPaths[DataTransfer.player1CharacterNumber]);
+        this.playerL=characters[DataTransfer.player1CharacterNumber];
         this.pl = Instantiate(playerL.gameObject,spawnPlayer1,Quaternion.identity).GetComponent<Player>();
         this.pl
         .SetUI(player1HPSlider,player1ItemImage)
@@ -51,7 +51,7 @@ public class GameMaster : MonoBehaviour
         this.pl.SetPlayerIndex(0);
         this.pl.cameraRotation = this.player1CameraRotation;
 
-        this.playerR=Resources.Load<Player>(this.characterPaths[DataTransfer.player2CharacterNumber]);
+        this.playerR=characters[DataTransfer.player2CharacterNumber];
         this.pr = Instantiate(playerR.gameObject,spawnPlayer2,Quaternion.identity).GetComponent<Player>();
         this.pr
         .SetUI(player2HPSlider,player2ItemImage)
