@@ -16,17 +16,26 @@ public class AttackerThrow : Attacker{
     [SerializeField,TooltipAttribute("連射の間隔")] int fireInterval = 10;
     [SerializeField,TooltipAttribute("弾丸に加える力")] float bulletForce = 1000f;
 
+    int remainingFireCount = 0;
+    long nextAttackTime = -1001001001;
+
     void FixedUpdate()
     {
-        if(GameMaster.instance.gameTime<lastAttackTime+fireInterval*fireCount){
-            if(GameMaster.instance.gameTime%fireInterval == 0){
-                Shoot();
-            }
+        if(GameMaster.instance.gameTime>=nextAttackTime && remainingFireCount>0){
+            remainingFireCount--;
+            nextAttackTime+=fireInterval;
+            Shoot();
         }
     }
 
+    public override void Attack()
+    {
+        base.Attack();
+        remainingFireCount = fireCount;
+        nextAttackTime = GameMaster.instance.gameTime+fireInterval;
+    }
+
     void Shoot(){
-        Debug.Log(lastAttackTime);
         for(int i=0;i<bulletCount;i++){
             GameObject cloneObject=Instantiate(bulletPrefab,transform.position,Quaternion.identity);
             Rigidbody rb=cloneObject.GetComponent<Rigidbody>();
