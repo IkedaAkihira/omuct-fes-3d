@@ -1,10 +1,16 @@
 using UnityEngine;
 
+enum ShootType{
+    Shoot,
+    Throw,
+    Fixed
+}
+
 public class AttackerThrow : Attacker{
     [SerializeField,TooltipAttribute("弾丸として使用するオブジェクト")] GameObject bulletPrefab;
 
-    [SerializeField,TooltipAttribute("チェックを入れると、標準を合わせた敵や壁に向かって弾丸を飛ばします。\n狙撃系はチェックを入れて、投げもの系は入れないといい感じになります。")]
-    bool useRaycastTargetting;
+    [SerializeField,TooltipAttribute("Shoot:照準が当たっている物に向かって発射\nThrow:カメラと同じ向きに投げる\nFixed高さ固定で発射する")]
+    ShootType shootType;
     
     [SerializeField,
     TooltipAttribute("弾丸を飛ばす方向をどれだけ乱れさせるか")]
@@ -18,6 +24,8 @@ public class AttackerThrow : Attacker{
 
     int remainingFireCount = 0;
     long nextAttackTime = -1001001001;
+
+    [SerializeField,TooltipAttribute("弾丸を縦に何度ずらすかをdegreeで指定する")] float attackRotY = 0f;
 
     void FixedUpdate()
     {
@@ -50,6 +58,23 @@ public class AttackerThrow : Attacker{
     }
 
     virtual protected Vector3 GetBulletVector3(){
-        return (this.useRaycastTargetting)?p.toTargetVec:p.cameraVec3;
+        Quaternion rotQuaternion = Quaternion.Euler(0f,0f,attackRotY);
+        Vector3 standardVec = new Vector3(-1f,0f,0f);
+        Quaternion attackQuaternion;
+        switch(shootType){
+            case ShootType.Shoot:
+                attackQuaternion = p.TargetVecAsQuaternion;
+                break;
+            case ShootType.Throw:
+                attackQuaternion = p.CameraRotationAsQuaternion;
+                break;
+            case ShootType.Fixed:
+                attackQuaternion =p.CameraRotationAsQuaternion2D;
+                break;
+            default:
+                attackQuaternion = p.TargetVecAsQuaternion;
+                break;
+        }
+        return attackQuaternion * rotQuaternion * standardVec;
     }
 }

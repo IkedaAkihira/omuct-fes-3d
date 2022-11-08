@@ -291,6 +291,13 @@ abstract public class Player : MonoBehaviour
     public Quaternion CameraRotationAsQuaternion{
         get { return Quaternion.Euler(0.0f, -Mathf.Rad2Deg * cameraRotation, Mathf.Rad2Deg * cameraRotationY); }
     }
+    public Quaternion CameraRotationAsQuaternion2D{
+        get { return Quaternion.Euler(0.0f, -Mathf.Rad2Deg * cameraRotation, 0.0f); }
+    }
+
+    public Quaternion TargetVecAsQuaternion{
+        get { return Quaternion.Euler(0.0f, -Mathf.Rad2Deg * cameraRotation, -Mathf.Rad2Deg * Mathf.Asin(toTargetVec.y));}
+    }
     
     public void Damage(DamageSource damageSource){
         PreDamagedEvent pde=new PreDamagedEvent(this,damageSource);
