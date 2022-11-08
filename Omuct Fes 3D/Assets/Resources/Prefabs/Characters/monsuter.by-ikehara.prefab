@@ -1292,7 +1292,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackInterval: 10
-  attackingTime: 1
+  attackingTime: 10
   bulletPrefab: {fileID: 516013885706272340, guid: 3a4627838811f4145a6fd7a060e4ec0b, type: 3}
   useRaycastTargetting: 0
   randomSize: 0.2
