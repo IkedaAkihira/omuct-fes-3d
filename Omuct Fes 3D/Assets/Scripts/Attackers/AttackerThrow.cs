@@ -1,12 +1,17 @@
 using UnityEngine;
 
 public class AttackerThrow : Attacker{
-    [SerializeField] GameObject bulletPrefab;
+    [SerializeField,TooltipAttribute("弾丸として使用するオブジェクト")] GameObject bulletPrefab;
 
     [SerializeField,TooltipAttribute("チェックを入れると、標準を合わせた敵や壁に向かって弾丸を飛ばします。\n狙撃系はチェックを入れて、投げもの系は入れないといい感じになります。")]
     bool useRaycastTargetting;
-    [SerializeField] float randomSize;
-    [SerializeField,TooltipAttribute("一回の射撃で何発の弾丸を発射するか(散弾の話)")] int bulletCount = 1;
+    
+    [SerializeField,
+    TooltipAttribute("弾丸を飛ばす方向をどれだけ乱れさせるか")]
+    float randomSize;
+    
+    [SerializeField,TooltipAttribute("一回の射撃で何発の弾丸を発射するか(散弾の話)")]
+    int bulletCount = 1;
     [SerializeField,TooltipAttribute("一回の攻撃で何回射撃するか(連射の話)")] int fireCount = 1;
     [SerializeField,TooltipAttribute("連射の間隔")] int fireInterval = 10;
     [SerializeField,TooltipAttribute("弾丸に加える力")] float bulletForce = 1000f;

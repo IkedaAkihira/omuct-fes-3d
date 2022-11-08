@@ -2,8 +2,8 @@ using UnityEngine;
 
 [RequireComponent(typeof(Player))]
 public class Attacker : MonoBehaviour {
-    [SerializeField] int attackInterval = 200;
-    [SerializeField] int attackingTime = 200;
+    [SerializeField,TooltipAttribute("攻撃のクールタイム")] int attackInterval = 200;
+    [SerializeField,TooltipAttribute("攻撃中の時間")] int attackingTime = 200;
     [System.NonSerialized] public long lastAttackTime=-1001001001;
 
     [System.NonSerialized] public Player p;
