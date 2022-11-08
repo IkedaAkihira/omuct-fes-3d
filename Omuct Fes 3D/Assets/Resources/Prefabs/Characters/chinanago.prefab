@@ -499,6 +499,7 @@ GameObject:
   - component: {fileID: 4601575946168645162}
   - component: {fileID: -8355163244115065052}
   - component: {fileID: 572751443477137228}
+  - component: {fileID: -8333127014787814478}
   m_Layer: 6
   m_Name: chinanago
   m_TagString: Untagged
@@ -551,17 +552,11 @@ MonoBehaviour:
   verticalCameraLimit: 0.9
   cameraDistance: 8
   animator: {fileID: 0}
-  attackInterval: 40
   assistUnder: 1
   doStopPlayerControl: 1
   playerIndex: 0
   diveTime: 0
   surfaceTime: 0
-  attackForce: 1000
-  bubbleDuration: 4
-  maxBubbleCount: 8
-  bubbleVerticalForce: 0.2
-  attackObject: {fileID: 8547489572854566174, guid: 1116b21a652b40940adbce6797fb3fc8, type: 3}
 --- !u!95 &-8355163244115065052
 Animator:
   serializedVersion: 4
@@ -600,6 +595,28 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: -1.5, y: 0.5, z: 0}
+--- !u!114 &-8333127014787814478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4925573452044076984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2e79bd6b19796e47b55c8762c4edf6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackInterval: 40
+  attackingTime: 40
+  bulletPrefab: {fileID: 895792666783305086, guid: 1116b21a652b40940adbce6797fb3fc8, type: 3}
+  shootType: 2
+  randomSize: 0
+  bulletCount: 1
+  fireCount: 7
+  fireInterval: 5
+  bulletForce: 1000
+  attackRotY: -11.6
 --- !u!1 &5418282262380208744
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,7 +7,7 @@ enum ShootType{
 }
 
 public class AttackerThrow : Attacker{
-    [SerializeField,TooltipAttribute("弾丸として使用するオブジェクト")] GameObject bulletPrefab;
+    [SerializeField,TooltipAttribute("弾丸として使用するオブジェクト")] public Bullet bulletPrefab;
 
     [SerializeField,TooltipAttribute("Shoot:照準が当たっている物に向かって発射\nThrow:カメラと同じ向きに投げる\nFixed高さ固定で発射する")]
     ShootType shootType;
@@ -20,7 +20,7 @@ public class AttackerThrow : Attacker{
     int bulletCount = 1;
     [SerializeField,TooltipAttribute("一回の攻撃で何回射撃するか(連射の話)")] int fireCount = 1;
     [SerializeField,TooltipAttribute("連射の間隔")] int fireInterval = 10;
-    [SerializeField,TooltipAttribute("弾丸に加える力")] float bulletForce = 1000f;
+    [SerializeField,TooltipAttribute("弾丸に加える力")] public float bulletForce = 1000f;
 
     int remainingFireCount = 0;
     long nextAttackTime = -1001001001;
@@ -45,7 +45,7 @@ public class AttackerThrow : Attacker{
 
     void Shoot(){
         for(int i=0;i<bulletCount;i++){
-            GameObject cloneObject=Instantiate(bulletPrefab,transform.position,Quaternion.identity);
+            GameObject cloneObject=Instantiate(bulletPrefab.gameObject,transform.position,Quaternion.identity);
             Rigidbody rb=cloneObject.GetComponent<Rigidbody>();
             rb.AddForce((GetBulletVector3().normalized
             + new Vector3(

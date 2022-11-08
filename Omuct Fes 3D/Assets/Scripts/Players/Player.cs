@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController)),RequireComponent(typeof(Animator)),RequireComponent(typeof(Attacker))]
-abstract public class Player : MonoBehaviour
+public class Player : MonoBehaviour
 {
     [SerializeField] protected int id;
     //行動情報
@@ -85,7 +85,7 @@ abstract public class Player : MonoBehaviour
     protected bool isLeftPlayer;
 
     //攻撃周り
-    Attacker attacker;
+    public Attacker attacker;
     private void Awake()
     {
         noItemSprite= Resources.Load<Sprite>("Textures/null");

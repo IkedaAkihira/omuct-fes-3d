@@ -1179,10 +1179,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8494582351823998933}
+  - component: {fileID: -3886202084364245898}
+  - component: {fileID: -2902477734810865105}
   - component: {fileID: 3364112171634888103}
   - component: {fileID: 1299237929458040051}
-  - component: {fileID: 3684548036362512284}
-  - component: {fileID: -2902477734810865105}
   m_Layer: 6
   m_Name: monsuter.by-ikehara
   m_TagString: Untagged
@@ -1207,6 +1207,59 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-3886202084364245898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9126827254007321967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8768fa3367c5da94ea2a73e601a9904d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 0
+  itemImage: {fileID: 0}
+  maxHp: 30
+  playerSpeed: 15
+  gravityValue: -20
+  jumpForce: 15
+  cameraRotationVelocity: -10
+  cameraRotationVelocityAssisted: -3
+  cameraRotationYVelocity: -10
+  cameraRotationYVelocityAssisted: -3
+  horizontal: 1
+  vertical: 1
+  th: 0.2
+  verticalCameraLimit: 0.9
+  cameraDistance: 8
+  animator: {fileID: 0}
+  assistUnder: 1
+  doStopPlayerControl: 1
+  playerIndex: 0
+--- !u!114 &-2902477734810865105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9126827254007321967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2e79bd6b19796e47b55c8762c4edf6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackInterval: 10
+  attackingTime: 10
+  bulletPrefab: {fileID: -9114152000965082332, guid: d335562ce3db613499e97233c9d48cbc, type: 3}
+  shootType: 1
+  randomSize: 0.1
+  bulletCount: 3
+  fireCount: 1
+  fireInterval: 5
+  bulletForce: 1000
+  attackRotY: -20
 --- !u!143 &3364112171634888103
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1245,58 +1298,3 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &3684548036362512284
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9126827254007321967}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcd555107a77acf45870030e8be2c28d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  id: 1
-  itemImage: {fileID: 0}
-  maxHp: 30
-  playerSpeed: 15
-  gravityValue: -20
-  jumpForce: 15
-  cameraRotationVelocity: -10
-  cameraRotationVelocityAssisted: -3
-  cameraRotationYVelocity: -10
-  cameraRotationYVelocityAssisted: -3
-  horizontal: 1
-  vertical: 1
-  th: 0.2
-  verticalCameraLimit: 0.9
-  cameraDistance: 8
-  animator: {fileID: 0}
-  assistUnder: 1
-  doStopPlayerControl: 1
-  playerIndex: 0
-  attackObject: {fileID: 4385019632303509958, guid: 5f886973b296d42498f9ce2a9b83293a, type: 3}
-  attackForce: 1000
-  attackRotY: -20
---- !u!114 &-2902477734810865105
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9126827254007321967}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2e79bd6b19796e47b55c8762c4edf6a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackInterval: 10
-  attackingTime: 10
-  bulletPrefab: {fileID: 516013885706272340, guid: 3a4627838811f4145a6fd7a060e4ec0b, type: 3}
-  useRaycastTargetting: 0
-  randomSize: 0.2
-  bulletCount: 3
-  fireCount: 1
-  fireInterval: 5
-  bulletForce: 3000

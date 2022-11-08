@@ -7,7 +7,7 @@ public class Bullet : MonoBehaviour {
     protected long startTime;
     protected Rigidbody rb;
 
-    private void Start() {
+    private void Awake() {
         this.rb=this.GetComponent<Rigidbody>();
         this.startTime=GameMaster.instance.gameTime;
     }
