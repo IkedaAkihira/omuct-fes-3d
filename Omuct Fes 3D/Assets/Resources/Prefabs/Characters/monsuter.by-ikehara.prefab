@@ -1237,7 +1237,6 @@ MonoBehaviour:
   animator: {fileID: 0}
   assistUnder: 1
   doStopPlayerControl: 1
-  attacker: {fileID: 0}
   playerIndex: 0
 --- !u!114 &-2902477734810865105
 MonoBehaviour:
