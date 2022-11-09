@@ -4955,9 +4955,9 @@ MonoBehaviour:
   player2CameraRotation: 1.570796
   resultDelay: 2
   characters:
-  - {fileID: 4601575946168645162, guid: 30c5afde4dd2a30418506b9eb1323a7e, type: 3}
   - {fileID: -3886202084364245898, guid: fd07c9f0246305946af1ae6a41fb6257, type: 3}
-  - {fileID: 3391429790510864814, guid: 5f939637169f67741932c814905cbf76, type: 3}
+  - {fileID: 4601575946168645162, guid: 30c5afde4dd2a30418506b9eb1323a7e, type: 3}
+  - {fileID: 4795167471915484786, guid: 5f939637169f67741932c814905cbf76, type: 3}
   sePlayer: {fileID: 289350700}
   spawnPlayer1: {x: 0, y: 10, z: -100}
   spawnPlayer2: {x: 0, y: 10, z: 100}
