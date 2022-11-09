@@ -13,11 +13,11 @@ public class DamageSEListener: EventListener{
             }
         }else{
             string soundName="";
-            if(e.damagedPlayer is PlayerMonster)
+            if(e.damagedPlayer.id == 1)
                 soundName = "damaged monster";
-            else if(e.damagedPlayer is PlayerEkipu)
+            else if(e.damagedPlayer.id == 0)
                 soundName = "damaged ekipu";
-            else if(e.damagedPlayer is PlayerChinanago)
+            else if(e.damagedPlayer.id == 2)
                 soundName = "damaged chinanago";
             player.Play(soundName);
         }
