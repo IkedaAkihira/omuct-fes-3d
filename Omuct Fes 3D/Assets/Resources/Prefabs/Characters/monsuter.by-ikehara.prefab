@@ -1219,7 +1219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8768fa3367c5da94ea2a73e601a9904d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
+  id: 1
   itemImage: {fileID: 0}
   maxHp: 30
   playerSpeed: 15
@@ -1237,6 +1237,7 @@ MonoBehaviour:
   animator: {fileID: 0}
   assistUnder: 1
   doStopPlayerControl: 1
+  attacker: {fileID: 0}
   playerIndex: 0
 --- !u!114 &-2902477734810865105
 MonoBehaviour:
@@ -1252,7 +1253,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackInterval: 10
   attackingTime: 10
-  bulletPrefab: {fileID: -9114152000965082332, guid: d335562ce3db613499e97233c9d48cbc, type: 3}
+  bulletPrefab: {fileID: 5453787685825550795, guid: 5f886973b296d42498f9ce2a9b83293a, type: 3}
   shootType: 1
   randomSize: 0.1
   bulletCount: 3
