@@ -3,7 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Bullet : MonoBehaviour {
     [System.NonSerialized] public Player parent;
-    [SerializeField] protected int lifeTime = 100;
+    [SerializeField] protected int lifeTime = 400;
     protected long startTime;
     protected Rigidbody rb;
 
