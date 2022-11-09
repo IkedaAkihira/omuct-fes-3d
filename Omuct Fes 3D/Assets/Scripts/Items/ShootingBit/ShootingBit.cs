@@ -4,8 +4,8 @@ using System;
 public class ShootingBit : MonoBehaviour {
     public int time=1000;
     public int duration=50;
-    public Player parent;
-    public GameObject attackObject;
+    [System.NonSerialized] public Player parent;
+    public Bullet bulletPrefab;
     public float attackForce=2000f;
     public float range=1.2f;
 
@@ -39,10 +39,10 @@ public class ShootingBit : MonoBehaviour {
             attackVec=parent.cameraVec3.normalized;
         }
         transform.forward = attackVec;
-        GameObject cloneObject=Instantiate(attackObject,transform.position+attackVec,Quaternion.identity);
+        GameObject cloneObject=Instantiate(bulletPrefab.gameObject,transform.position+attackVec,Quaternion.identity);
         Rigidbody rb=cloneObject.GetComponent<Rigidbody>();
         rb.AddForce(attackVec*attackForce);
-        BulletShootingBit bullet=cloneObject.GetComponent<BulletShootingBit>();
+        Bullet bullet=cloneObject.GetComponent<Bullet>();
         bullet.parent=parent;
     }
 }
