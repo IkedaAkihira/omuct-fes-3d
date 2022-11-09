@@ -9,7 +9,7 @@ public class BulletGrenade : Bullet
 
     [SerializeField] private GameObject explosion;
 
-    override protected void HitObject(){
+    private void OnDestroy() {
         Instantiate(this.explosion,this.transform.position,Quaternion.identity);
         GameMaster.instance.sePlayer.Play("bomb");
     }
