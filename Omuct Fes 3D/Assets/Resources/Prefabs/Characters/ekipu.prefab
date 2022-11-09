@@ -390,9 +390,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2925789516513214447}
+  - component: {fileID: 4795167471915484786}
+  - component: {fileID: -7250852863874671739}
   - component: {fileID: 3391429790510864812}
   - component: {fileID: 3391429790510864813}
-  - component: {fileID: 3391429790510864814}
   m_Layer: 6
   m_Name: ekipu
   m_TagString: Untagged
@@ -419,6 +420,59 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4795167471915484786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2581036187324294485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8768fa3367c5da94ea2a73e601a9904d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 0
+  itemImage: {fileID: 0}
+  maxHp: 20
+  playerSpeed: 10
+  gravityValue: -20
+  jumpForce: 15
+  cameraRotationVelocity: -10
+  cameraRotationVelocityAssisted: -3
+  cameraRotationYVelocity: -10
+  cameraRotationYVelocityAssisted: -3
+  horizontal: 1
+  vertical: 1
+  th: 0.2
+  verticalCameraLimit: 0.9
+  cameraDistance: 8
+  animator: {fileID: 0}
+  assistUnder: 1
+  doStopPlayerControl: 1
+  playerIndex: 0
+--- !u!114 &-7250852863874671739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2581036187324294485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2e79bd6b19796e47b55c8762c4edf6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackInterval: 17
+  attackingTime: 17
+  bulletPrefab: {fileID: 3054033381850423106, guid: 4e3cab90edf90324b9012a73be2c7bf7, type: 3}
+  shootType: 0
+  randomSize: 0
+  bulletCount: 1
+  fireCount: 1
+  fireInterval: 10
+  bulletForce: 3000
+  attackRotY: 0
 --- !u!143 &3391429790510864812
 CharacterController:
   m_ObjectHideFlags: 0
@@ -457,38 +511,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &3391429790510864814
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2581036187324294485}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2dc12d6464484824180e6433c6ef7c19, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemImage: {fileID: 0}
-  maxHp: 20
-  playerSpeed: 10
-  gravityValue: -20
-  jumpForce: 15
-  cameraRotationVelocity: -10
-  cameraRotationVelocityAssisted: -1
-  cameraRotationYVelocity: -3
-  cameraRotationYVelocityAssisted: -0.3
-  horizontal: 1
-  vertical: 1
-  th: 0.05
-  verticalCameraLimit: 0.9
-  cameraDistance: 8
-  animator: {fileID: 0}
-  attackInterval: 17
-  assistUnder: 1
-  playerIndex: 0
-  attackObject: {fileID: 4358696385323467273, guid: 4e3cab90edf90324b9012a73be2c7bf7, type: 3}
-  attackForce: 3000
 --- !u!1 &2734417882892927546
 GameObject:
   m_ObjectHideFlags: 0

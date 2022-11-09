@@ -230,11 +230,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 375cd96161e813342b52b8e97d68019b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parent: {fileID: 0}
-  damage: 3
   lifeTime: 400
+  damage: 3
   magnification: 0.03
   defaultSize: 1
+  targetRotation: {x: 0, y: 0, z: 0, w: 0}
+  parentEkipu: {fileID: 0}
+  splitRemain: 1
 --- !u!65 &8716430593448550307
 BoxCollider:
   m_ObjectHideFlags: 0
