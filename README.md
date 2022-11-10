@@ -7,3 +7,6 @@ Unityで3Dゲームを作ります。
 * 効果音ラボ
 * クラゲ工匠
 * On-Jin ～音人～
+# プレイ動画
+* https://youtu.be/MHo0mEou9HU
+* https://youtu.be/0GhzSYJQc1Y
